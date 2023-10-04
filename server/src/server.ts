@@ -52,7 +52,7 @@ export default class Server {
         //~>
 
         this.app.use("/api/v1/pizzas", pizzasRoutes.getRouter());
-        this.app.use("/docs", SwaggerUi.serve, SwaggerUi.setup(swaggerSpecs));
+        this.app.use("/", SwaggerUi.serve, SwaggerUi.setup(swaggerSpecs));
 
         /* ★━━━━━━━━━━━★ Templates ★━━━━━━━━━━━★ */
         this.app.use("*", (_req, res, _next) => {
