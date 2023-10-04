@@ -12,7 +12,6 @@ git clone https://github.com/TatiCor/pizzeriaProject/tree/feat/server_routes.git
 
 ```
 cd pizzeriaProject/server
-
 ```
 
 3. Install project dependencies:
