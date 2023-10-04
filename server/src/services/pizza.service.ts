@@ -1,19 +1,45 @@
 // import { GetPizzasPaginatedError } from "../errors/errors";
 
+import {
+    DuplicatedProductError,
+    InvalidArgValuesError,
+} from "../errors/errors";
 import { pizzaModel } from "../models/Pizza";
 // import { PaginationParams } from "../types/types";
-
+interface IPizza {
+    name: string;
+    description: string;
+    price: number;
+    type: "whole" | "half";
+    thumbnail: string[];
+}
 export default class PizzaService {
     readonly #pizzaModel;
     constructor() {
         this.#pizzaModel = pizzaModel;
     }
+
     // Add a new Pizza
-    addPizza = async (newPizza: object): Promise<object> => {
+    addPizza = async (newPizza: IPizza): Promise<object> => {
         try {
+            if (!["whole", "half"].includes(newPizza.type)) {
+                throw new InvalidArgValuesError("");
+            }
+            const existingPizza = await this.#pizzaModel.findOne({
+                name: newPizza.name,
+            });
+            if (existingPizza) {
+                throw new DuplicatedProductError("");
+            }
+
             const addedPizza = await this.#pizzaModel.create(newPizza);
             return addedPizza;
         } catch (error) {
+            if (error instanceof InvalidArgValuesError) {
+                throw error;
+            } else if (error instanceof DuplicatedProductError) {
+                throw error;
+            }
             throw error;
         }
     };
