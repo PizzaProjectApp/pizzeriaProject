@@ -29,7 +29,7 @@ export default class Server {
         this.app.use(cors());
         this.app.use(morgan("dev"));
         this.app.use(Express.json());
-        const specs = swaggerJSDoc(swaggerOptions);
+        const swaggerSpecs = swaggerJSDoc(swaggerOptions);
         this.app.use(Express.static(__dirname + "/public"));
         this.app.use(Express.urlencoded({ extended: true }));
 
@@ -52,7 +52,7 @@ export default class Server {
         //~>
 
         this.app.use("/api/v1/pizzas", pizzasRoutes.getRouter());
-        this.app.use("/docs", SwaggerUi.serve, SwaggerUi.setup(specs));
+        this.app.use("/docs", SwaggerUi.serve, SwaggerUi.setup(swaggerSpecs));
 
         /* ★━━━━━━━━━━━★ Templates ★━━━━━━━━━━━★ */
         this.app.use("*", (_req, res, _next) => {
