@@ -38,10 +38,13 @@ export default class PizzaController {
         } catch (error) {
             if (error instanceof InvalidArgValuesError) {
                 res.status(400).json({ message: "Invalid argument values" });
+                return;
             } else if (error instanceof DuplicatedProductError) {
                 res.status(400).json({ message: "Duplicated Product" });
+                return;
             }
             res.status(500).json({ message: "Something went wrong" });
+            return;
         }
     };
 
@@ -101,6 +104,7 @@ export default class PizzaController {
         try {
             const pizzaName = req.params.pname;
             const response = await this.#pizzaService.deletePizza(pizzaName);
+
             if (response.deletedCount === 0) {
                 res.json({ message: "Pizza not found" });
                 return;
