@@ -12,7 +12,7 @@ import swaggerJSDoc from "swagger-jsdoc";
 import { swaggerOptions } from "./config/swaggerOptions.config";
 
 // Routes
-import PizzaRouter from "./routes/pizza.routes";
+import PizzaRouter from "./routes/v1/pizza.routes";
 
 interface Options {
     port: number;
