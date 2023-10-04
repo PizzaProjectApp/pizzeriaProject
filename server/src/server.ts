@@ -2,7 +2,16 @@ import Express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import path from "path";
+
+// Handlebars
 import { engine } from "express-handlebars";
+
+// Swagger
+import SwaggerUi from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
+import { swaggerOptions } from "./config/swaggerOptions.config";
+
+// Routes
 import PizzaRouter from "./routes/pizza.routes";
 
 interface Options {
@@ -19,8 +28,9 @@ export default class Server {
         this.port = port;
         this.app.use(cors());
         this.app.use(morgan("dev"));
-        this.app.use(Express.static(__dirname + "/public"));
         this.app.use(Express.json());
+        const specs = swaggerJSDoc(swaggerOptions);
+        this.app.use(Express.static(__dirname + "/public"));
         this.app.use(Express.urlencoded({ extended: true }));
 
         this.app.set("views", path.join(__dirname, "views"));
@@ -39,7 +49,10 @@ export default class Server {
 
         /* ★━━━━━━━━━━━★ Routes ★━━━━━━━━━━━★ */
         const pizzasRoutes = new PizzaRouter();
+        //~>
+
         this.app.use("/api/v1/pizzas", pizzasRoutes.getRouter());
+        this.app.use("/docs", SwaggerUi.serve, SwaggerUi.setup(specs));
 
         /* ★━━━━━━━━━━━★ Templates ★━━━━━━━━━━━★ */
         this.app.use("*", (_req, res, _next) => {
