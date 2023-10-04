@@ -5,7 +5,7 @@ Follow the steps below to set up and run the application in your local environme
 1. Clone this repository to your local machine:
 
 ```
-git clone https://github.com/TatiCor/pizzeriaProject/tree/feat/server_routes.git
+git clone -b feat/server_routes https://github.com/TatiCor/pizzeriaProject.git
 ```
 
 2. Navigate to the project directory:
