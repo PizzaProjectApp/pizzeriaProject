@@ -19,16 +19,32 @@ export default class EmpanadaRouter extends CustomRouter {
          *           type: string
          *         price:
          *           type: number
-         *         status:
-         *           type: boolean
          */
 
         /**
          * @swagger
          * tags:
          *   - name: Empanadas
-         *     description: Operations about empanadas
+         *     description: Operations related to empanadas
          */
+
+        /**
+         * @swagger
+         * /empanadas:
+         *   get:
+         *     summary: Get a list of available empanadas
+         *     tags:
+         *       - Empanadas
+         *     responses:
+         *       200:
+         *         description: List of empanadas retrieved successfully
+         *       500:
+         *         description: Internal server error
+         */
+
+        //~> |Get a list of available empanadas
+        this.get("/", empanadaController.getEmpanadas);
+
         /**
          * @swagger
          * /empanadas:
@@ -48,7 +64,7 @@ export default class EmpanadaRouter extends CustomRouter {
          *       400:
          *         description: Bad request
          */
-
+        //~> |Add a new empanada
         this.post("/", empanadaController.addEmpanada);
 
         /**
@@ -72,6 +88,7 @@ export default class EmpanadaRouter extends CustomRouter {
          *         description: Empanada not found
          */
 
+        //~> |Get an empanada by ID
         this.get("/:empid", empanadaController.getEmpanadaById);
 
         /**
@@ -103,6 +120,7 @@ export default class EmpanadaRouter extends CustomRouter {
          *         description: Bad request
          */
 
+        //~> |Update an empanada by name
         this.put("/:empname", empanadaController.updateEmpanadas);
 
         /**
@@ -126,6 +144,7 @@ export default class EmpanadaRouter extends CustomRouter {
          *         description: Empanada not found
          */
 
+        //~> |Delete an empanada by name
         this.delete("/:empname", empanadaController.deleteEmpanadas);
     }
 }
