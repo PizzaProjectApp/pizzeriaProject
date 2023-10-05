@@ -42,6 +42,16 @@ export default class EmpanadaService {
             throw error;
         }
     };
+
+    getEmpanadaById = async (id: any) => {
+        try {
+            parseInt(id);
+            return this.#empanadaModel.findById(id).lean();
+        } catch (error) {
+            throw error;
+        }
+    };
+
     //Delete a Empanada by name
     deleteEmpanada = async (name: string): Promise<any> => {
         try {
