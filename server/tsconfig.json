@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
         "target": "ES2017",
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
         "module": "CommonJS",
+        "outDir": "../build/src",
         "rootDir": "./src",
         "resolveJsonModule": true,
-        "outDir": "../build/src",
-        "removeComments": true,
-        "noEmitOnError": true,
-        "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "removeComments": true,
+        "noEmitOnError": true,
+        "allowSyntheticDefaultImports": true,
         "strictPropertyInitialization": false,
         "moduleResolution": "node",
         "noImplicitAny": true,
@@ -23,6 +23,6 @@
         "noFallthroughCasesInSwitch": true,
         "skipLibCheck": true
     },
-    "include": ["./src/**/*"],
+    "include": ["./src/**/*", "./swagger/swaggerOptions.config.ts"],
     "exclude": ["./public", "node_modules"]
 }
