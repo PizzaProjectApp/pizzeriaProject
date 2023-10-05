@@ -9,7 +9,7 @@ import { engine } from "express-handlebars";
 // Swagger
 import SwaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
-import { swaggerOptions } from "./config/swaggerOptions.config";
+import { swaggerOptions } from "./config/index";
 
 // Routes
 import PizzaRouter from "./routes/v1/pizza.routes";
