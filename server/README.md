@@ -34,6 +34,8 @@ backend
    ├─ .env
    ├─ .env.template
    ├─ .prettierignore
+   ├─ .vscode
+   │  └─ settings.json
    ├─ package-lock.json
    ├─ package.json
    ├─ README.md
@@ -45,6 +47,8 @@ backend
    │  │  ├─ index.ts
    │  │  └─ swaggerOptions.config.ts
    │  ├─ controllers
+   │  │  ├─ dessert.controller.ts
+   │  │  ├─ empanada.controller.ts
    │  │  └─ pizza.controller.ts
    │  ├─ errors
    │  │  ├─ errorHandler.ts
@@ -61,9 +65,13 @@ backend
    │  │     └─ notFound.css
    │  ├─ routes
    │  │  └─ v1
+   │  │     ├─ dessert.routes.ts
+   │  │     ├─ empanada.routes.ts
    │  │     └─ pizza.routes.ts
    │  ├─ server.ts
    │  ├─ services
+   │  │  ├─ dessert.service.ts
+   │  │  ├─ empanada.service.ts
    │  │  └─ pizza.service.ts
    │  ├─ types
    │  │  ├─ errorHandler.ts
