@@ -15,6 +15,7 @@ import { swaggerOptions } from "./config/index";
 import PizzaRouter from "./routes/v1/pizza.routes";
 import EmpanadaRouter from "./routes/v1/empanada.routes";
 import DessertRouter from "./routes/v1/dessert.routes";
+import BeverageRouter from "./routes/v1/beverage.routes";
 
 interface Options {
     port: number;
@@ -53,11 +54,13 @@ export default class Server {
         const pizzasRoutes = new PizzaRouter();
         const empanadasRoutes = new EmpanadaRouter();
         const dessertsRoutes = new DessertRouter();
+        const beveragesRoutes = new BeverageRouter();
         //~>
 
         this.app.use("/api/v1/pizzas", pizzasRoutes.getRouter());
         this.app.use("/api/v1/empanadas", empanadasRoutes.getRouter());
         this.app.use("/api/v1/desserts", dessertsRoutes.getRouter());
+        this.app.use("/api/v1/beverages", beveragesRoutes.getRouter());
         this.app.use("/", SwaggerUi.serve, SwaggerUi.setup(swaggerSpecs));
 
         /* ★━━━━━━━━━━━★ Templates ★━━━━━━━━━━━★ */
