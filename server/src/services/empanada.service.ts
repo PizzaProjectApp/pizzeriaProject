@@ -52,7 +52,10 @@ export default class EmpanadaService {
     };
 
     //Update a Empanada by name
-    updateEmpanada = async (name: string, newData: object): Promise<object> => {
+    updateEmpanada = async (
+        name: string,
+        newData: IEmpanada
+    ): Promise<object> => {
         try {
             await this.#empanadaModel.findOneAndUpdate({ name }, newData);
             return { message: "Product successfully updated." };
