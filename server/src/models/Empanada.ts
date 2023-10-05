@@ -14,6 +14,11 @@ const EmpanadaSchema = new Schema({
         type: Number,
         required: true,
     },
+    thumbnail: {
+        type: [String],
+        default: [""],
+        required: false,
+    },
     status: {
         type: Boolean,
         default: true,

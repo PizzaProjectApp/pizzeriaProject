@@ -19,6 +19,11 @@ const DessertSchema = new Schema({
         enum: ["cold", "hot"],
         default: "cold",
     },
+    thumbnail: {
+        type: [String],
+        default: [""],
+        required: false,
+    },
     status: {
         type: Boolean,
         default: true,

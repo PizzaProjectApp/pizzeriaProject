@@ -18,6 +18,11 @@ const BeverageSchema = new Schema({
         type: String,
         required: true,
     },
+    thumbnail: {
+        type: [String],
+        default: [""],
+        required: false,
+    },
     status: {
         type: Boolean,
         default: true,
