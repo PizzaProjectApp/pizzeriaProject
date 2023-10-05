@@ -29,6 +29,7 @@ export default class PizzaRouter extends CustomRouter {
          *           type: array
          *           items:
          *             type: string
+         *           default: [""]
          *           description: Array of thumbnail URLs (["www.imagen1.com", "www.imagen2.com"])
          */
 
