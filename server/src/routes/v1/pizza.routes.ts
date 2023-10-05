@@ -1,7 +1,7 @@
 import CustomRouter from "../../middlewares/CustomRouter";
 import PizzaController from "../../controllers/pizza.controller";
 
-//~~> | Product Controller
+//~~> | Pizza Controller
 const pizzaController = new PizzaController();
 
 export default class PizzaRouter extends CustomRouter {
