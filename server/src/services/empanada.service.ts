@@ -5,6 +5,7 @@ interface IEmpanada {
     name: String;
     description: String;
     price: Number;
+    thumbnail: string[];
 }
 
 export default class EmpanadaService {
