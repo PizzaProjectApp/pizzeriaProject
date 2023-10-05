@@ -19,6 +19,11 @@ export default class EmpanadaRouter extends CustomRouter {
          *           type: string
          *         price:
          *           type: number
+         *         thumbnail:
+         *           type: array
+         *           items:
+         *             type: string
+         *           description: Array of thumbnail URLs (["www.imagen1.com", "www.imagen2.com"])
          */
 
         /**
