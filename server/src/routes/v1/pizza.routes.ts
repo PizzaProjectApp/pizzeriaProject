@@ -8,6 +8,32 @@ export default class PizzaRouter extends CustomRouter {
     init() {
         /**
          * @swagger
+         * components:
+         *   schemas:
+         *     Pizza:
+         *       type: object
+         *       properties:
+         *         name:
+         *           type: string
+         *           description: Name of the pizza
+         *         description:
+         *           type: string
+         *           description: Description of the pizza
+         *         price:
+         *           type: number
+         *           description: Price of the pizza
+         *         type:
+         *           type: string
+         *           description: Type of pizza ("whole", "half")
+         *         thumbnail:
+         *           type: array
+         *           items:
+         *             type: string
+         *           description: Array of thumbnail URLs (["www.imagen1.com", "www.imagen2.com"])
+         */
+
+        /**
+         * @swagger
          * tags:
          *   - name: Pizzas
          *     description: Operations about pizzas
@@ -66,31 +92,7 @@ export default class PizzaRouter extends CustomRouter {
          *       content:
          *         application/json:
          *           schema:
-         *             type: object
-         *             required:
-         *               - name
-         *               - description
-         *               - price
-         *               - type
-         *               - thumbnail
-         *             properties:
-         *               name:
-         *                 type: string
-         *                 description: Name of the pizza
-         *               description:
-         *                 type: string
-         *                 description: Description of the pizza
-         *               price:
-         *                 type: number
-         *                 description: Price of the pizza
-         *               type:
-         *                 type: string
-         *                 description: Type of pizza ("whole", "half")
-         *               thumbnail:
-         *                 type: array
-         *                 items:
-         *                   type: string
-         *                 description: Array of thumbnail URLs (["www.imagen1.com", "www.imagen2.com"])
+         *             $ref: '#/components/schemas/Pizza'
          *     responses:
          *       201:
          *         description: Pizza added successfully
@@ -100,7 +102,6 @@ export default class PizzaRouter extends CustomRouter {
 
         //~> |Add Pizza
         this.post("/", pizzaController.addPizza);
-
         /**
          * @swagger
          * /pizzas/{pname}:
@@ -120,25 +121,7 @@ export default class PizzaRouter extends CustomRouter {
          *       content:
          *         application/json:
          *           schema:
-         *             type: object
-         *             properties:
-         *               name:
-         *                 type: string
-         *                 description: New name of the pizza
-         *               description:
-         *                 type: string
-         *                 description: New description of the pizza
-         *               price:
-         *                 type: number
-         *                 description: New price of the pizza
-         *               type:
-         *                 type: string
-         *                 description: New type of pizza ("whole", "half")
-         *               thumbnail:
-         *                 type: array
-         *                 items:
-         *                   type: string
-         *                 description: New array of thumbnail URLs
+         *             $ref: '#/components/schemas/Pizza'
          *     responses:
          *       204:
          *         description: Pizza updated successfully
