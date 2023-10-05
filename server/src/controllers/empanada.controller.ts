@@ -14,9 +14,9 @@ export default class EmpanadaController {
     //~> |GET
     addEmpanada = async (req: Request, res: Response): Promise<void> => {
         try {
-            const newProduct = req.body;
+            const newEmpanada = req.body;
 
-            await this.#empanadaService.addEmpanada(newProduct);
+            await this.#empanadaService.addEmpanada(newEmpanada);
 
             res.json({ message: `Empanada Successfully Added` });
         } catch (error) {
@@ -36,12 +36,12 @@ export default class EmpanadaController {
     //~> |GET
     getEmpanadaById = async (req: Request, res: Response): Promise<void> => {
         try {
-            const EmpanadaId = req.params.empid;
+            const empanadaId = req.params.empid;
             const response =
-                await this.#empanadaService.getEmpanadaById(EmpanadaId);
+                await this.#empanadaService.getEmpanadaById(empanadaId);
             if (!response) {
                 res.status(404).json({
-                    message: `Not Found Empanada with id : ${EmpanadaId}`,
+                    message: `Not Found Empanada with id : ${empanadaId}`,
                 });
                 return;
             }
@@ -70,9 +70,10 @@ export default class EmpanadaController {
     //~> |UPDATE
     updateEmpanadas = async (req: Request, res: Response): Promise<void> => {
         try {
-            const { name, newData } = req.body;
+            const empanadaName = req.params.empname;
+            const { newData } = req.body;
             const response = await this.#empanadaService.updateEmpanada(
-                name,
+                empanadaName,
                 newData
             );
             res.json(response);
@@ -87,9 +88,9 @@ export default class EmpanadaController {
     //~> |DELETE
     deleteEmpanadas = async (req: Request, res: Response): Promise<void> => {
         try {
-            const EmpanadaName = req.params.empname;
+            const empanadaName = req.params.empname;
             const response =
-                await this.#empanadaService.deleteEmpanada(EmpanadaName);
+                await this.#empanadaService.deleteEmpanada(empanadaName);
 
             if (response.deletedCount === 0) {
                 res.json({ message: "Empanada not found" });
