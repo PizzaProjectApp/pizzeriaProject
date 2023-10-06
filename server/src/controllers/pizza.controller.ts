@@ -85,9 +85,10 @@ export default class PizzaController {
     //~> |UPDATE
     updatePizzas = async (req: Request, res: Response): Promise<void> => {
         try {
-            const { name, newData } = req.body;
+            const pizzaId = req.params.pid;
+            const { newData } = req.body;
             const response = await this.#pizzaService.updatePizza(
-                name,
+                pizzaId,
                 newData
             );
             res.json(response);
@@ -102,8 +103,8 @@ export default class PizzaController {
     //~> |DELETE
     deletePizzas = async (req: Request, res: Response): Promise<void> => {
         try {
-            const pizzaName = req.params.pname;
-            const response = await this.#pizzaService.deletePizza(pizzaName);
+            const pizzaId = req.params.pid;
+            const response = await this.#pizzaService.deletePizza(pizzaId);
 
             if (response.deletedCount === 0) {
                 res.json({ message: "Pizza not found" });
