@@ -105,13 +105,13 @@ export default class PizzaRouter extends CustomRouter {
         this.post("/", pizzaController.addPizza);
         /**
          * @swagger
-         * /pizzas/{pname}:
+         * /pizzas/{pid}:
          *   put:
-         *     summary: Update a pizza by name
+         *     summary: Update a pizza by id
          *     tags:
          *       - Pizzas
          *     parameters:
-         *       - name: pname
+         *       - name: pid
          *         in: path
          *         required: true
          *         description: Name of the pizza to update
@@ -131,17 +131,17 @@ export default class PizzaRouter extends CustomRouter {
          */
 
         //~> |Put Pizzas
-        this.put("/:pname", pizzaController.updatePizzas);
+        this.put("/:pid", pizzaController.updatePizzas);
 
         /**
          * @swagger
-         * /pizzas/{pname}:
+         * /pizzas/{pid}:
          *   delete:
-         *     summary: Delete a pizza by name
+         *     summary: Delete a pizza by id
          *     tags:
          *       - Pizzas
          *     parameters:
-         *       - name: pname
+         *       - name: pid
          *         in: path
          *         required: true
          *         description: Name of the pizza to delete
@@ -155,6 +155,6 @@ export default class PizzaRouter extends CustomRouter {
          */
 
         //~> |Delete Pizza by name
-        this.delete("/:pname", pizzaController.deletePizzas);
+        this.delete("/:pid", pizzaController.deletePizzas);
     }
 }
