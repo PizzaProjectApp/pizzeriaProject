@@ -44,9 +44,8 @@ export default class PizzaService {
         }
     };
 
-    getPizzaById = async (id: any) => {
+    getPizzaById = async (id: string) => {
         try {
-            parseInt(id);
             return this.#pizzaModel.findById(id).lean();
         } catch (error) {
             throw error;
@@ -61,17 +60,17 @@ export default class PizzaService {
         }
     };
 
-    deletePizza = async (name: string): Promise<any> => {
+    deletePizza = async (id: string): Promise<any> => {
         try {
-            return await this.#pizzaModel.deleteOne({ name });
+            return await this.#pizzaModel.findByIdAndDelete(id);
         } catch (error) {
             throw error;
         }
     };
 
-    updatePizza = async (name: string, newData: object): Promise<object> => {
+    updatePizza = async (id: string, newData: object): Promise<object> => {
         try {
-            await this.#pizzaModel.findOneAndUpdate({ name }, newData);
+            await this.#pizzaModel.findByIdAndUpdate(id, newData);
             return { message: "Product successfully updated." };
         } catch (error) {
             throw error;
