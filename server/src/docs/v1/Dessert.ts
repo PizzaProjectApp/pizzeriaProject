@@ -146,7 +146,7 @@
  * @swagger
  * /desserts/{dstid}:
  *   delete:
- *     summary: Delete a dessert by name
+ *     summary: Delete a dessert by ID
  *     tags: [Desserts]
  *     parameters:
  *       - name: dstid

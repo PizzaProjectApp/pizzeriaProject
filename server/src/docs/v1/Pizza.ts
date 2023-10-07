@@ -88,7 +88,7 @@
  * @swagger
  * /pizzas/{pid}:
  *   put:
- *     summary: Update a pizza by id
+ *     summary: Update a pizza by ID
  *     tags: [Pizzas]
  *     parameters:
  *       - name: pid
@@ -142,7 +142,7 @@
  * @swagger
  * /pizzas/{pid}:
  *   delete:
- *     summary: Delete a pizza by id
+ *     summary: Delete a pizza by ID
  *     tags: [Pizzas]
  *     parameters:
  *       - name: pid
