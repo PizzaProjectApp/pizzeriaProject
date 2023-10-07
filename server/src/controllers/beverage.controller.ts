@@ -14,6 +14,22 @@ export default class BeverageController {
     //~> |GET
     addBeverage = async (req: Request, res: Response): Promise<void> => {
         try {
+            const requiredKeys = [
+                "name",
+                "description",
+                "price",
+                "category",
+                "thumbnail",
+            ];
+            for (const key of requiredKeys) {
+                if (!(key in req.body)) {
+                    res.status(400).json({
+                        message: `Missing required key: ${key}`,
+                    });
+                    return;
+                }
+            }
+
             const newBeverage = req.body;
 
             await this.#beverageService.addBeverage(newBeverage);
@@ -24,7 +40,7 @@ export default class BeverageController {
                 res.status(400).json({ message: "Invalid argument values" });
                 return;
             } else if (error instanceof DuplicatedProductError) {
-                res.status(400).json({ message: "Duplicated Product" });
+                res.status(409).json({ message: "Duplicated Product" });
                 return;
             }
             res.status(500).json({ message: "Something went wrong" });
@@ -50,6 +66,7 @@ export default class BeverageController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 
@@ -63,17 +80,18 @@ export default class BeverageController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 
     //Update Beverage
     //~> |UPDATE
-    updateBeverage = async (req: Request, res: Response): Promise<void> => {
+    updateBeverageById = async (req: Request, res: Response): Promise<void> => {
         try {
-            const beverageName = req.params.bvgname;
-            const { newData } = req.body;
-            const response = await this.#beverageService.updateBeverage(
-                beverageName,
+            const beverageId = req.params.bvgid;
+            const newData = req.body;
+            const response = await this.#beverageService.updateBeverageById(
+                beverageId,
                 newData
             );
             res.json(response);
@@ -81,16 +99,40 @@ export default class BeverageController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
+        }
+    };
+
+    //Partially Update Beverage
+    //~> |PARTIALLY UPDATE
+    partialUpdateBeverageById = async (
+        req: Request,
+        res: Response
+    ): Promise<void> => {
+        try {
+            const beverageId = req.params.bvgid;
+            const newData = req.body;
+            const response = await this.#beverageService.updateBeverageById(
+                beverageId,
+                newData,
+                true
+            );
+            res.json(response);
+        } catch (error) {
+            res.status(500).json({
+                message: "Something went wrong",
+            });
+            return;
         }
     };
 
     //Retrieve all Beverages
     //~> |DELETE
-    deleteBeverages = async (req: Request, res: Response): Promise<void> => {
+    deleteBeverageById = async (req: Request, res: Response): Promise<void> => {
         try {
-            const beverageName = req.params.bvgname;
+            const beverageId = req.params.bvgid;
             const response =
-                await this.#beverageService.deleteBeverage(beverageName);
+                await this.#beverageService.deleteBeverageById(beverageId);
 
             if (response.deletedCount === 0) {
                 res.json({ message: "Beverage not found" });
@@ -102,6 +144,7 @@ export default class BeverageController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 }

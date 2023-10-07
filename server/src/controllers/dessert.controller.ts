@@ -14,6 +14,22 @@ export default class DessertController {
     //~> |GET
     addDessert = async (req: Request, res: Response): Promise<void> => {
         try {
+            const requiredKeys = [
+                "name",
+                "description",
+                "price",
+                "type",
+                "thumbnail",
+            ];
+
+            for (const key of requiredKeys) {
+                if (!(key in req.body)) {
+                    res.status(400).json({
+                        message: `Missing required key: ${key}`,
+                    });
+                    return;
+                }
+            }
             const newDessert = req.body;
 
             await this.#dessertService.addDessert(newDessert);
@@ -50,6 +66,7 @@ export default class DessertController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 
@@ -63,6 +80,7 @@ export default class DessertController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 
@@ -71,8 +89,8 @@ export default class DessertController {
     updateDessert = async (req: Request, res: Response): Promise<void> => {
         try {
             const dessertId = req.params.dstid;
-            const { newData } = req.body;
-            const response = await this.#dessertService.updateDessert(
+            const newData = req.body;
+            const response = await this.#dessertService.updateDessertById(
                 dessertId,
                 newData
             );
@@ -81,16 +99,40 @@ export default class DessertController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
+        }
+    };
+
+    //Partially Update Dessert
+    //~> |PARTIALLY UPDATE
+    partialUpdateDessertById = async (
+        req: Request,
+        res: Response
+    ): Promise<void> => {
+        try {
+            const dessertId = req.params.dstid;
+            const newData = req.body;
+            const response = await this.#dessertService.updateDessertById(
+                dessertId,
+                newData,
+                true
+            );
+            res.json(response);
+        } catch (error) {
+            res.status(500).json({
+                message: "Something went wrong",
+            });
+            return;
         }
     };
 
     //Retrieve all Desserts
     //~> |DELETE
-    deleteDesserts = async (req: Request, res: Response): Promise<void> => {
+    deleteDessertById = async (req: Request, res: Response): Promise<void> => {
         try {
             const dessertId = req.params.dstid;
             const response =
-                await this.#dessertService.deleteDessert(dessertId);
+                await this.#dessertService.deleteDessertById(dessertId);
 
             if (response.deletedCount === 0) {
                 res.json({ message: "Dessert not found" });
@@ -102,6 +144,7 @@ export default class DessertController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 }

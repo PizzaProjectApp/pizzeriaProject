@@ -14,6 +14,16 @@ export default class EmpanadaController {
     //~> |GET
     addEmpanada = async (req: Request, res: Response): Promise<void> => {
         try {
+            const requiredKeys = ["name", "description", "price", "thumbnail"];
+
+            for (const key of requiredKeys) {
+                if (!(key in req.body)) {
+                    res.status(400).json({
+                        message: `Missing required key: ${key}`,
+                    });
+                    return;
+                }
+            }
             const newEmpanada = req.body;
 
             await this.#empanadaService.addEmpanada(newEmpanada);
@@ -63,16 +73,17 @@ export default class EmpanadaController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 
     //Update Empanada
     //~> |UPDATE
-    updateEmpanadas = async (req: Request, res: Response): Promise<void> => {
+    updateEmpanada = async (req: Request, res: Response): Promise<void> => {
         try {
             const empanadaId = req.params.empid;
-            const { newData } = req.body;
-            const response = await this.#empanadaService.updateEmpanada(
+            const newData = req.body;
+            const response = await this.#empanadaService.updateEmpanadaById(
                 empanadaId,
                 newData
             );
@@ -81,16 +92,40 @@ export default class EmpanadaController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
+        }
+    };
+
+    //Partially Update Empanada
+    //~> |PARTIALLY UPDATE
+    partialUpdateEmpanadaById = async (
+        req: Request,
+        res: Response
+    ): Promise<void> => {
+        try {
+            const empanadaId = req.params.empid;
+            const newData = req.body;
+            const response = await this.#empanadaService.updateEmpanadaById(
+                empanadaId,
+                newData,
+                true
+            );
+            res.json(response);
+        } catch (error) {
+            res.status(500).json({
+                message: "Something went wrong",
+            });
+            return;
         }
     };
 
     //Retrieve all Empanadas
     //~> |DELETE
-    deleteEmpanadas = async (req: Request, res: Response): Promise<void> => {
+    deleteEmpanadaById = async (req: Request, res: Response): Promise<void> => {
         try {
             const empanadaId = req.params.empnid;
             const response =
-                await this.#empanadaService.deleteEmpanada(empanadaId);
+                await this.#empanadaService.deleteEmpanadaById(empanadaId);
 
             if (response.deletedCount === 0) {
                 res.json({ message: "Empanada not found" });
@@ -102,6 +137,7 @@ export default class EmpanadaController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 }

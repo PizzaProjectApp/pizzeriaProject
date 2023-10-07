@@ -10,6 +10,7 @@ export default class PizzaController {
     constructor() {
         this.#pizzaService = new PizzaService();
     }
+
     //Add new Pizza
     //~> |GET
     addPizza = async (req: Request, res: Response): Promise<void> => {
@@ -48,7 +49,7 @@ export default class PizzaController {
         }
     };
 
-    // Retrieve a single Pizza with ID
+    // Retrieve an single Pizza with ID
     //~> |GET
     getPizzaById = async (req: Request, res: Response): Promise<void> => {
         try {
@@ -65,6 +66,7 @@ export default class PizzaController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 
@@ -78,16 +80,17 @@ export default class PizzaController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 
     //Update Pizza
     //~> |UPDATE
-    updatePizzas = async (req: Request, res: Response): Promise<void> => {
+    updatePizza = async (req: Request, res: Response): Promise<void> => {
         try {
             const pizzaId = req.params.pid;
-            const { newData } = req.body;
-            const response = await this.#pizzaService.updatePizza(
+            const newData = req.body;
+            const response = await this.#pizzaService.updatePizzaById(
                 pizzaId,
                 newData
             );
@@ -96,15 +99,39 @@ export default class PizzaController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
 
-    //Retrieve all Pizzas
-    //~> |DELETE
-    deletePizzas = async (req: Request, res: Response): Promise<void> => {
+    //Partially Update Pizza
+    //~> |PARTIALLY UPDATE
+    partialUpdatePizzaById = async (
+        req: Request,
+        res: Response
+    ): Promise<void> => {
         try {
             const pizzaId = req.params.pid;
-            const response = await this.#pizzaService.deletePizza(pizzaId);
+            const newData = req.body;
+            const response = await this.#pizzaService.updatePizzaById(
+                pizzaId,
+                newData,
+                true
+            );
+            res.json(response);
+        } catch (error) {
+            res.status(500).json({
+                message: "Something went wrong",
+            });
+            return;
+        }
+    };
+
+    //Delete an single Pizza by ID
+    //~> |DELETE
+    deletePizzaById = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const pizzaId = req.params.pid;
+            const response = await this.#pizzaService.deletePizzaById(pizzaId);
 
             if (response.deletedCount === 0) {
                 res.json({ message: "Pizza not found" });
@@ -116,6 +143,7 @@ export default class PizzaController {
             res.status(500).json({
                 message: "Something went wrong",
             });
+            return;
         }
     };
     // //Get all Pizza with specified limit/page/query/sort
