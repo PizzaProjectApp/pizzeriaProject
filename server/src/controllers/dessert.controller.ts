@@ -70,10 +70,10 @@ export default class DessertController {
     //~> |UPDATE
     updateDessert = async (req: Request, res: Response): Promise<void> => {
         try {
-            const dessertName = req.params.dstname;
+            const dessertId = req.params.dstid;
             const { newData } = req.body;
             const response = await this.#dessertService.updateDessert(
-                dessertName,
+                dessertId,
                 newData
             );
             res.json(response);
@@ -88,9 +88,9 @@ export default class DessertController {
     //~> |DELETE
     deleteDesserts = async (req: Request, res: Response): Promise<void> => {
         try {
-            const dessertName = req.params.dstname;
+            const dessertId = req.params.dstid;
             const response =
-                await this.#dessertService.deleteDessert(dessertName);
+                await this.#dessertService.deleteDessert(dessertId);
 
             if (response.deletedCount === 0) {
                 res.json({ message: "Dessert not found" });
