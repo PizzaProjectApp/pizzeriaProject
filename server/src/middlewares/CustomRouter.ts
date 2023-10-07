@@ -47,6 +47,15 @@ export default class CustomRouter {
             this.applyCallbacks(callbacks)
         );
     }
+    patch(path: string, ...callbacks: CustomCallback[]): void {
+        //Remember add "policies" to callback up
+        this.router.patch(
+            path,
+            // this.handlePolicies(policies),
+            // this.generateCustomResponses,
+            this.applyCallbacks(callbacks)
+        );
+    }
     delete(path: string, ...callbacks: CustomCallback[]): void {
         //Remember add "policies" to callback up
         this.router.delete(
