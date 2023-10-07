@@ -94,7 +94,7 @@
  *       - name: bvgid
  *         in: path
  *         required: true
- *         description: Name of the beverage to update
+ *         description: ID of the beverage to update
  *         schema:
  *           type: string
  *     requestBody:
@@ -150,7 +150,7 @@
  *       - name: bvgid
  *         in: path
  *         required: true
- *         description: Name of the beverage to delete
+ *         description: ID of the beverage to delete
  *         schema:
  *           type: string
  *     responses:

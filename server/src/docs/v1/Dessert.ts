@@ -96,7 +96,7 @@
  *       - name: dstid
  *         in: path
  *         required: true
- *         description: Name of the dessert to update
+ *         description: ID of the dessert to update
  *         schema:
  *           type: string
  *     requestBody:
@@ -152,7 +152,7 @@
  *       - name: dstid
  *         in: path
  *         required: true
- *         description: Name of the dessert to delete
+ *         description: ID of the dessert to delete
  *         schema:
  *           type: string
  *     responses:

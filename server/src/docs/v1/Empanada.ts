@@ -88,7 +88,7 @@
  *       - name: empid
  *         in: path
  *         required: true
- *         description: Name of the empanada to update
+ *         description: ID of the empanada to update
  *         schema:
  *           type: string
  *     requestBody:
@@ -144,7 +144,7 @@
  *       - name: empid
  *         in: path
  *         required: true
- *         description: Name of the empanada to delete
+ *         description: ID of the empanada to delete
  *         schema:
  *           type: string
  *     responses:

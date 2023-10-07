@@ -94,7 +94,7 @@
  *       - name: pid
  *         in: path
  *         required: true
- *         description: Name of the pizza to update
+ *         description: ID of the pizza to update
  *         schema:
  *           type: string
  *     requestBody:
@@ -148,7 +148,7 @@
  *       - name: pid
  *         in: path
  *         required: true
- *         description: Name of the pizza to delete
+ *         description: ID of the pizza to delete
  *         schema:
  *           type: string
  *     responses:
