@@ -24,7 +24,7 @@
  *           default: [""]
  *           description: Array of thumbnail URLs (["www.image1.com", "www.image2.com"])
  */
-
+//~> |
 /**
  * @swagger
  * tags:
@@ -44,7 +44,7 @@
  *       500:
  *         description: Internal server error
  */
-//~> |
+//~> |Post
 /**
  * @swagger
  * /beverages:
@@ -63,7 +63,7 @@
  *       400:
  *         description: Bad request
  */
-//~> |
+//~> |Get
 /**
  * @swagger
  * /beverages/{bvgid}:
@@ -83,15 +83,15 @@
  *       404:
  *         description: Beverage not found
  */
-//~> |
+//~> |Put
 /**
  * @swagger
- * /beverages/{bvgname}:
+ * /beverages/{bvgid}:
  *   put:
- *     summary: Update a beverage by name
+ *     summary: Update a beverage by ID
  *     tags: [Beverages]
  *     parameters:
- *       - name: bvgname
+ *       - name: bvgid
  *         in: path
  *         required: true
  *         description: Name of the beverage to update
@@ -111,15 +111,43 @@
  *       400:
  *         description: Bad request
  */
-//~> |
+//~> |Patch
 /**
  * @swagger
- * /beverages/{bvgname}:
- *   delete:
- *     summary: Delete a beverage by name
+ * /beverages/{bvgid}:
+ *   patch:
+ *     summary: Update a beverage partially by ID
  *     tags: [Beverages]
  *     parameters:
- *       - name: bvgname
+ *       - name: bvgid
+ *         in: path
+ *         required: true
+ *         description: ID of the beverage to update
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Beverage'
+ *     responses:
+ *       204:
+ *         description: Beverage updated partially successfully
+ *       404:
+ *         description: Beverage not found
+ *       400:
+ *         description: Bad request
+ */
+//~> |Delete
+/**
+ * @swagger
+ * /beverages/{bvgid}:
+ *   delete:
+ *     summary: Delete a beverage by ID
+ *     tags: [Beverages]
+ *     parameters:
+ *       - name: bvgid
  *         in: path
  *         required: true
  *         description: Name of the beverage to delete

@@ -33,7 +33,7 @@
  *   name: Desserts
  *   description: Operations related to desserts
  */
-//~> |
+//~> |Get
 /**
  * @swagger
  * /desserts:
@@ -46,26 +46,7 @@
  *       500:
  *         description: Internal server error
  */
-//~> |
-/**
- * @swagger
- * /desserts:
- *   post:
- *     summary: Add a new dessert
- *     tags: [Desserts]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Dessert'
- *     responses:
- *       201:
- *         description: Dessert added successfully
- *       400:
- *         description: Bad request
- */
-//~> |
+//~> |Get
 /**
  * @swagger
  * /desserts/{dstid}:
@@ -85,15 +66,34 @@
  *       404:
  *         description: Dessert not found
  */
-//~> |
+//~> |Post
 /**
  * @swagger
- * /desserts/{dstname}:
+ * /desserts:
+ *   post:
+ *     summary: Add a new dessert
+ *     tags: [Desserts]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Dessert'
+ *     responses:
+ *       201:
+ *         description: Dessert added successfully
+ *       400:
+ *         description: Bad request
+ */
+//~> |Put
+/**
+ * @swagger
+ * /desserts/{dstid}:
  *   put:
- *     summary: Update a dessert by name
+ *     summary: Update a dessert by ID
  *     tags: [Desserts]
  *     parameters:
- *       - name: dstname
+ *       - name: dstid
  *         in: path
  *         required: true
  *         description: Name of the dessert to update
@@ -113,15 +113,43 @@
  *       400:
  *         description: Bad request
  */
-//~> |
+//~> |Patch
 /**
  * @swagger
- * /desserts/{dstname}:
+ * /desserts/{dstid}:
+ *   patch:
+ *     summary: Update a dessert partially by ID
+ *     tags: [Desserts]
+ *     parameters:
+ *       - name: dstid
+ *         in: path
+ *         required: true
+ *         description: ID of the dessert to update
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Dessert'
+ *     responses:
+ *       204:
+ *         description: Dessert updated partially successfully
+ *       404:
+ *         description: Dessert not found
+ *       400:
+ *         description: Bad request
+ */
+//~> |Delete
+/**
+ * @swagger
+ * /desserts/{dstid}:
  *   delete:
  *     summary: Delete a dessert by name
  *     tags: [Desserts]
  *     parameters:
- *       - name: dstname
+ *       - name: dstid
  *         in: path
  *         required: true
  *         description: Name of the dessert to delete

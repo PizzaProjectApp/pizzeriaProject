@@ -31,28 +31,26 @@
  *   - name: Pizzas
  *     description: Operations about pizzas
  */
-//~> |
+//~> |Get
 /**
  * @swagger
  * /pizzas:
  *   get:
  *     summary: Get a list of available pizzas
- *     tags:
- *       - Pizzas
+ *     tags: [Pizzas]
  *     responses:
  *       200:
  *         description: List of pizzas retrieved successfully
  *       500:
  *         description: Internal server error
  */
-//~> |
+//~> |Get
 /**
  * @swagger
  * /pizzas/{pid}:
  *   get:
  *     summary: Retrieve a single pizza by ID
- *     tags:
- *       - Pizzas
+ *     tags: [Pizzas]
  *     parameters:
  *       - name: pid
  *         in: path
@@ -66,14 +64,13 @@
  *       404:
  *         description: Pizza not found
  */
-//~> |
+//~> |Post
 /**
  * @swagger
  * /pizzas:
  *   post:
  *     summary: Add a new pizza
- *     tags:
- *       - Pizzas
+ *     tags: [Pizzas]
  *     requestBody:
  *       required: true
  *       content:
@@ -86,14 +83,13 @@
  *       400:
  *         description: Bad request
  */
-//~> |
+//~> |Put
 /**
  * @swagger
  * /pizzas/{pid}:
  *   put:
  *     summary: Update a pizza by id
- *     tags:
- *       - Pizzas
+ *     tags: [Pizzas]
  *     parameters:
  *       - name: pid
  *         in: path
@@ -113,14 +109,41 @@
  *       404:
  *         description: Pizza not found
  */
-//~> |
+//~> |Patch
+/**
+ * @swagger
+ * /pizzas/{pid}:
+ *   patch:
+ *     summary: Update a pizza partially by ID
+ *     tags: [Pizzas]
+ *     parameters:
+ *       - name: pid
+ *         in: path
+ *         required: true
+ *         description: ID of the pizza to update
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Pizza'
+ *     responses:
+ *       204:
+ *         description: Pizza updated partially successfully
+ *       404:
+ *         description: Pizza not found
+ *       400:
+ *         description: Bad request
+ */
+//~> |Delete
 /**
  * @swagger
  * /pizzas/{pid}:
  *   delete:
  *     summary: Delete a pizza by id
- *     tags:
- *       - Pizzas
+ *     tags: [Pizzas]
  *     parameters:
  *       - name: pid
  *         in: path
