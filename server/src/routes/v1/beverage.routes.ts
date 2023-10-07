@@ -18,7 +18,7 @@ export default class BeverageRouter extends CustomRouter {
         //~> |Update an beverage by id
         this.put("/:bvgid", beverageController.updateBeverageById);
 
-        //~> |Update an beverage by id
+        //~> |Partial Update an beverage by id
         this.patch("/:bvgid", beverageController.partialUpdateBeverageById);
 
         //~> |Delete an beverage by id
