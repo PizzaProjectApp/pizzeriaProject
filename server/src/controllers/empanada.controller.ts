@@ -70,10 +70,10 @@ export default class EmpanadaController {
     //~> |UPDATE
     updateEmpanadas = async (req: Request, res: Response): Promise<void> => {
         try {
-            const empanadaName = req.params.empname;
+            const empanadaId = req.params.empid;
             const { newData } = req.body;
             const response = await this.#empanadaService.updateEmpanada(
-                empanadaName,
+                empanadaId,
                 newData
             );
             res.json(response);
@@ -88,9 +88,9 @@ export default class EmpanadaController {
     //~> |DELETE
     deleteEmpanadas = async (req: Request, res: Response): Promise<void> => {
         try {
-            const empanadaName = req.params.empname;
+            const empanadaId = req.params.empnid;
             const response =
-                await this.#empanadaService.deleteEmpanada(empanadaName);
+                await this.#empanadaService.deleteEmpanada(empanadaId);
 
             if (response.deletedCount === 0) {
                 res.json({ message: "Empanada not found" });
