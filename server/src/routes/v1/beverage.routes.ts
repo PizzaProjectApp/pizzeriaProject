@@ -15,10 +15,10 @@ export default class BeverageRouter extends CustomRouter {
         //~> |Get an beverage by ID
         this.get("/:bvgid", beverageController.getBeverageById);
 
-        //~> |Update an beverage by name
-        this.put("/:bvgname", beverageController.updateBeverage);
+        //~> |Update an beverage by id
+        this.put("/:bvgid", beverageController.updateBeverage);
 
-        //~> |Delete an beverage by name
-        this.delete("/:bvgname", beverageController.deleteBeverages);
+        //~> |Delete an beverage by id
+        this.delete("/:bvgid", beverageController.deleteBeverages);
     }
 }
