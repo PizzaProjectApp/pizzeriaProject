@@ -1,7 +1,7 @@
 import DessertController from "../../controllers/dessert.controller";
 import CustomRouter from "../../middlewares/CustomRouter";
 
-//~~> | Empanada Controller
+//~~> | Dessert Controller
 const dessertController = new DessertController();
 
 export default class DessertRouter extends CustomRouter {
@@ -16,9 +16,12 @@ export default class DessertRouter extends CustomRouter {
         this.get("/:dstid", dessertController.getDessertById);
 
         //~> |Update an dessert by name
-        this.put("/:dstname", dessertController.updateDessert);
+        this.put("/:dstid", dessertController.updateDessert);
+
+        //~> |Partially Update an dessert by id
+        this.patch("/:dstid", dessertController.partialUpdateDessertById);
 
         //~> |Delete an dessert by name
-        this.delete("/:dstname", dessertController.deleteDesserts);
+        this.delete("/:dstid", dessertController.deleteDesserts);
     }
 }

@@ -18,6 +18,9 @@ export default class EmpanadaRouter extends CustomRouter {
         //~> |Update an empanada by name
         this.put("/:empname", empanadaController.updateEmpanadas);
 
+        //~> |Partially Update an empanada by id
+        this.patch("/:empid", empanadaController.partialUpdateEmpanadaById);
+
         //~> |Delete an empanada by name
         this.delete("/:empname", empanadaController.deleteEmpanadas);
     }

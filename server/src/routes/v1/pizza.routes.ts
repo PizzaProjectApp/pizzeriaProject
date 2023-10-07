@@ -18,6 +18,9 @@ export default class PizzaRouter extends CustomRouter {
         //~> |Put Pizzas
         this.put("/:pid", pizzaController.updatePizzas);
 
+        //~> |Partially Update an pizza by id
+        this.patch("/:pid", pizzaController.partialUpdatePizzaById);
+
         //~> |Delete Pizza by name
         this.delete("/:pid", pizzaController.deletePizzas);
     }
