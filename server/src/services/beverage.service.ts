@@ -45,32 +45,45 @@ export default class BeverageService {
         }
     };
 
-    getBeverageById = async (id: any) => {
+    getBeverageById = async (id: string) => {
         try {
             parseInt(id);
-            return this.#beverageModel.findById(id).lean();
+            return this.#beverageModel.findById({ _id: id }).lean();
         } catch (error) {
             throw error;
         }
     };
 
-    //Delete a Beverage by name
-    deleteBeverage = async (name: string): Promise<any> => {
+    //Delete a Beverage by id
+    deleteBeverage = async (id: string): Promise<any> => {
         try {
-            return await this.#beverageModel.deleteOne({ name });
+            return await this.#beverageModel.deleteOne({ _id: id });
         } catch (error) {
             throw error;
         }
     };
 
-    //Update a Beverage by name
-    updateBeverage = async (
-        name: string,
-        newData: IBeverage
+    //Update a Beverage by id
+    updateBeverageById = async (
+        id: string,
+        newData: Partial<IBeverage>,
+        usePatch: boolean = false
     ): Promise<object> => {
         try {
-            await this.#beverageModel.findOneAndUpdate({ name }, newData);
-            return { message: "Product successfully updated." };
+            const updatedBeverage = await this.#beverageModel.findOneAndUpdate(
+                { _id: id },
+                usePatch ? { $set: newData } : newData,
+                { new: true }
+            );
+
+            if (!updatedBeverage) {
+                return { message: "Beverage not found." };
+            }
+
+            return {
+                message: "Beverage successfully updated.",
+                updatedBeverage,
+            };
         } catch (error) {
             throw error;
         }
