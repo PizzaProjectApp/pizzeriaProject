@@ -1,3 +1,5 @@
+import { __dirname } from "../utils/pathUtils";
+
 export const swaggerOptions = {
     definition: {
         openapi: "3.0.3",
@@ -8,5 +10,5 @@ export const swaggerOptions = {
         },
         servers: [{ url: "http://localhost:3000/api/v1" }],
     },
-    apis: ["./src/routes/*/*.ts"],
+    apis: [`${__dirname}/docs/v1/*.ts`],
 };
