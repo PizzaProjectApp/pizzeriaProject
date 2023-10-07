@@ -16,12 +16,12 @@ export default class PizzaRouter extends CustomRouter {
         this.post("/", pizzaController.addPizza);
 
         //~> |Put Pizzas
-        this.put("/:pid", pizzaController.updatePizzas);
+        this.put("/:pid", pizzaController.updatePizza);
 
-        //~> |Partially Update an pizza by id
+        //~> |Partially Update an pizza by ID
         this.patch("/:pid", pizzaController.partialUpdatePizzaById);
 
-        //~> |Delete Pizza by name
-        this.delete("/:pid", pizzaController.deletePizzas);
+        //~> |Delete Pizza by ID
+        this.delete("/:pid", pizzaController.deletePizzaById);
     }
 }

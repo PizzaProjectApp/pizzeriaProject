@@ -15,13 +15,13 @@ export default class DessertRouter extends CustomRouter {
         //~> |Get an dessert by ID
         this.get("/:dstid", dessertController.getDessertById);
 
-        //~> |Update an dessert by name
+        //~> |Update an dessert by ID
         this.put("/:dstid", dessertController.updateDessert);
 
-        //~> |Partially Update an dessert by id
+        //~> |Partially Update an dessert by ID
         this.patch("/:dstid", dessertController.partialUpdateDessertById);
 
-        //~> |Delete an dessert by name
-        this.delete("/:dstid", dessertController.deleteDesserts);
+        //~> |Delete an dessert by ID
+        this.delete("/:dstid", dessertController.deleteDessertById);
     }
 }

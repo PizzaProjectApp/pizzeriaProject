@@ -15,13 +15,13 @@ export default class EmpanadaRouter extends CustomRouter {
         //~> |Get an empanada by ID
         this.get("/:empid", empanadaController.getEmpanadaById);
 
-        //~> |Update an empanada by name
-        this.put("/:empname", empanadaController.updateEmpanadas);
+        //~> |Update an empanada by ID
+        this.put("/:empid", empanadaController.updateEmpanada);
 
-        //~> |Partially Update an empanada by id
+        //~> |Partially Update an empanada by ID
         this.patch("/:empid", empanadaController.partialUpdateEmpanadaById);
 
-        //~> |Delete an empanada by name
-        this.delete("/:empname", empanadaController.deleteEmpanadas);
+        //~> |Delete an empanada by ID
+        this.delete("/:empid", empanadaController.deleteEmpanadaById);
     }
 }
