@@ -14,11 +14,12 @@ export default class EmpanadaService {
         this.#empanadaModel = empanadaModel;
     }
 
-    // Add a new Empanada
     addEmpanada = async (newEmpanada: IEmpanada): Promise<object> => {
         try {
             const existingEmpanada = await this.#empanadaModel.findOne({
                 name: newEmpanada.name,
+                description: newEmpanada.description,
+                price: newEmpanada.price,
             });
 
             if (existingEmpanada) {
@@ -35,7 +36,7 @@ export default class EmpanadaService {
             throw error;
         }
     };
-    //Get a list of available empanadas
+
     getEmpanadas = async () => {
         try {
             return this.#empanadaModel.find().lean();
@@ -44,32 +45,43 @@ export default class EmpanadaService {
         }
     };
 
-    getEmpanadaById = async (id: any) => {
+    getEmpanadaById = async (id: string) => {
         try {
-            parseInt(id);
-            return this.#empanadaModel.findById(id).lean();
+            return this.#empanadaModel.findById({ _id: id }).lean();
         } catch (error) {
             throw error;
         }
     };
 
-    //Delete a Empanada by name
-    deleteEmpanada = async (name: string): Promise<any> => {
-        try {
-            return await this.#empanadaModel.deleteOne({ name });
-        } catch (error) {
-            throw error;
-        }
-    };
-
-    //Update a Empanada by name
-    updateEmpanada = async (
-        name: string,
-        newData: IEmpanada
+    //Update a Empanada by id
+    updateEmpanadaById = async (
+        id: string,
+        newData: Partial<IEmpanada>,
+        usePatch: boolean = false
     ): Promise<object> => {
         try {
-            await this.#empanadaModel.findOneAndUpdate({ name }, newData);
-            return { message: "Product successfully updated." };
+            const updatedEmpanada = await this.#empanadaModel.findOneAndUpdate(
+                { _id: id },
+                usePatch ? { $set: newData } : newData,
+                { new: true }
+            );
+
+            if (!updatedEmpanada) {
+                return { message: "Empanada not found." };
+            }
+
+            return {
+                message: "Empanada successfully updated.",
+                updatedEmpanada,
+            };
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    deleteEmpanadaById = async (id: string): Promise<any> => {
+        try {
+            return await this.#empanadaModel.deleteOne({ _id: id });
         } catch (error) {
             throw error;
         }

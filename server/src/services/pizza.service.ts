@@ -19,7 +19,6 @@ export default class PizzaService {
         this.#pizzaModel = pizzaModel;
     }
 
-    // Add a new Pizza
     addPizza = async (newPizza: IPizza): Promise<object> => {
         try {
             if (!["whole", "half"].includes(newPizza.type)) {
@@ -27,6 +26,8 @@ export default class PizzaService {
             }
             const existingPizza = await this.#pizzaModel.findOne({
                 name: newPizza.name,
+                price: newPizza.price,
+                type: newPizza.type,
             });
             if (existingPizza) {
                 throw new DuplicatedProductError("");
@@ -46,7 +47,7 @@ export default class PizzaService {
 
     getPizzaById = async (id: string) => {
         try {
-            return this.#pizzaModel.findById(id).lean();
+            return this.#pizzaModel.findById({ _id: id }).lean();
         } catch (error) {
             throw error;
         }
@@ -60,23 +61,38 @@ export default class PizzaService {
         }
     };
 
-    deletePizza = async (id: string): Promise<any> => {
+    updatePizzaById = async (
+        id: string,
+        newData: Partial<IPizza>,
+        usePatch: boolean = false
+    ): Promise<object> => {
         try {
-            return await this.#pizzaModel.findByIdAndDelete(id);
+            const updatedPizza = await this.#pizzaModel.findOneAndUpdate(
+                { _id: id },
+                usePatch ? { $set: newData } : newData,
+                { new: true }
+            );
+
+            if (!updatedPizza) {
+                return { message: "Pizza not found." };
+            }
+
+            return {
+                message: "Pizza successfully updated.",
+                updatedPizza,
+            };
         } catch (error) {
             throw error;
         }
     };
 
-    updatePizza = async (id: string, newData: object): Promise<object> => {
+    deletePizzaById = async (id: string): Promise<any> => {
         try {
-            await this.#pizzaModel.findByIdAndUpdate(id, newData);
-            return { message: "Product successfully updated." };
+            return await this.#pizzaModel.findByIdAndDelete({ _id: id });
         } catch (error) {
             throw error;
         }
     };
-
     // // Retrieve all pizzas
     // getPizzasPaginated = async (params: PaginationParams): Promise<object> => {
     //     try {

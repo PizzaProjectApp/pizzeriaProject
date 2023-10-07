@@ -14,11 +14,13 @@ export default class DessertService {
         this.#dessertModel = dessertModel;
     }
 
-    // Add a new Dessert
     addDessert = async (newDessert: IDessert): Promise<object> => {
         try {
             const existingDessert = await this.#dessertModel.findOne({
                 name: newDessert.name,
+                description: newDessert.description,
+                price: newDessert.price,
+                type: newDessert.type,
             });
 
             if (existingDessert) {
@@ -35,7 +37,7 @@ export default class DessertService {
             throw error;
         }
     };
-    //Get a list of available desserts
+
     getDesserts = async () => {
         try {
             return this.#dessertModel.find().lean();
@@ -44,32 +46,43 @@ export default class DessertService {
         }
     };
 
-    getDessertById = async (id: any) => {
+    getDessertById = async (id: string) => {
         try {
             parseInt(id);
-            return this.#dessertModel.findById(id).lean();
+            return this.#dessertModel.findById({ _id: id }).lean();
         } catch (error) {
             throw error;
         }
     };
 
-    //Delete a Dessert by name
-    deleteDessert = async (name: string): Promise<any> => {
-        try {
-            return await this.#dessertModel.deleteOne({ name });
-        } catch (error) {
-            throw error;
-        }
-    };
-
-    //Update a Dessert by name
-    updateDessert = async (
-        name: string,
-        newData: IDessert
+    updateDessertById = async (
+        id: string,
+        newData: Partial<IDessert>,
+        usePatch: boolean = false
     ): Promise<object> => {
         try {
-            await this.#dessertModel.findOneAndUpdate({ name }, newData);
-            return { message: "Dessert successfully updated." };
+            const updatedDessert = await this.#dessertModel.findOneAndUpdate(
+                { _id: id },
+                usePatch ? { $set: newData } : newData,
+                { new: true }
+            );
+
+            if (!updatedDessert) {
+                return { message: "Dessert not found." };
+            }
+
+            return {
+                message: "Dessert successfully updated.",
+                updatedDessert,
+            };
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    deleteDessertById = async (id: string): Promise<any> => {
+        try {
+            return await this.#dessertModel.deleteOne({ _id: id });
         } catch (error) {
             throw error;
         }

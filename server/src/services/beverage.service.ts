@@ -15,11 +15,13 @@ export default class BeverageService {
         this.#beverageModel = beverageModel;
     }
 
-    // Add a new Beverage
     addBeverage = async (newBeverage: IBeverage): Promise<object> => {
         try {
             const existingBeverage = await this.#beverageModel.findOne({
                 name: newBeverage.name,
+                description: newBeverage.description,
+                price: newBeverage.price,
+                category: newBeverage.category,
             });
 
             if (existingBeverage) {
@@ -36,7 +38,7 @@ export default class BeverageService {
             throw error;
         }
     };
-    //Get a list of available beverages
+
     getBeverages = async () => {
         try {
             return this.#beverageModel.find().lean();
@@ -54,16 +56,6 @@ export default class BeverageService {
         }
     };
 
-    //Delete a Beverage by id
-    deleteBeverage = async (id: string): Promise<any> => {
-        try {
-            return await this.#beverageModel.deleteOne({ _id: id });
-        } catch (error) {
-            throw error;
-        }
-    };
-
-    //Update a Beverage by id
     updateBeverageById = async (
         id: string,
         newData: Partial<IBeverage>,
@@ -84,6 +76,14 @@ export default class BeverageService {
                 message: "Beverage successfully updated.",
                 updatedBeverage,
             };
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    deleteBeverageById = async (id: string): Promise<any> => {
+        try {
+            return await this.#beverageModel.deleteOne({ _id: id });
         } catch (error) {
             throw error;
         }
