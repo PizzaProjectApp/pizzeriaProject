@@ -1,5 +1,5 @@
 import { DuplicatedProductError } from "../errors/errors";
-import { empanadaModel } from "../models/Empanada";
+import { empanadaModel } from "../data/mongodb/models/Empanada";
 
 interface IEmpanada {
     name: String;

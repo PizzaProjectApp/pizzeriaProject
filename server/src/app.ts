@@ -1,4 +1,5 @@
-import { PORT, connectDB } from "./config/index";
+import { envs } from "./config/index";
+import { MongoDatabase } from "./data/mongodb/index";
 import Server from "./server";
 
 (() => {
@@ -7,9 +8,11 @@ import Server from "./server";
 
 async function main() {
     try {
-        await connectDB();
-        console.log("DB connected");
-        await new Server({ port: Number(PORT) }).start();
+        await MongoDatabase.connect({
+            mongoUrl: envs.MONGODB_URI,
+            dbName: envs.DB_NAME,
+        });
+        new Server({ port: envs.PORT }).start();
     } catch (error) {
         console.error(error);
     }

@@ -1,5 +1,5 @@
 import { DuplicatedProductError } from "../errors/errors";
-import { beverageModel } from "../models/Beverage";
+import { beverageModel } from "../data/mongodb/models/Beverage";
 
 interface IBeverage {
     name: String;

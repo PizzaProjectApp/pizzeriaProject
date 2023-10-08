@@ -1,5 +1,5 @@
 import { DuplicatedProductError } from "../errors/errors";
-import { dessertModel } from "../models/Dessert";
+import { dessertModel } from "../data/mongodb/models/Dessert";
 
 interface IDessert {
     name: String;

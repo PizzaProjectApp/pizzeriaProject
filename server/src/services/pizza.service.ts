@@ -4,7 +4,7 @@ import {
     DuplicatedProductError,
     InvalidArgValuesError,
 } from "../errors/errors";
-import { pizzaModel } from "../models/Pizza";
+import { pizzaModel } from "../data/mongodb/models/Pizza";
 // import { PaginationParams } from "../types/types";
 interface IPizza {
     name: string;
