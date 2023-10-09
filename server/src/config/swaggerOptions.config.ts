@@ -1,4 +1,4 @@
-import { __dirname } from "../utils/pathUtils";
+import { rootDirOverSrc } from "../utils/pathUtils";
 
 export const swaggerOptions = {
     definition: {
@@ -10,5 +10,5 @@ export const swaggerOptions = {
         },
         servers: [{ url: "http://localhost:3000/api/v1" }],
     },
-    apis: [`${__dirname}/docs/v1/*.ts`],
+    apis: [`${rootDirOverSrc}docs/v1/*ts`],
 };
