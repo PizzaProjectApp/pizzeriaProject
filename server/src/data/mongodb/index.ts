@@ -1,1 +1,1 @@
-export * from "./mongoDatabase";
+export * from "./MongoDatabase";
