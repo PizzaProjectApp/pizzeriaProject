@@ -1,5 +1,5 @@
 import DessertController from "../../controllers/dessert.controller";
-import CustomRouter from "../../middlewares/CustomRouter";
+import CustomRouter from "../../middlewares/custom-router.middleware";
 
 //~~> | Dessert Controller
 const dessertController = new DessertController();

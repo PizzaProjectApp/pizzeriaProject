@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import {
     DuplicatedProductError,
     InvalidArgValuesError,
-} from "../errors/errors";
+} from "../errors/errors.error";
 import DessertService from "../services/dessert.service";
 
 export default class DessertController {

@@ -29,47 +29,57 @@ npm run dev
 # Remember to have the .env file in the root folder.
 
 ```
-backend
+pizzeriaProject
 └─ server
    ├─ .env
    ├─ .env.template
    ├─ .prettierignore
-   ├─ .vscode
-   │  └─ settings.json
+   ├─ docs
+   │  └─ v1
+   │     ├─ Beverage.ts
+   │     ├─ Dessert.ts
+   │     ├─ Empanada.ts
+   │     └─ Pizza.ts
    ├─ package-lock.json
    ├─ package.json
    ├─ README.md
    ├─ src
    │  ├─ app.ts
    │  ├─ config
-   │  │  ├─ db.config.ts
    │  │  ├─ env.config.ts
    │  │  ├─ index.ts
    │  │  └─ swaggerOptions.config.ts
    │  ├─ controllers
+   │  │  ├─ beverage.controller.ts
    │  │  ├─ dessert.controller.ts
    │  │  ├─ empanada.controller.ts
    │  │  └─ pizza.controller.ts
+   │  ├─ data
+   │  │  └─ mongodb
+   │  │     ├─ index.ts
+   │  │     ├─ models
+   │  │     │  ├─ Beverage.ts
+   │  │     │  ├─ Dessert.ts
+   │  │     │  ├─ Empanada.ts
+   │  │     │  └─ Pizza.ts
+   │  │     └─ mongo-database.ts
    │  ├─ errors
-   │  │  ├─ errorHandler.ts
-   │  │  └─ errors.ts
+   │  │  ├─ error-handler.error.ts
+   │  │  └─ errors.error.ts
    │  ├─ middlewares
-   │  │  └─ CustomRouter.ts
-   │  ├─ models
-   │  │  ├─ Beverage.ts
-   │  │  ├─ Dessert.ts
-   │  │  ├─ Empanada.ts
-   │  │  └─ Pizza.ts
+   │  │  └─ custom-router.middleware.ts
    │  ├─ public
    │  │  └─ css
    │  │     └─ notFound.css
    │  ├─ routes
    │  │  └─ v1
+   │  │     ├─ beverage.routes.ts
    │  │     ├─ dessert.routes.ts
    │  │     ├─ empanada.routes.ts
    │  │     └─ pizza.routes.ts
    │  ├─ server.ts
    │  ├─ services
+   │  │  ├─ beverage.service.ts
    │  │  ├─ dessert.service.ts
    │  │  ├─ empanada.service.ts
    │  │  └─ pizza.service.ts
@@ -77,7 +87,7 @@ backend
    │  │  ├─ errorHandler.ts
    │  │  └─ types.ts
    │  ├─ utils
-   │  │  └─ pathUtils.ts
+   │  │  └─ path.utils.ts
    │  └─ views
    │     ├─ home.hbs
    │     ├─ layouts

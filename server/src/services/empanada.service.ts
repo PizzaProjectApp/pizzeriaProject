@@ -1,4 +1,4 @@
-import { DuplicatedProductError } from "../errors/errors";
+import { DuplicatedProductError } from "../errors/errors.error";
 import { empanadaModel } from "../data/mongodb/models/Empanada";
 
 interface IEmpanada {

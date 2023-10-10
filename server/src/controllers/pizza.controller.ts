@@ -3,7 +3,7 @@ import PizzaService from "../services/pizza.service";
 import {
     DuplicatedProductError,
     InvalidArgValuesError,
-} from "../errors/errors";
+} from "../errors/errors.error";
 
 export default class PizzaController {
     readonly #pizzaService;

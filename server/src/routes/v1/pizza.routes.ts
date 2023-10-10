@@ -1,4 +1,4 @@
-import CustomRouter from "../../middlewares/CustomRouter";
+import CustomRouter from "../../middlewares/custom-router.middleware";
 import PizzaController from "../../controllers/pizza.controller";
 
 //~~> | Pizza Controller
