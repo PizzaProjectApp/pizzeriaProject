@@ -1,2 +1,2 @@
 export * from "./env.config";
-export * from "./swaggerOptions.config";
+export * from "./swagger-options.config";
