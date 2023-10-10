@@ -1,4 +1,4 @@
-import { DuplicatedProductError } from "../errors/errors";
+import { DuplicatedProductError } from "../errors/errors.error";
 import { beverageModel } from "../data/mongodb/models/Beverage";
 
 interface IBeverage {

@@ -26,9 +26,12 @@ export default class Server {
     private readonly port: number;
 
     constructor(options: Options) {
-        const { port } = options;
-
+        const { port = 3100 } = options;
         this.port = port;
+    }
+
+    async start() {
+        /* ★━━━━━━━━━━━★ Middlewares ★━━━━━━━━━━━★ */
         this.app.use(cors());
         this.app.use(morgan("dev"));
         this.app.use(Express.json());
@@ -36,6 +39,7 @@ export default class Server {
         this.app.use(Express.static(__dirname + "/public"));
         this.app.use(Express.urlencoded({ extended: true }));
 
+        /* ★━━━━━━━━━━━★ Handlebars ★━━━━━━━━━━━★ */
         this.app.set("views", path.join(__dirname, "views"));
 
         this.app.engine(
@@ -67,9 +71,8 @@ export default class Server {
         this.app.use("*", (_req, res, _next) => {
             res.render("partials/notFound", { title: "404 Not Found" });
         });
-    }
 
-    async start() {
+        /* ★━━━━━━━━━━━★ Listener ★━━━━━━━━━━━★ */
         this.app.listen(this.port, () => {
             console.log(
                 `🚀 Server running on port ${this.port}. 

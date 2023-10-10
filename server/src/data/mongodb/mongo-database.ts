@@ -1,5 +1,5 @@
 import { connect } from "mongoose";
-import { ConnectToMongoDBError } from "../../errors/errors";
+import { ConnectToMongoDBError } from "../../errors/errors.error";
 
 interface Options {
     mongoUrl: string;

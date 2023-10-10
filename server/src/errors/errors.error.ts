@@ -1,4 +1,4 @@
-import { errorFactory } from "./errorHandler";
+import { errorFactory } from "./error-handler.error";
 
 //~> | MongoDB Errors
 export const ConnectToMongoDBError = errorFactory({

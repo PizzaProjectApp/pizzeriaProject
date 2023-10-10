@@ -1,5 +1,5 @@
 import EmpanadaController from "../../controllers/empanada.controller";
-import CustomRouter from "../../middlewares/CustomRouter";
+import CustomRouter from "../../middlewares/custom-router.middleware";
 
 //~~> | Empanada Controller
 const empanadaController = new EmpanadaController();

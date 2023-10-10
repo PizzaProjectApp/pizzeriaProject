@@ -1,4 +1,4 @@
-import { rootDirOverSrc } from "../utils/pathUtils";
+import { rootDirOverSrc } from "../utils/path.utils";
 
 export const swaggerOptions = {
     definition: {
