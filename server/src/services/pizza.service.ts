@@ -1,11 +1,9 @@
-// import { GetPizzasPaginatedError } from "../errors/errors";
-
 import {
     DuplicatedProductError,
     InvalidArgValuesError,
 } from "../errors/errors.error";
 import { pizzaModel } from "../data/mongodb/models/Pizza";
-// import { PaginationParams } from "../types/types";
+
 interface IPizza {
     name: string;
     description: string;
