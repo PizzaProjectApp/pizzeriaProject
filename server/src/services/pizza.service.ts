@@ -19,7 +19,7 @@ export default class PizzaService {
         this.#pizzaModel = pizzaModel;
     }
 
-    addPizza = async (newPizza: IPizza): Promise<object> => {
+    addPizza = async (newPizza: IPizza): Promise<IPizza> => {
         try {
             if (!["whole", "half"].includes(newPizza.type)) {
                 throw new InvalidArgValuesError("");
@@ -34,7 +34,16 @@ export default class PizzaService {
             }
 
             const addedPizza = await this.#pizzaModel.create(newPizza);
-            return addedPizza;
+
+            const result: IPizza = {
+                name: addedPizza.name,
+                description: addedPizza.description,
+                price: addedPizza.price,
+                type: addedPizza.type,
+                thumbnail: addedPizza.thumbnail || [""],
+            };
+
+            return result;
         } catch (error) {
             if (error instanceof InvalidArgValuesError) {
                 throw error;
@@ -45,7 +54,7 @@ export default class PizzaService {
         }
     };
 
-    getPizzaById = async (id: string) => {
+    getPizzaById = async (id: string): Promise<IPizza | null> => {
         try {
             return this.#pizzaModel.findById({ _id: id }).lean();
         } catch (error) {
@@ -53,7 +62,7 @@ export default class PizzaService {
         }
     };
 
-    getPizzas = async () => {
+    getPizzas = async (): Promise<IPizza> => {
         try {
             return this.#pizzaModel.find().lean();
         } catch (error) {
