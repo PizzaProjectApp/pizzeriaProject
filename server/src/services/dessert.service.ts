@@ -2,19 +2,20 @@ import { DuplicatedProductError } from "../errors/errors.error";
 import { dessertModel } from "../data/mongodb/models/Dessert";
 
 interface IDessert {
-    name: String;
-    description: String;
-    price: Number;
+    name: string;
+    description: string;
+    price: number;
     type: "cold" | "hot";
     thumbnail: string[];
 }
+
 export default class DessertService {
     readonly #dessertModel;
     constructor() {
         this.#dessertModel = dessertModel;
     }
 
-    addDessert = async (newDessert: IDessert): Promise<object> => {
+    addDessert = async (newDessert: IDessert): Promise<IDessert> => {
         try {
             const existingDessert = await this.#dessertModel.findOne({
                 name: newDessert.name,
@@ -29,7 +30,15 @@ export default class DessertService {
 
             const addedDessert = await this.#dessertModel.create(newDessert);
 
-            return addedDessert;
+            const result: IDessert = {
+                name: addedDessert.name,
+                description: addedDessert.description!,
+                price: addedDessert.price,
+                type: addedDessert.type,
+                thumbnail: addedDessert.thumbnail!,
+            };
+
+            return result;
         } catch (error) {
             if (error instanceof DuplicatedProductError) {
                 throw error;
@@ -46,9 +55,8 @@ export default class DessertService {
         }
     };
 
-    getDessertById = async (id: string) => {
+    getDessertById = async (id: string): Promise<IDessert | null> => {
         try {
-            parseInt(id);
             return this.#dessertModel.findById({ _id: id }).lean();
         } catch (error) {
             throw error;
