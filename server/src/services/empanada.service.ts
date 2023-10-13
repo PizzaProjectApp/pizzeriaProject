@@ -2,9 +2,9 @@ import { DuplicatedProductError } from "../errors/errors.error";
 import { empanadaModel } from "../data/mongodb/models/Empanada";
 
 interface IEmpanada {
-    name: String;
-    description: String;
-    price: Number;
+    name: string;
+    description: string;
+    price: number;
     thumbnail: string[];
 }
 
@@ -14,7 +14,7 @@ export default class EmpanadaService {
         this.#empanadaModel = empanadaModel;
     }
 
-    addEmpanada = async (newEmpanada: IEmpanada): Promise<object> => {
+    addEmpanada = async (newEmpanada: IEmpanada): Promise<IEmpanada> => {
         try {
             const existingEmpanada = await this.#empanadaModel.findOne({
                 name: newEmpanada.name,
@@ -28,7 +28,14 @@ export default class EmpanadaService {
 
             const addedEmpanada = await this.#empanadaModel.create(newEmpanada);
 
-            return addedEmpanada;
+            const result: IEmpanada = {
+                name: addedEmpanada.name,
+                description: addedEmpanada.description,
+                price: addedEmpanada.price,
+                thumbnail: addedEmpanada.thumbnail || [""],
+            };
+
+            return result;
         } catch (error) {
             if (error instanceof DuplicatedProductError) {
                 throw error;
@@ -37,7 +44,7 @@ export default class EmpanadaService {
         }
     };
 
-    getEmpanadas = async () => {
+    getEmpanadas = async (): Promise<IEmpanada> => {
         try {
             return this.#empanadaModel.find().lean();
         } catch (error) {
@@ -45,7 +52,7 @@ export default class EmpanadaService {
         }
     };
 
-    getEmpanadaById = async (id: string) => {
+    getEmpanadaById = async (id: string): Promise<IEmpanada | null> => {
         try {
             return this.#empanadaModel.findById({ _id: id }).lean();
         } catch (error) {

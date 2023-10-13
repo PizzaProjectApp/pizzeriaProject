@@ -2,10 +2,10 @@ import { DuplicatedProductError } from "../errors/errors.error";
 import { beverageModel } from "../data/mongodb/models/Beverage";
 
 interface IBeverage {
-    name: String;
-    description: String;
-    price: Number;
-    category: String;
+    name: string;
+    description: string;
+    price: number;
+    category: string;
     thumbnail: string[];
 }
 
@@ -15,7 +15,7 @@ export default class BeverageService {
         this.#beverageModel = beverageModel;
     }
 
-    addBeverage = async (newBeverage: IBeverage): Promise<object> => {
+    addBeverage = async (newBeverage: IBeverage): Promise<IBeverage> => {
         try {
             const existingBeverage = await this.#beverageModel.findOne({
                 name: newBeverage.name,
@@ -29,8 +29,15 @@ export default class BeverageService {
             }
 
             const addedBeverage = await this.#beverageModel.create(newBeverage);
+            const result: IBeverage = {
+                name: addedBeverage.name,
+                description: addedBeverage.description,
+                price: addedBeverage.price,
+                category: addedBeverage.category,
+                thumbnail: addedBeverage.thumbnail || [""],
+            };
 
-            return addedBeverage;
+            return result;
         } catch (error) {
             if (error instanceof DuplicatedProductError) {
                 throw error;
@@ -39,7 +46,7 @@ export default class BeverageService {
         }
     };
 
-    getBeverages = async () => {
+    getBeverages = async (): Promise<IBeverage> => {
         try {
             return this.#beverageModel.find().lean();
         } catch (error) {
@@ -47,7 +54,7 @@ export default class BeverageService {
         }
     };
 
-    getBeverageById = async (id: string) => {
+    getBeverageById = async (id: string): Promise<IBeverage | null> => {
         try {
             parseInt(id);
             return this.#beverageModel.findById({ _id: id }).lean();

@@ -32,10 +32,10 @@ export default class DessertService {
 
             const result: IDessert = {
                 name: addedDessert.name,
-                description: addedDessert.description!,
+                description: addedDessert.description,
                 price: addedDessert.price,
                 type: addedDessert.type,
-                thumbnail: addedDessert.thumbnail!,
+                thumbnail: addedDessert.thumbnail || [""],
             };
 
             return result;
@@ -47,7 +47,7 @@ export default class DessertService {
         }
     };
 
-    getDesserts = async () => {
+    getDesserts = async (): Promise<IDessert> => {
         try {
             return this.#dessertModel.find().lean();
         } catch (error) {
