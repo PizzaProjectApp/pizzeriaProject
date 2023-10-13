@@ -1,27 +1,31 @@
+import { Router } from "express";
 import BeverageController from "../../controllers/beverage.controller";
-import CustomRouter from "../../middlewares/custom-router.middleware";
 
 //~~> | Empanada Controller
 const beverageController = new BeverageController();
 
-export default class BeverageRouter extends CustomRouter {
-    init() {
+export default class BeverageRouter {
+    static get routes(): Router {
+        const router = Router();
+
         //~> |Get a list of available beverages
-        this.get("/", beverageController.getBeverages);
+        router.get("/", beverageController.getBeverages);
 
         //~> |Add a new beverage
-        this.post("/", beverageController.addBeverage);
+        router.post("/", beverageController.addBeverage);
 
         //~> |Get an beverage by ID
-        this.get("/:bvgid", beverageController.getBeverageById);
+        router.get("/:bvgid", beverageController.getBeverageById);
 
         //~> |Update an beverage by ID
-        this.put("/:bvgid", beverageController.updateBeverageById);
+        router.put("/:bvgid", beverageController.updateBeverageById);
 
         //~> |Partially Update an beverage by ID
-        this.patch("/:bvgid", beverageController.partialUpdateBeverageById);
+        router.patch("/:bvgid", beverageController.partialUpdateBeverageById);
 
         //~> |Delete an beverage by ID
-        this.delete("/:bvgid", beverageController.deleteBeverageById);
+        router.delete("/:bvgid", beverageController.deleteBeverageById);
+
+        return router;
     }
 }

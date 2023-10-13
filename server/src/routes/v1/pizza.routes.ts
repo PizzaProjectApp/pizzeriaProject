@@ -1,27 +1,31 @@
-import CustomRouter from "../../middlewares/custom-router.middleware";
+import { Router } from "express";
 import PizzaController from "../../controllers/pizza.controller";
 
 //~~> | Pizza Controller
 const pizzaController = new PizzaController();
 
-export default class PizzaRouter extends CustomRouter {
-    init() {
+export default class PizzaRouter {
+    static get routes(): Router {
+        const router = Router();
+
         //~> |Get a list of available pizzas
-        this.get("/", pizzaController.getPizzas);
+        router.get("/", pizzaController.getPizzas);
 
         // Retrieve a single Pizza with ID
-        this.get("/:pid", pizzaController.getPizzaById);
+        router.get("/:pid", pizzaController.getPizzaById);
 
         //~> |Add Pizza
-        this.post("/", pizzaController.addPizza);
+        router.post("/", pizzaController.addPizza);
 
         //~> |Put Pizzas
-        this.put("/:pid", pizzaController.updatePizza);
+        router.put("/:pid", pizzaController.updatePizza);
 
         //~> |Partially Update an pizza by ID
-        this.patch("/:pid", pizzaController.partialUpdatePizzaById);
+        router.patch("/:pid", pizzaController.partialUpdatePizzaById);
 
         //~> |Delete Pizza by ID
-        this.delete("/:pid", pizzaController.deletePizzaById);
+        router.delete("/:pid", pizzaController.deletePizzaById);
+
+        return router;
     }
 }

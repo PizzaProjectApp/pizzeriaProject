@@ -1,27 +1,31 @@
+import { Router } from "express";
 import DessertController from "../../controllers/dessert.controller";
-import CustomRouter from "../../middlewares/custom-router.middleware";
 
 //~~> | Dessert Controller
 const dessertController = new DessertController();
 
-export default class DessertRouter extends CustomRouter {
-    init() {
+export default class DessertRouter {
+    static get routes(): Router {
+        const router = Router();
+
         //~> |Get a list of available desserts
-        this.get("/", dessertController.getDesserts);
+        router.get("/", dessertController.getDesserts);
 
         //~> |Add a new dessert
-        this.post("/", dessertController.addDessert);
+        router.post("/", dessertController.addDessert);
 
         //~> |Get an dessert by ID
-        this.get("/:dstid", dessertController.getDessertById);
+        router.get("/:dstid", dessertController.getDessertById);
 
         //~> |Update an dessert by ID
-        this.put("/:dstid", dessertController.updateDessert);
+        router.put("/:dstid", dessertController.updateDessert);
 
         //~> |Partially Update an dessert by ID
-        this.patch("/:dstid", dessertController.partialUpdateDessertById);
+        router.patch("/:dstid", dessertController.partialUpdateDessertById);
 
         //~> |Delete an dessert by ID
-        this.delete("/:dstid", dessertController.deleteDessertById);
+        router.delete("/:dstid", dessertController.deleteDessertById);
+
+        return router;
     }
 }

@@ -1,4 +1,7 @@
-import { HandleErrorOptions } from "../types/errorHandler";
+export interface HandleErrorOptions {
+    name: string;
+}
+
 export const errorFactory = function (options: HandleErrorOptions) {
     return class HandleError extends Error {
         constructor(message: string) {

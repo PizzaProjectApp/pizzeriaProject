@@ -146,16 +146,4 @@ export default class PizzaController {
             return;
         }
     };
-    // //Get all Pizza with specified limit/page/query/sort
-    // //~> |GET
-    // getPizzasPaginated = async (req: Request, res: Response): Promise<void> => {
-    //     try {
-    //         const products = await this.#pizzaService.getPizzasPaginated(
-    //             req.query
-    //         );
-    //         res.json(products);
-    //     } catch (error) {
-    //         res.status(500).json({ message: "Something went wrong" });
-    //     }
-    // };
 }

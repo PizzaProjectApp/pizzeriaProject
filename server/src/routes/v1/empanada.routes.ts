@@ -1,27 +1,31 @@
+import { Router } from "express";
 import EmpanadaController from "../../controllers/empanada.controller";
-import CustomRouter from "../../middlewares/custom-router.middleware";
 
 //~~> | Empanada Controller
 const empanadaController = new EmpanadaController();
 
-export default class EmpanadaRouter extends CustomRouter {
-    init() {
+export default class EmpanadaRouter {
+    static get routes(): Router {
+        const router = Router();
+
         //~> |Get a list of available empanadas
-        this.get("/", empanadaController.getEmpanadas);
+        router.get("/", empanadaController.getEmpanadas);
 
         //~> |Add a new empanada
-        this.post("/", empanadaController.addEmpanada);
+        router.post("/", empanadaController.addEmpanada);
 
         //~> |Get an empanada by ID
-        this.get("/:empid", empanadaController.getEmpanadaById);
+        router.get("/:empid", empanadaController.getEmpanadaById);
 
         //~> |Update an empanada by ID
-        this.put("/:empid", empanadaController.updateEmpanada);
+        router.put("/:empid", empanadaController.updateEmpanada);
 
         //~> |Partially Update an empanada by ID
-        this.patch("/:empid", empanadaController.partialUpdateEmpanadaById);
+        router.patch("/:empid", empanadaController.partialUpdateEmpanadaById);
 
         //~> |Delete an empanada by ID
-        this.delete("/:empid", empanadaController.deleteEmpanadaById);
+        router.delete("/:empid", empanadaController.deleteEmpanadaById);
+
+        return router;
     }
 }
