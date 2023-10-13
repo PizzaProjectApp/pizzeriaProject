@@ -12,7 +12,7 @@ export default class EmpanadaController {
     }
     //Add new Empanada
     //~> |GET
-    addEmpanada = async (req: Request, res: Response): Promise<void> => {
+    addEmpanada = async (req: Request, res: Response) => {
         try {
             const requiredKeys = ["name", "description", "price", "thumbnail"];
 
@@ -44,7 +44,7 @@ export default class EmpanadaController {
 
     // Retrieve a single Empanada with ID
     //~> |GET
-    getEmpanadaById = async (req: Request, res: Response): Promise<void> => {
+    getEmpanadaById = async (req: Request, res: Response) => {
         try {
             const empanadaId = req.params.empid;
             const response =
@@ -65,7 +65,7 @@ export default class EmpanadaController {
 
     //Retrieve all Empanadas
     //~> |GET
-    getEmpanadas = async (_req: Request, res: Response): Promise<void> => {
+    getEmpanadas = async (_req: Request, res: Response) => {
         try {
             const response = await this.#empanadaService.getEmpanadas();
             res.json(response);
@@ -79,7 +79,7 @@ export default class EmpanadaController {
 
     //Update Empanada
     //~> |UPDATE
-    updateEmpanada = async (req: Request, res: Response): Promise<void> => {
+    updateEmpanada = async (req: Request, res: Response) => {
         try {
             const empanadaId = req.params.empid;
             const newData = req.body;
@@ -98,10 +98,7 @@ export default class EmpanadaController {
 
     //Partially Update Empanada
     //~> |PARTIALLY UPDATE
-    partialUpdateEmpanadaById = async (
-        req: Request,
-        res: Response
-    ): Promise<void> => {
+    partialUpdateEmpanadaById = async (req: Request, res: Response) => {
         try {
             const empanadaId = req.params.empid;
             const newData = req.body;
@@ -121,7 +118,7 @@ export default class EmpanadaController {
 
     //Retrieve all Empanadas
     //~> |DELETE
-    deleteEmpanadaById = async (req: Request, res: Response): Promise<void> => {
+    deleteEmpanadaById = async (req: Request, res: Response) => {
         try {
             const empanadaId = req.params.empnid;
             const response =

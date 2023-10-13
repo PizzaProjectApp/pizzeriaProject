@@ -13,7 +13,7 @@ export default class PizzaController {
 
     //Add new Pizza
     //~> |GET
-    addPizza = async (req: Request, res: Response): Promise<void> => {
+    addPizza = async (req: Request, res: Response) => {
         try {
             const requiredKeys = [
                 "name",
@@ -51,7 +51,7 @@ export default class PizzaController {
 
     // Retrieve an single Pizza with ID
     //~> |GET
-    getPizzaById = async (req: Request, res: Response): Promise<void> => {
+    getPizzaById = async (req: Request, res: Response) => {
         try {
             const pizzaId = req.params.pid;
             const response = await this.#pizzaService.getPizzaById(pizzaId);
@@ -72,7 +72,7 @@ export default class PizzaController {
 
     //Retrieve all Pizzas
     //~> |GET
-    getPizzas = async (_req: Request, res: Response): Promise<void> => {
+    getPizzas = async (_req: Request, res: Response) => {
         try {
             const response = await this.#pizzaService.getPizzas();
             res.json(response);
@@ -86,7 +86,7 @@ export default class PizzaController {
 
     //Update Pizza
     //~> |UPDATE
-    updatePizza = async (req: Request, res: Response): Promise<void> => {
+    updatePizza = async (req: Request, res: Response) => {
         try {
             const pizzaId = req.params.pid;
             const newData = req.body;
@@ -105,10 +105,7 @@ export default class PizzaController {
 
     //Partially Update Pizza
     //~> |PARTIALLY UPDATE
-    partialUpdatePizzaById = async (
-        req: Request,
-        res: Response
-    ): Promise<void> => {
+    partialUpdatePizzaById = async (req: Request, res: Response) => {
         try {
             const pizzaId = req.params.pid;
             const newData = req.body;
@@ -128,7 +125,7 @@ export default class PizzaController {
 
     //Delete an single Pizza by ID
     //~> |DELETE
-    deletePizzaById = async (req: Request, res: Response): Promise<void> => {
+    deletePizzaById = async (req: Request, res: Response) => {
         try {
             const pizzaId = req.params.pid;
             const response = await this.#pizzaService.deletePizzaById(pizzaId);

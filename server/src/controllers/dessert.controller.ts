@@ -12,7 +12,7 @@ export default class DessertController {
     }
     //Add new Dessert
     //~> |GET
-    addDessert = async (req: Request, res: Response): Promise<void> => {
+    addDessert = async (req: Request, res: Response) => {
         try {
             const requiredKeys = [
                 "name",
@@ -50,7 +50,7 @@ export default class DessertController {
 
     // Retrieve a single Dessert with ID
     //~> |GET
-    getDessertById = async (req: Request, res: Response): Promise<void> => {
+    getDessertById = async (req: Request, res: Response) => {
         try {
             const dessertId = req.params.dstid;
             const response =
@@ -72,7 +72,7 @@ export default class DessertController {
 
     //Retrieve all Desserts
     //~> |GET
-    getDesserts = async (_req: Request, res: Response): Promise<void> => {
+    getDesserts = async (_req: Request, res: Response) => {
         try {
             const response = await this.#dessertService.getDesserts();
             res.json(response);
@@ -86,7 +86,7 @@ export default class DessertController {
 
     //Update Dessert
     //~> |UPDATE
-    updateDessert = async (req: Request, res: Response): Promise<void> => {
+    updateDessert = async (req: Request, res: Response) => {
         try {
             const dessertId = req.params.dstid;
             const newData = req.body;
@@ -105,10 +105,7 @@ export default class DessertController {
 
     //Partially Update Dessert
     //~> |PARTIALLY UPDATE
-    partialUpdateDessertById = async (
-        req: Request,
-        res: Response
-    ): Promise<void> => {
+    partialUpdateDessertById = async (req: Request, res: Response) => {
         try {
             const dessertId = req.params.dstid;
             const newData = req.body;
@@ -128,7 +125,7 @@ export default class DessertController {
 
     //Retrieve all Desserts
     //~> |DELETE
-    deleteDessertById = async (req: Request, res: Response): Promise<void> => {
+    deleteDessertById = async (req: Request, res: Response) => {
         try {
             const dessertId = req.params.dstid;
             const response =

@@ -12,7 +12,7 @@ export default class BeverageController {
     }
     //Add new Beverage
     //~> |GET
-    addBeverage = async (req: Request, res: Response): Promise<void> => {
+    addBeverage = async (req: Request, res: Response) => {
         try {
             const requiredKeys = [
                 "name",
@@ -50,7 +50,7 @@ export default class BeverageController {
 
     // Retrieve a single Beverage with ID
     //~> |GET
-    getBeverageById = async (req: Request, res: Response): Promise<void> => {
+    getBeverageById = async (req: Request, res: Response) => {
         try {
             const beverageId = req.params.bvgid;
             const response =
@@ -72,7 +72,7 @@ export default class BeverageController {
 
     //Retrieve all Beverages
     //~> |GET
-    getBeverages = async (_req: Request, res: Response): Promise<void> => {
+    getBeverages = async (_req: Request, res: Response) => {
         try {
             const response = await this.#beverageService.getBeverages();
             res.json(response);
@@ -86,7 +86,7 @@ export default class BeverageController {
 
     //Update Beverage
     //~> |UPDATE
-    updateBeverageById = async (req: Request, res: Response): Promise<void> => {
+    updateBeverageById = async (req: Request, res: Response) => {
         try {
             const beverageId = req.params.bvgid;
             const newData = req.body;
@@ -105,10 +105,7 @@ export default class BeverageController {
 
     //Partially Update Beverage
     //~> |PARTIALLY UPDATE
-    partialUpdateBeverageById = async (
-        req: Request,
-        res: Response
-    ): Promise<void> => {
+    partialUpdateBeverageById = async (req: Request, res: Response) => {
         try {
             const beverageId = req.params.bvgid;
             const newData = req.body;
@@ -128,7 +125,7 @@ export default class BeverageController {
 
     //Retrieve all Beverages
     //~> |DELETE
-    deleteBeverageById = async (req: Request, res: Response): Promise<void> => {
+    deleteBeverageById = async (req: Request, res: Response) => {
         try {
             const beverageId = req.params.bvgid;
             const response =
