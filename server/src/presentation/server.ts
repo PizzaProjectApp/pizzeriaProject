@@ -5,7 +5,7 @@ import morgan from "morgan";
 // Swagger
 import SwaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
-import { swaggerOptions } from "./config/index";
+import { swaggerOptions } from "../config/index";
 
 interface Options {
     port: number;
@@ -28,8 +28,10 @@ export default class Server {
         this.app.use(cors());
         this.app.use(morgan("dev"));
         this.app.use(Express.json());
-        const swaggerSpecs = swaggerJSDoc(swaggerOptions);
         this.app.use(Express.urlencoded({ extended: true }));
+
+        /* ★━━━━━━━━━━━★ Swagger Docs ★━━━━━━━━━━━★ */
+        const swaggerSpecs = swaggerJSDoc(swaggerOptions);
 
         /* ★━━━━━━━━━━━★ Routes ★━━━━━━━━━━━★ */
         this.app.use(this.routes);
@@ -39,7 +41,6 @@ export default class Server {
             SwaggerUi.serve,
             SwaggerUi.setup(swaggerSpecs)
         );
-
         /* ★━━━━━━━━━━━★ Listener ★━━━━━━━━━━━★ */
         this.app.listen(this.port, () => {
             console.log(
