@@ -8,21 +8,13 @@ import {
 import { PizzaMapper } from "../mappers/pizza.mapper";
 
 export class PizzaDatasourceImpl implements PizzaDatasource {
-    async create(pizzaDto: PizzaDto): Promise<PizzaEntity> {
-        const {
-            name,
-            description,
-            price,
-            type,
-            thumbnail,
-            status = true,
-        } = pizzaDto;
+    create = async (pizzaDto: PizzaDto): Promise<PizzaEntity> => {
+        const { name, description, price, type, thumbnail, status } = pizzaDto;
         try {
             const exists = await pizzaModel.findOne({
                 name,
                 description,
                 price,
-                type,
             });
 
             if (exists)
@@ -48,5 +40,5 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             }
             throw CustomError.internalServer();
         }
-    }
+    };
 }
