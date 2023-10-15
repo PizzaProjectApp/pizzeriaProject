@@ -1,6 +1,4 @@
 import { connect } from "mongoose";
-import { ConnectToMongoDBError } from "../../errors/errors.error";
-
 interface Options {
     mongoUrl: string;
     dbName: string;
@@ -14,7 +12,7 @@ export class MongoDatabase {
             console.log("🔌", "DB connected");
             return true;
         } catch (error) {
-            throw new ConnectToMongoDBError("Failed to connect to MongoDB");
+            throw error;
         }
     }
 }

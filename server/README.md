@@ -26,74 +26,81 @@ npm i
 npm run dev
 ```
 
-# Remember to have the .env file in the root folder.
+Make sure you have the `.env` file in the root folder.
+
+```plaintext
+pizzeria_project
+└─ server
+├─ .env
+├─ .env.template
+└─ ...
+
+# To access the documentation, open your web browser and enter the following URL:
 
 ```
-pizzeriaProject
+
+http://localhost:3000/api/docs
+
+```
+
+This will take you to the API documentation, where you can explore the endpoints and learn how to interact with the application.
+
+```
+
+pizzeria_project
 └─ server
-   ├─ .env
-   ├─ .env.template
-   ├─ .prettierignore
-   ├─ docs
-   │  └─ v1
-   │     ├─ Beverage.ts
-   │     ├─ Dessert.ts
-   │     ├─ Empanada.ts
-   │     └─ Pizza.ts
-   ├─ package-lock.json
-   ├─ package.json
-   ├─ README.md
-   ├─ src
-   │  ├─ app.ts
-   │  ├─ config
-   │  │  ├─ env.config.ts
-   │  │  ├─ index.ts
-   │  │  └─ swaggerOptions.config.ts
-   │  ├─ controllers
-   │  │  ├─ beverage.controller.ts
-   │  │  ├─ dessert.controller.ts
-   │  │  ├─ empanada.controller.ts
-   │  │  └─ pizza.controller.ts
-   │  ├─ data
-   │  │  └─ mongodb
-   │  │     ├─ index.ts
-   │  │     ├─ models
-   │  │     │  ├─ Beverage.ts
-   │  │     │  ├─ Dessert.ts
-   │  │     │  ├─ Empanada.ts
-   │  │     │  └─ Pizza.ts
-   │  │     └─ mongo-database.ts
-   │  ├─ errors
-   │  │  ├─ error-handler.error.ts
-   │  │  └─ errors.error.ts
-   │  ├─ middlewares
-   │  │  └─ custom-router.middleware.ts
-   │  ├─ public
-   │  │  └─ css
-   │  │     └─ notFound.css
-   │  ├─ routes
-   │  │  └─ v1
-   │  │     ├─ beverage.routes.ts
-   │  │     ├─ dessert.routes.ts
-   │  │     ├─ empanada.routes.ts
-   │  │     └─ pizza.routes.ts
-   │  ├─ server.ts
-   │  ├─ services
-   │  │  ├─ beverage.service.ts
-   │  │  ├─ dessert.service.ts
-   │  │  ├─ empanada.service.ts
-   │  │  └─ pizza.service.ts
-   │  ├─ types
-   │  │  ├─ errorHandler.ts
-   │  │  └─ types.ts
-   │  ├─ utils
-   │  │  └─ path.utils.ts
-   │  └─ views
-   │     ├─ home.hbs
-   │     ├─ layouts
-   │     │  └─ main.hbs
-   │     └─ partials
-   │        └─ notFound.hbs
-   └─ tsconfig.json
+├─ .env
+├─ .env.template
+├─ .prettierignore
+├─ docs
+│ └─ v1
+│ ├─ Beverage.ts
+│ ├─ Dessert.ts
+│ ├─ Empanada.ts
+│ └─ Pizza.ts
+├─ package-lock.json
+├─ package.json
+├─ README.md
+├─ src
+│ ├─ app.ts
+│ ├─ config
+│ │ ├─ env.config.ts
+│ │ ├─ index.ts
+│ │ └─ swagger-options.config.ts
+│ ├─ controllers
+│ │ ├─ beverage.controller.ts
+│ │ ├─ dessert.controller.ts
+│ │ ├─ empanada.controller.ts
+│ │ └─ pizza.controller.ts
+│ ├─ data
+│ │ └─ mongodb
+│ │ ├─ index.ts
+│ │ ├─ models
+│ │ │ ├─ Beverage.ts
+│ │ │ ├─ Dessert.ts
+│ │ │ ├─ Empanada.ts
+│ │ │ └─ Pizza.ts
+│ │ └─ mongo-database.ts
+│ ├─ errors
+│ │ ├─ error-handler.error.ts
+│ │ └─ errors.error.ts
+│ ├─ routes
+│ │ └─ v1
+│ │ ├─ beverage.routes.ts
+│ │ ├─ dessert.routes.ts
+│ │ ├─ empanada.routes.ts
+│ │ ├─ pizza.routes.ts
+│ │ └─ routes.ts
+│ ├─ server.ts
+│ ├─ services
+│ │ ├─ beverage.service.ts
+│ │ ├─ dessert.service.ts
+│ │ ├─ empanada.service.ts
+│ │ └─ pizza.service.ts
+│ └─ utils
+│ └─ path.utils.ts
+└─ tsconfig.json
+
+```
 
 ```

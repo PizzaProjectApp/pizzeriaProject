@@ -8,7 +8,7 @@ const EmpanadaSchema = new Schema({
     },
     description: {
         type: String,
-        required: false,
+        required: true,
     },
     price: {
         type: Number,
@@ -17,7 +17,6 @@ const EmpanadaSchema = new Schema({
     thumbnail: {
         type: [String],
         default: [""],
-        required: false,
     },
     status: {
         type: Boolean,
