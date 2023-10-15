@@ -5,7 +5,7 @@ Follow the steps below to set up and run the application in your local environme
 1. Clone this repository to your local machine:
 
 ```
-git clone -b refacotr/clean_architecture https://github.com/TatiCor/pizzeriaProject.git
+git clone -b refactor/clean_architecture https://github.com/TatiCor/pizzeriaProject.git
 ```
 
 2. Navigate to the project directory:
