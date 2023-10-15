@@ -7,8 +7,8 @@ interface PizzaUseCase {
 
 export class CreatePizza implements PizzaUseCase {
     constructor(private readonly pizzaRepository: PizzaRepository) {}
-    async execute(pizzaDto: PizzaDto): Promise<PizzaDto> {
+    execute = async (pizzaDto: PizzaDto): Promise<PizzaDto> => {
         const pizza = await this.pizzaRepository.create(pizzaDto);
         return pizza;
-    }
+    };
 }
