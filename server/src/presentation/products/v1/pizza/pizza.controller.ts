@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CustomError, PizzaDto, PizzaRepository } from "../../../../domain";
-import { CreatePizza } from "../../../../domain/use-cases";
+import { PizzaUseCase } from "../../../../domain/use-cases";
 
 export class PizzaController {
     constructor(private readonly pizzaRepository: PizzaRepository) {}
@@ -17,8 +17,15 @@ export class PizzaController {
         const [error, pizzaDto] = PizzaDto.create(req.body);
         if (error) return res.status(400).json({ error });
 
-        new CreatePizza(this.pizzaRepository)
-            .execute(pizzaDto!)
+        new PizzaUseCase(this.pizzaRepository)
+            .create(pizzaDto!)
+            .then((data) => res.json(data))
+            .catch((error) => this.handleError(error, res));
+    };
+
+    getPizzas = (_req: Request, res: Response) => {
+        new PizzaUseCase(this.pizzaRepository)
+            .getAll()
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };

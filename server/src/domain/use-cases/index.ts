@@ -1,1 +1,1 @@
-export * from "./pizza/create-pizza.use-case";
+export * from "./products/pizza.use-case";

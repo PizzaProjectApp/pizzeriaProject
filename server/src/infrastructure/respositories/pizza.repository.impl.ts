@@ -11,4 +11,7 @@ export class PizzaRepositoryImpl implements PizzaRepository {
     create = (pizzaDto: PizzaDto): Promise<PizzaEntity> => {
         return this.pizzaDatasource.create(pizzaDto);
     };
+    getAll(): Promise<PizzaEntity[]> {
+        return this.pizzaDatasource.getAll();
+    }
 }

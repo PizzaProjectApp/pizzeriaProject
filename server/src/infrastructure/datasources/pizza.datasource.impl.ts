@@ -41,4 +41,15 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             throw CustomError.internalServer();
         }
     };
+
+    getAll = async (): Promise<PizzaEntity[]> => {
+        try {
+            return await pizzaModel.find().lean();
+        } catch (error) {
+            if (error instanceof CustomError) {
+                throw error;
+            }
+            throw CustomError.internalServer();
+        }
+    };
 }
