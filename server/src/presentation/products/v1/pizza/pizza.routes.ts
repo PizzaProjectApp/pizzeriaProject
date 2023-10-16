@@ -19,8 +19,8 @@ export class PizzaRoutes {
         //~> |Get a list of available pizzas
         router.get("/", controller.getPizzas);
 
-        // // Retrieve a single Pizza with ID
-        // router.get("/:pid", controller.getPizzaById);
+        // Retrieve a single Pizza with ID
+        router.get("/:pid", controller.getPizzaById);
 
         // //~> |Add Pizza
         // router.post("/", controller.addPizza);
