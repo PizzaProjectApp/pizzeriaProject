@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { CustomError, PizzaDto, PizzaRepository } from "../../../../domain";
-import { PizzaUseCase } from "../../../../domain/use-cases";
-import { PizzaIdDto } from "../../../../domain/dtos/pizza/pizza-id.dto";
+import { PizzaIdDto, PizzaUseCase } from "../../../../domain/index";
 
 export class PizzaController {
     constructor(private readonly pizzaRepository: PizzaRepository) {}

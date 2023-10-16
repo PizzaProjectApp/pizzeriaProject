@@ -4,10 +4,11 @@ import {
     PizzaDatasource,
     CustomError,
     PizzaDto,
+    PizzaIdDto,
     PizzaEntity,
 } from "../../domain";
-import { PizzaIdDto } from "../../domain/dtos/pizza/pizza-id.dto";
-import { PizzaMapper } from "../mappers/pizza.mapper";
+import { PizzaMapper } from "../index";
+
 export class PizzaDatasourceImpl implements PizzaDatasource {
     create = async (pizzaDto: PizzaDto): Promise<PizzaEntity> => {
         const { name, description, price, type, thumbnail, status } = pizzaDto;

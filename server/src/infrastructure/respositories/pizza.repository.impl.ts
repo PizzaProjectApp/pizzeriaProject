@@ -1,10 +1,11 @@
 import {
     PizzaDatasource,
     PizzaDto,
+    PizzaIdDto,
     PizzaEntity,
     PizzaRepository,
 } from "../../domain";
-import { PizzaIdDto } from "../../domain/dtos/pizza/pizza-id.dto";
+
 export class PizzaRepositoryImpl implements PizzaRepository {
     constructor(private readonly pizzaDatasource: PizzaDatasource) {}
 
