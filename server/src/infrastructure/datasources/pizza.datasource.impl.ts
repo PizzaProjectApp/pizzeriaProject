@@ -1,3 +1,4 @@
+import { logger } from "../../config";
 import { pizzaModel } from "../../data";
 import {
     PizzaDatasource,
@@ -5,8 +6,8 @@ import {
     PizzaDto,
     PizzaEntity,
 } from "../../domain";
+import { PizzaIdDto } from "../../domain/dtos/pizza/pizza-id.dto";
 import { PizzaMapper } from "../mappers/pizza.mapper";
-
 export class PizzaDatasourceImpl implements PizzaDatasource {
     create = async (pizzaDto: PizzaDto): Promise<PizzaEntity> => {
         const { name, description, price, type, thumbnail, status } = pizzaDto;
@@ -38,6 +39,10 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
+            logger.error(
+                "Error while searching for the pizza. Details:",
+                error
+            );
             throw CustomError.internalServer();
         }
     };
@@ -49,6 +54,34 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
+            logger.error(
+                "Error while searching for all pizzas. Details:",
+                error
+            );
+            throw CustomError.internalServer();
+        }
+    };
+
+    getById = async (pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> => {
+        const { id } = pizzaIdDto;
+        try {
+            const exists = await pizzaModel.findById(id);
+
+            if (!exists) {
+                throw CustomError.notFound(
+                    `Pizza with ID: ${pizzaIdDto.id} not found`
+                );
+            }
+
+            return PizzaMapper.PizzaEntityFromObject(exists);
+        } catch (error) {
+            if (error instanceof CustomError) {
+                throw error;
+            }
+            logger.error(
+                "Error while searching for the pizza by ID. Details:",
+                error
+            );
             throw CustomError.internalServer();
         }
     };
