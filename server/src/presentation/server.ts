@@ -5,7 +5,7 @@ import morgan from "morgan";
 // Swagger
 import SwaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
-import { swaggerOptions } from "../config/index";
+import { logger, swaggerOptions } from "../config"; // Winston and Swagger
 
 interface Options {
     port: number;
@@ -41,12 +41,13 @@ export default class Server {
             SwaggerUi.serve,
             SwaggerUi.setup(swaggerSpecs)
         );
+        logger.info(
+            "📚 Swagger documentation is available at: http://localhost:3000/api/docs"
+        );
+
         /* ★━━━━━━━━━━━★ Listener ★━━━━━━━━━━━★ */
         this.app.listen(this.port, () => {
-            console.log(
-                `🚀 Server running on port ${this.port}. 
-    bat ${new Date().toLocaleString()}`
-            );
+            logger.info(`🚀 Server running on port ${this.port}.`);
         });
     }
 }

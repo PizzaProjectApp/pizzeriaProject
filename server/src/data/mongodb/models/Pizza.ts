@@ -6,7 +6,6 @@ const PizzaSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     description: {
         type: String,
@@ -20,6 +19,7 @@ const PizzaSchema = new Schema({
         type: String,
         enum: ["whole", "half"],
         default: "whole",
+        required: false,
     },
     thumbnail: {
         type: [String],

@@ -5,7 +5,7 @@ Follow the steps below to set up and run the application in your local environme
 1. Clone this repository to your local machine:
 
 ```
-git clone -b feat/server_routes https://github.com/TatiCor/pizzeriaProject.git
+git clone -b refactor/clean_architecture https://github.com/TatiCor/pizzeriaProject.git
 ```
 
 2. Navigate to the project directory:
@@ -34,73 +34,159 @@ pizzeria_project
 ├─ .env
 ├─ .env.template
 └─ ...
+```
 
 # To access the documentation, open your web browser and enter the following URL:
 
 ```
-
 http://localhost:3000/api/docs
-
 ```
 
 This will take you to the API documentation, where you can explore the endpoints and learn how to interact with the application.
 
 ```
-
 pizzeria_project
 └─ server
-├─ .env
-├─ .env.template
-├─ .prettierignore
-├─ docs
-│ └─ v1
-│ ├─ Beverage.ts
-│ ├─ Dessert.ts
-│ ├─ Empanada.ts
-│ └─ Pizza.ts
-├─ package-lock.json
-├─ package.json
-├─ README.md
-├─ src
-│ ├─ app.ts
-│ ├─ config
-│ │ ├─ env.config.ts
-│ │ ├─ index.ts
-│ │ └─ swagger-options.config.ts
-│ ├─ controllers
-│ │ ├─ beverage.controller.ts
-│ │ ├─ dessert.controller.ts
-│ │ ├─ empanada.controller.ts
-│ │ └─ pizza.controller.ts
-│ ├─ data
-│ │ └─ mongodb
-│ │ ├─ index.ts
-│ │ ├─ models
-│ │ │ ├─ Beverage.ts
-│ │ │ ├─ Dessert.ts
-│ │ │ ├─ Empanada.ts
-│ │ │ └─ Pizza.ts
-│ │ └─ mongo-database.ts
-│ ├─ errors
-│ │ ├─ error-handler.error.ts
-│ │ └─ errors.error.ts
-│ ├─ routes
-│ │ └─ v1
-│ │ ├─ beverage.routes.ts
-│ │ ├─ dessert.routes.ts
-│ │ ├─ empanada.routes.ts
-│ │ ├─ pizza.routes.ts
-│ │ └─ routes.ts
-│ ├─ server.ts
-│ ├─ services
-│ │ ├─ beverage.service.ts
-│ │ ├─ dessert.service.ts
-│ │ ├─ empanada.service.ts
-│ │ └─ pizza.service.ts
-│ └─ utils
-│ └─ path.utils.ts
-└─ tsconfig.json
-
-```
+   ├─ .env
+   ├─ .env.template
+   ├─ .prettierignore
+   ├─ docs
+   │  └─ v1
+   │     ├─ Beverage.ts
+   │     ├─ Dessert.ts
+   │     ├─ Empanada.ts
+   │     └─ Pizza.ts
+   ├─ logs
+   │  ├─ combined.log
+   │  └─ error.log
+   ├─ package-lock.json
+   ├─ package.json
+   ├─ README.md
+   ├─ src
+   │  ├─ app.ts
+   │  ├─ config
+   │  │  ├─ env.config.ts
+   │  │  ├─ index.ts
+   │  │  ├─ logger.config.ts
+   │  │  └─ swagger-options.config.ts
+   │  ├─ data
+   │  │  ├─ index.ts
+   │  │  └─ mongodb
+   │  │     ├─ index.ts
+   │  │     ├─ models
+   │  │     │  ├─ Beverage.ts
+   │  │     │  ├─ Dessert.ts
+   │  │     │  ├─ Empanada.ts
+   │  │     │  └─ Pizza.ts
+   │  │     └─ mongo-database.ts
+   │  ├─ domain
+   │  │  ├─ datasources
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.datasource.ts
+   │  │  │     ├─ dessert.datasource.ts
+   │  │  │     ├─ empanada.datasource.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.datasource.ts
+   │  │  ├─ dtos
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage
+   │  │  │     │  ├─ beverage-partial.dto.ts
+   │  │  │     │  ├─ beverage.dto.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ dessert
+   │  │  │     │  ├─ dessert-partial.dto.ts
+   │  │  │     │  ├─ dessert.dto.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ empanada
+   │  │  │     │  ├─ empanada-partial.dto.ts
+   │  │  │     │  ├─ empanada.dto.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ index.ts
+   │  │  │     ├─ pizza
+   │  │  │     │  ├─ index.ts
+   │  │  │     │  ├─ pizza-partial.dto.ts
+   │  │  │     │  └─ pizza.dto.ts
+   │  │  │     └─ product-id.dto.ts
+   │  │  ├─ entities
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.entity.ts
+   │  │  │     ├─ dessert.entity.ts
+   │  │  │     ├─ empanada.entity.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.entity.ts
+   │  │  ├─ errors
+   │  │  │  └─ custom.error.ts
+   │  │  ├─ index.ts
+   │  │  ├─ repositories
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.repository.ts
+   │  │  │     ├─ dessert.repository.ts
+   │  │  │     ├─ empanada.repository.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.repository.ts
+   │  │  └─ use-cases
+   │  │     ├─ index.ts
+   │  │     └─ products
+   │  │        ├─ beverage.use-case.ts
+   │  │        ├─ dessert.use-case.ts
+   │  │        ├─ empanada.use-case.ts
+   │  │        ├─ index.ts
+   │  │        └─ pizza.use-case.ts
+   │  ├─ infrastructure
+   │  │  ├─ datasources
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.datasource.impl.ts
+   │  │  │     ├─ dessert.datasource.impl.ts
+   │  │  │     ├─ empanada.datasource.impl.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.datasource.impl.ts
+   │  │  ├─ index.ts
+   │  │  ├─ mappers
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.mapper.ts
+   │  │  │     ├─ dessert.mapper.ts
+   │  │  │     ├─ empanada.mapper.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.mapper.ts
+   │  │  └─ repositories
+   │  │     ├─ index.ts
+   │  │     └─ products
+   │  │        ├─ beverage.repository.impl.ts
+   │  │        ├─ dessert.repository.impl.ts
+   │  │        ├─ empanada.repository.impl.ts
+   │  │        ├─ index.ts
+   │  │        └─ pizza.repository.impl.ts
+   │  ├─ presentation
+   │  │  ├─ products
+   │  │  │  ├─ index.ts
+   │  │  │  └─ v1
+   │  │  │     ├─ beverage
+   │  │  │     │  ├─ beverage.controller.ts
+   │  │  │     │  ├─ beverage.routes.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ dessert
+   │  │  │     │  ├─ dessert.controller.ts
+   │  │  │     │  ├─ dessert.routes.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ empanada
+   │  │  │     │  ├─ empanada.controller.ts
+   │  │  │     │  ├─ empanada.routes.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza
+   │  │  │        ├─ index.ts
+   │  │  │        ├─ pizza.controller.ts
+   │  │  │        └─ pizza.routes.ts
+   │  │  ├─ routes.ts
+   │  │  └─ server.ts
+   │  └─ utils
+   │     └─ path.utils.ts
+   └─ tsconfig.json
 
 ```

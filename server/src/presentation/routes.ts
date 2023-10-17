@@ -1,8 +1,10 @@
 import { Router } from "express";
-// import BeverageRouter from "./products";
-// import DessertRouter from "./products";
-// import EmpanadaRouter from "./products";
-import { PizzaRoutes } from "./products/v1";
+import {
+    PizzaRoutes,
+    BeverageRoutes,
+    DessertRoutes,
+    EmpanadaRoutes,
+} from "./products";
 
 export class AppRoutes {
     static get routes(): Router {
@@ -10,9 +12,9 @@ export class AppRoutes {
 
         //~> | V1 ROUTES
         router.use("/api/v1/pizzas", PizzaRoutes.routes);
-        // router.use("/api/v1/empanadas", EmpanadaRouter.routes);
-        // router.use("/api/v1/desserts", DessertRouter.routes);
-        // router.use("/api/v1/beverages", BeverageRouter.routes);
+        router.use("/api/v1/beverages", BeverageRoutes.routes);
+        router.use("/api/v1/desserts", DessertRoutes.routes);
+        router.use("/api/v1/empanadas", EmpanadaRoutes.routes);
 
         return router;
     }
