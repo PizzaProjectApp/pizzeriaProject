@@ -26,8 +26,8 @@ export class PizzaRoutes {
         //~> |Put Pizzas
         router.put("/:pid", controller.updatePizzaById);
 
-        // //~> |Partially Update an pizza by ID
-        // router.patch("/:pid", controller.partialUpdatePizzaById);
+        //~> |Partially Update an pizza by ID
+        router.patch("/:pid", controller.partialUpdatePizzaById);
 
         //~> |Delete Pizza by ID
         router.delete("/:pid", controller.deletePizzaById);
