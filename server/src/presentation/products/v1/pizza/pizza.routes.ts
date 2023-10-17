@@ -23,8 +23,8 @@ export class PizzaRoutes {
         // Retrieve a single Pizza with ID
         router.get("/:pid", controller.getPizzaById);
 
-        // //~> |Put Pizzas
-        // router.put("/:pid", controller.updatePizza);
+        //~> |Put Pizzas
+        router.put("/:pid", controller.updatePizzaById);
 
         // //~> |Partially Update an pizza by ID
         // router.patch("/:pid", controller.partialUpdatePizzaById);
