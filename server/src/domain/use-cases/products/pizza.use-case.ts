@@ -1,3 +1,4 @@
+import { PizzaPartialDto } from "../../dtos/pizza/pizza-partial.dto";
 import { PizzaDto, PizzaIdDto, PizzaRepository } from "../../index";
 
 interface IPizzaUseCase {
@@ -6,6 +7,10 @@ interface IPizzaUseCase {
     getById(pizzaIdDto: PizzaIdDto): Promise<PizzaDto>;
     deleteById(pizzaIdDto: PizzaIdDto): Promise<PizzaDto>;
     updateById(pizzaIdDto: PizzaIdDto, pizzaDto: PizzaDto): Promise<PizzaDto>;
+    partialUpdateById(
+        pizzaIdDto: PizzaIdDto,
+        pizzaPartialDto: PizzaPartialDto
+    ): Promise<PizzaDto>;
 }
 
 export class PizzaUseCase implements IPizzaUseCase {
@@ -31,5 +36,15 @@ export class PizzaUseCase implements IPizzaUseCase {
         pizzaDto: PizzaDto
     ): Promise<PizzaDto> => {
         return await this.pizzaRepository.updateById(pizzaIdDto, pizzaDto);
+    };
+
+    partialUpdateById = async (
+        pizzaIdDto: PizzaIdDto,
+        pizzaPartialDto: PizzaPartialDto
+    ): Promise<PizzaDto> => {
+        return await this.pizzaRepository.partialUpdateById(
+            pizzaIdDto,
+            pizzaPartialDto
+        );
     };
 }
