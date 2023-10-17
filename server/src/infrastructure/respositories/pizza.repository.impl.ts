@@ -5,6 +5,7 @@ import {
     PizzaEntity,
     PizzaRepository,
 } from "../../domain";
+import { PizzaPartialDto } from "../../domain/dtos/pizza/pizza-partial.dto";
 
 export class PizzaRepositoryImpl implements PizzaRepository {
     constructor(private readonly pizzaDatasource: PizzaDatasource) {}
@@ -26,5 +27,14 @@ export class PizzaRepositoryImpl implements PizzaRepository {
         pizzaDto: PizzaDto
     ): Promise<PizzaEntity> {
         return this.pizzaDatasource.updateById(pizzaIdDto, pizzaDto);
+    }
+    partialUpdateById(
+        pizzaIdDto: PizzaIdDto,
+        pizzaPartialDto: PizzaPartialDto
+    ): Promise<PizzaEntity> {
+        return this.pizzaDatasource.partialUpdateById(
+            pizzaIdDto,
+            pizzaPartialDto
+        );
     }
 }
