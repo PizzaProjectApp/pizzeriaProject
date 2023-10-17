@@ -3,7 +3,6 @@ import { envs } from "./env.config";
 import winston from "winston";
 
 export const logger = winston.createLogger({
-    format: winston.format.json(),
     transports: [
         new winston.transports.File({
             filename: `${rootDirOverSrc}/logs/error.log`,
@@ -19,7 +18,9 @@ if (envs.MODE === "dev") {
             format: winston.format.combine(
                 winston.format.timestamp({ format: "HH:mm:ss" }),
                 winston.format.colorize(),
-                winston.format.simple()
+                winston.format.printf(({ timestamp, level, message }) => {
+                    return `${timestamp} [${level}]: ${message}`;
+                })
             ),
         })
     );
