@@ -1,6 +1,6 @@
 <div align="center">
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=ROBOTO&weight=500&size=48&duration=2000&pause=200&color=F79756&center=true&vCenter=true&multiline=true&repeat=false&random=false&width=550&height=200&lines=E-commerce;%22PIZZER%C3%8DA+DON+REMOLO%22" alt="Typing SVG" /></a> <br>
- <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=ROBOTO&weight=500&size=36&duration=2000&pause=200&color=F78C38&center=true&vCenter=true&random=false&width=435&height=100&lines=~~%3E+E-commerce+%3C~~;~~%3E+To+Take+Away+%3C~~;~~%3E+Online+ordering+%3C~~" alt="Typing SVG" /></a>
+ <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=ROBOTO&weight=500&size=36&duration=2000&pause=900&color=F78C38&center=true&vCenter=true&random=false&width=435&height=100&lines=~~%3E+E-commerce+%3C~~;~~%3E+To+Take+Away+%3C~~;~~%3E+Online+ordering+%3C~~" alt="Typing SVG" /></a>
 </div>
 ## Getting Started
 
@@ -20,20 +20,42 @@ To get started with this project, follow these steps:
 3. **Run the Application:**
     npm start
 
-# Equipo de Desarrollo
+# 🤹Development Team
 
-## Desarrolladores
+<!-- Desarrollador  - UX/UI -->
+<p align="center">    
+    <span style="font-weight: bold;">UX/UI</span>
+    <br>
+    <a href="https://www.linkedin.com/in/gabriela-cavallo-arregui/"><img alt="LinkedIn" title="LinkedIn" src="https://custom-icon-badges.demolab.com/badge/-LinkedIn-231b2e?style=for-the-badge&logoColor=FF6C31&logo=LinkedIn"/></a>
+<!--     <a href="https://portfolio3.dev/"><img alt="Portfolio" title="Portfolio" src="https://custom-icon-badges.demolab.com/badge/-|Portfolio-1F222E?style=for-the-badge&logoColor=FF6C31&logo=link-external"/></a>
+    <a href="mailto:developer3@gmail.com">
+        <img src="https://custom-icon-badges.demolab.com/badge/-Email-231b2e?style=for-the-badge&logoColor=FF6C31&logo=gmail" alt="Email">
+    </a> -->
+</p>
 
-### [Nombre del Desarrollador 1](Enlace al Portfolio)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](Enlace a LinkedIn)
 
-### [Nombre del Desarrollador 2](Enlace al Portfolio)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](Enlace a LinkedIn)
+<!-- Desarrollador  - Front-End -->
+<p align="center">    
+    <span style="font-weight: bold;">Front-End</span>
+    <br>
+    <a href="https://www.linkedin.com/in/tatianacordecci/"><img alt="LinkedIn" title="LinkedIn" src="https://custom-icon-badges.demolab.com/badge/-LinkedIn-231b2e?style=for-the-badge&logoColor=2E90F7&logo=LinkedIn"/></a>
+    <a href="https://portfolio2.dev/"><img alt="Portfolio" title="Portfolio" src="https://custom-icon-badges.demolab.com/badge/-|Portfolio-1F222E?style=for-the-badge&logoColor=2E90F7&logo=link-external"/></a>
+<!--     <a href="mailto:developer2@gmail.com">
+        <img src="https://custom-icon-badges.demolab.com/badge/-Email-231b2e?style=for-the-badge&logoColor=2E90F7&logo=gmail" alt="Email">
+    </a> -->
+</p>
 
-## UX/UI Designer
+<!-- Desarrollador  - Back-End -->
+<p align="center">    
+    <span style="font-weight: bold;">Back-End</span>
+    <br>
+    <a href="https://www.linkedin.com/in/juandebandi/"><img alt="LinkedIn" title="LinkedIn" src="https://custom-icon-badges.demolab.com/badge/-LinkedIn-231b2e?style=for-the-badge&logoColor=F8D866&logo=LinkedIn"/></a>
+    <a href="https://juandebandi.dev/"><img alt="Portfolio" title="Portfolio" src="https://custom-icon-badges.demolab.com/badge/-|Portfolio-1F222E?style=for-the-badge&logoColor=F8D866&logo=link-external"/></a>
+    <a href="mailto:juudinidev@gmail.com">
+        <img src="https://custom-icon-badges.demolab.com/badge/-Email-231b2e?style=for-the-badge&logoColor=F8D866&logo=gmail" alt="Email">
+    </a>
+</p>
 
-### [Nombre del Diseñador](Enlace al Portfolio)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](Enlace a LinkedIn)
 # Pizzeria eCommerce
 
 Welcome to the Pizzeria eCommerce project. This application is an online platform that allows users to order and customize pizzas to their liking. It's a comprehensive solution that incorporates Clean Architecture, Domain-Driven Design (DDD), and follows the principles of Clean Code to ensure that the codebase is highly maintainable and scalable.
