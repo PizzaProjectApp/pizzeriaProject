@@ -2,6 +2,9 @@
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=ROBOTO&weight=500&size=48&duration=2000&pause=200&color=F79756&center=true&vCenter=true&multiline=true&repeat=false&random=false&width=550&height=200&lines=E-commerce;%22PIZZER%C3%8DA+DON+REMOLO%22" alt="Typing SVG" /></a> <br>
  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=ROBOTO&weight=500&size=36&duration=2000&pause=900&color=F78C38&center=true&vCenter=true&random=false&width=435&height=100&lines=~~%3E+E-commerce+%3C~~;~~%3E+To+Take+Away+%3C~~;~~%3E+Online+ordering+%3C~~" alt="Typing SVG" /></a>
 </div>
+
+![IMG](assets/logo-remolo.png)
+
 ## Getting Started
 
 To get started with this project, follow these steps:
