@@ -49,4 +49,17 @@ export class PizzaController {
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };
+
+    updatePizzaById = (req: Request, res: Response) => {
+        let [errorId, pizzaIdDto] = PizzaIdDto.create(req.params.pid);
+        let [errorDto, pizzaDto] = PizzaDto.create(req.body);
+
+        if (errorId) return res.status(400).json({ errorId });
+        if (errorDto) return res.status(400).json({ errorDto });
+
+        new PizzaUseCase(this.pizzaRepository)
+            .updateById(pizzaIdDto!, pizzaDto!)
+            .then((data) => res.json(data))
+            .catch((error) => this.handleError(error, res));
+    };
 }
