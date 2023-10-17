@@ -86,4 +86,26 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             throw CustomError.internalServer();
         }
     };
+
+    deleteById = async (pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> => {
+        const { id } = pizzaIdDto;
+        try {
+            const deleted = await pizzaModel.findByIdAndDelete(id);
+            if (!deleted) {
+                throw CustomError.notFound(
+                    `Pizza with ID: ${pizzaIdDto.id} not found`
+                );
+            }
+            return PizzaMapper.PizzaEntityFromObject(deleted);
+        } catch (error) {
+            if (error instanceof CustomError) {
+                throw error;
+            }
+            logger.error(
+                "Error while deleting for the pizza by ID. Details:",
+                error
+            );
+            throw CustomError.internalServer();
+        }
+    };
 }
