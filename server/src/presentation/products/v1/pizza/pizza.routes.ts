@@ -14,6 +14,7 @@ export class PizzaRoutes {
 
         const controller = new PizzaController(pizzaRepository);
 
+        //~> |Add Pizza
         router.post("/", controller.createPizza);
 
         //~> |Get a list of available pizzas
@@ -21,9 +22,6 @@ export class PizzaRoutes {
 
         // Retrieve a single Pizza with ID
         router.get("/:pid", controller.getPizzaById);
-
-        // //~> |Add Pizza
-        // router.post("/", controller.addPizza);
 
         // //~> |Put Pizzas
         // router.put("/:pid", controller.updatePizza);
