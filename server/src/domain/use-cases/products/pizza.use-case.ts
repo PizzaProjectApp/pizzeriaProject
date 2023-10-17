@@ -5,6 +5,7 @@ interface IPizzaUseCase {
     getAll(): Promise<PizzaDto[]>;
     getById(pizzaIdDto: PizzaIdDto): Promise<PizzaDto>;
     deleteById(pizzaIdDto: PizzaIdDto): Promise<PizzaDto>;
+    updateById(pizzaIdDto: PizzaIdDto, pizzaDto: PizzaDto): Promise<PizzaDto>;
 }
 
 export class PizzaUseCase implements IPizzaUseCase {
@@ -23,5 +24,12 @@ export class PizzaUseCase implements IPizzaUseCase {
 
     deleteById = async (pizzaIdDto: PizzaIdDto): Promise<PizzaDto> => {
         return await this.pizzaRepository.deleteById(pizzaIdDto);
+    };
+
+    updateById = async (
+        pizzaIdDto: PizzaIdDto,
+        pizzaDto: PizzaDto
+    ): Promise<PizzaDto> => {
+        return await this.pizzaRepository.updateById(pizzaIdDto, pizzaDto);
     };
 }
