@@ -1,3 +1,3 @@
-export * from "./datasources/pizza.datasource.impl";
-export * from "./respositories/pizza.repository.impl";
-export * from "./mappers/pizza.mapper";
+export * from "./datasources/index";
+export * from "./repositories/products/index";
+export * from "./mappers/products/index";

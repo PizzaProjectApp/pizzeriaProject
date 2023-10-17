@@ -1,7 +1,7 @@
-import { CustomError, PizzaEntity } from "../../domain";
+import { CustomError, DessertEntity } from "../../../domain";
 
-export class PizzaMapper {
-    static PizzaEntityFromObject(object: { [key: string]: any }) {
+export class DessertMapper {
+    static DessertEntityFromObject = (object: { [key: string]: any }) => {
         const { id, _id, name, description, price, type, thumbnail, status } =
             object;
 
@@ -23,8 +23,11 @@ export class PizzaMapper {
         if (!thumbnail) {
             throw CustomError.badRequest("Missing thumbnail");
         }
+        if (status === undefined) {
+            throw CustomError.badRequest("Missing status");
+        }
 
-        return new PizzaEntity(
+        return new DessertEntity(
             id || _id,
             name,
             description,
@@ -33,5 +36,5 @@ export class PizzaMapper {
             thumbnail,
             status
         );
-    }
+    };
 }

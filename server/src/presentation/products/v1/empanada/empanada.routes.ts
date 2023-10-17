@@ -1,26 +1,36 @@
 import { Router } from "express";
+import {
+    EmpanadaDatasourceImpl,
+    EmpanadaRepositoryImpl,
+} from "../../../../infrastructure";
+import { EmpanadaController } from "./empanada.controller";
 
-export default class EmpanadaRoutes {
+export class EmpanadaRoutes {
     static get routes(): Router {
         const router = Router();
 
-        // //~> |Get a list of available empanadas
-        // router.get("/", empanadaController.getEmpanadas);
+        const database = new EmpanadaDatasourceImpl();
+        const empanadaRepository = new EmpanadaRepositoryImpl(database);
 
-        // //~> |Add a new empanada
-        // router.post("/", empanadaController.addEmpanada);
+        const controller = new EmpanadaController(empanadaRepository);
 
-        // //~> |Get an empanada by ID
-        // router.get("/:empid", empanadaController.getEmpanadaById);
+        //~> |Get a list of available empanadas
+        router.get("/", controller.getEmpanadas);
 
-        // //~> |Update an empanada by ID
-        // router.put("/:empid", empanadaController.updateEmpanada);
+        //~> |Add a new empanada
+        router.post("/", controller.createEmpanada);
 
-        // //~> |Partially Update an empanada by ID
-        // router.patch("/:empid", empanadaController.partialUpdateEmpanadaById);
+        //~> |Get an empanada by ID
+        router.get("/:empid", controller.getEmpanadaById);
 
-        // //~> |Delete an empanada by ID
-        // router.delete("/:empid", empanadaController.deleteEmpanadaById);
+        //~> |Update an empanada by ID
+        router.put("/:empid", controller.updateEmpanadaById);
+
+        //~> |Partially Update an empanada by ID
+        router.patch("/:empid", controller.partialUpdateEmpanadaById);
+
+        //~> |Delete an empanada by ID
+        router.delete("/:empid", controller.deleteEmpanadaById);
 
         return router;
     }

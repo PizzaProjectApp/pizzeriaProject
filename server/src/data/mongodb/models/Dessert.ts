@@ -18,6 +18,7 @@ const DessertSchema = new Schema({
         type: String,
         enum: ["cold", "hot"],
         default: "cold",
+        required: false,
     },
     thumbnail: {
         type: [String],
