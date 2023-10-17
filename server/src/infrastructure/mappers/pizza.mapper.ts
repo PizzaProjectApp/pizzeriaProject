@@ -23,7 +23,7 @@ export class PizzaMapper {
         if (!thumbnail) {
             throw CustomError.badRequest("Missing thumbnail");
         }
-        if (!status) {
+        if (status === undefined) {
             throw CustomError.badRequest("Missing status");
         }
 
