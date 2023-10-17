@@ -1,4 +1,4 @@
-import { envs } from "./config";
+import { envs, logger } from "./config";
 import { MongoDatabase } from "./data/mongodb";
 import Server from "./presentation/server";
 import { AppRoutes } from "./presentation/routes";
@@ -15,6 +15,6 @@ async function main() {
         });
         new Server({ port: envs.PORT, routes: AppRoutes.routes }).start();
     } catch (error) {
-        console.error(error);
+        logger.error(error);
     }
 }
