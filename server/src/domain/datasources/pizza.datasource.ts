@@ -1,3 +1,4 @@
+import { PizzaPartialDto } from "../dtos/pizza/pizza-partial.dto";
 import { PizzaDto, PizzaIdDto, PizzaEntity } from "../index";
 
 export abstract class PizzaDatasource {
@@ -8,5 +9,9 @@ export abstract class PizzaDatasource {
     abstract updateById(
         pizzaIdDto: PizzaIdDto,
         pizzaDto: PizzaDto
+    ): Promise<PizzaEntity>;
+    abstract partialUpdateById(
+        pizzaIdDto: PizzaIdDto,
+        pizzaPartialDto: PizzaPartialDto
     ): Promise<PizzaEntity>;
 }
