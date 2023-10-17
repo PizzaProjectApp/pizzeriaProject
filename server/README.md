@@ -56,6 +56,9 @@ pizzeria_project
    │     ├─ Dessert.ts
    │     ├─ Empanada.ts
    │     └─ Pizza.ts
+   ├─ logs
+   │  ├─ combined.log
+   │  └─ error.log
    ├─ package-lock.json
    ├─ package.json
    ├─ README.md
@@ -64,6 +67,7 @@ pizzeria_project
    │  ├─ config
    │  │  ├─ env.config.ts
    │  │  ├─ index.ts
+   │  │  ├─ logger.config.ts
    │  │  └─ swagger-options.config.ts
    │  ├─ data
    │  │  ├─ index.ts
@@ -77,45 +81,112 @@ pizzeria_project
    │  │     └─ mongo-database.ts
    │  ├─ domain
    │  │  ├─ datasources
-   │  │  │  └─ pizza.datasource.ts
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.datasource.ts
+   │  │  │     ├─ dessert.datasource.ts
+   │  │  │     ├─ empanada.datasource.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.datasource.ts
    │  │  ├─ dtos
-   │  │  │  └─ pizza.dto.ts
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage
+   │  │  │     │  ├─ beverage-partial.dto.ts
+   │  │  │     │  ├─ beverage.dto.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ dessert
+   │  │  │     │  ├─ dessert-partial.dto.ts
+   │  │  │     │  ├─ dessert.dto.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ empanada
+   │  │  │     │  ├─ empanada-partial.dto.ts
+   │  │  │     │  ├─ empanada.dto.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ index.ts
+   │  │  │     ├─ pizza
+   │  │  │     │  ├─ index.ts
+   │  │  │     │  ├─ pizza-partial.dto.ts
+   │  │  │     │  └─ pizza.dto.ts
+   │  │  │     └─ product-id.dto.ts
    │  │  ├─ entities
-   │  │  │  └─ pizza.entity.ts
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.entity.ts
+   │  │  │     ├─ dessert.entity.ts
+   │  │  │     ├─ empanada.entity.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.entity.ts
    │  │  ├─ errors
    │  │  │  └─ custom.error.ts
    │  │  ├─ index.ts
    │  │  ├─ repositories
-   │  │  │  └─ pizza.repository.ts
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.repository.ts
+   │  │  │     ├─ dessert.repository.ts
+   │  │  │     ├─ empanada.repository.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.repository.ts
    │  │  └─ use-cases
    │  │     ├─ index.ts
-   │  │     └─ pizza
-   │  │        └─ create-pizza.use-case.ts
+   │  │     └─ products
+   │  │        ├─ beverage.use-case.ts
+   │  │        ├─ dessert.use-case.ts
+   │  │        ├─ empanada.use-case.ts
+   │  │        ├─ index.ts
+   │  │        └─ pizza.use-case.ts
    │  ├─ infrastructure
    │  │  ├─ datasources
-   │  │  │  └─ pizza.datasource.impl.ts
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.datasource.impl.ts
+   │  │  │     ├─ dessert.datasource.impl.ts
+   │  │  │     ├─ empanada.datasource.impl.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.datasource.impl.ts
    │  │  ├─ index.ts
    │  │  ├─ mappers
-   │  │  │  └─ pizza.mapper.ts
-   │  │  └─ respositories
-   │  │     └─ pizza.repository.impl.ts
-   │  └─ presentation
-   │     ├─ products
-   │     │  └─ v1
-   │     │     ├─ beverage
-   │     │     │  └─ beverage.routes.ts
-   │     │     ├─ dessert
-   │     │     │  └─ dessert.routes.ts
-   │     │     ├─ empanada
-   │     │     │  └─ empanada.routes.ts
-   │     │     ├─ index.ts
-   │     │     └─ pizza
-   │     │        ├─ pizza.controller.ts
-   │     │        └─ pizza.routes.ts
-   │     ├─ routes.ts
-   │     ├─ server.ts
-   │     └─ utils
-   │        └─ path.utils.ts
+   │  │  │  ├─ index.ts
+   │  │  │  └─ products
+   │  │  │     ├─ beverage.mapper.ts
+   │  │  │     ├─ dessert.mapper.ts
+   │  │  │     ├─ empanada.mapper.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza.mapper.ts
+   │  │  └─ repositories
+   │  │     ├─ index.ts
+   │  │     └─ products
+   │  │        ├─ beverage.repository.impl.ts
+   │  │        ├─ dessert.repository.impl.ts
+   │  │        ├─ empanada.repository.impl.ts
+   │  │        ├─ index.ts
+   │  │        └─ pizza.repository.impl.ts
+   │  ├─ presentation
+   │  │  ├─ products
+   │  │  │  ├─ index.ts
+   │  │  │  └─ v1
+   │  │  │     ├─ beverage
+   │  │  │     │  ├─ beverage.controller.ts
+   │  │  │     │  ├─ beverage.routes.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ dessert
+   │  │  │     │  ├─ dessert.controller.ts
+   │  │  │     │  ├─ dessert.routes.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ empanada
+   │  │  │     │  ├─ empanada.controller.ts
+   │  │  │     │  ├─ empanada.routes.ts
+   │  │  │     │  └─ index.ts
+   │  │  │     ├─ index.ts
+   │  │  │     └─ pizza
+   │  │  │        ├─ index.ts
+   │  │  │        ├─ pizza.controller.ts
+   │  │  │        └─ pizza.routes.ts
+   │  │  ├─ routes.ts
+   │  │  └─ server.ts
+   │  └─ utils
+   │     └─ path.utils.ts
    └─ tsconfig.json
 
 ```
