@@ -7,6 +7,7 @@ import {
     PizzaIdDto,
     PizzaEntity,
 } from "../../domain";
+import { PizzaPartialDto } from "../../domain/dtos/pizza/pizza-partial.dto";
 import { PizzaMapper } from "../index";
 
 export class PizzaDatasourceImpl implements PizzaDatasource {
@@ -127,6 +128,34 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
                 throw error;
             }
             logger.error("Error while updating pizza by ID. Details:", error);
+            throw CustomError.internalServer();
+        }
+    };
+
+    partialUpdateById = async (
+        pizzaIdDto: PizzaIdDto,
+        pizzaPartialDto: PizzaPartialDto
+    ): Promise<PizzaEntity> => {
+        const { id } = pizzaIdDto;
+        try {
+            const existsPizza = await pizzaModel.findOneAndUpdate(
+                { _id: id },
+                pizzaPartialDto,
+                { new: true }
+            );
+            if (!existsPizza) {
+                throw CustomError.notFound(`Pizza with ID: ${id} not found`);
+            }
+
+            return PizzaMapper.PizzaEntityFromObject(existsPizza);
+        } catch (error) {
+            if (error instanceof CustomError) {
+                throw error;
+            }
+            logger.error(
+                "Error while partial updating pizza by ID. Details:",
+                error
+            );
             throw CustomError.internalServer();
         }
     };
