@@ -1,1 +1,1 @@
-export * from "./pizza.datasource";
+export * from "./products/index";

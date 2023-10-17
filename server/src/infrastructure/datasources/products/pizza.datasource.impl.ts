@@ -1,14 +1,14 @@
-import { logger } from "../../config";
-import { pizzaModel } from "../../data";
+import { logger } from "../../../config";
+import { pizzaModel } from "../../../data";
 import {
     PizzaDatasource,
     CustomError,
     PizzaDto,
-    PizzaIdDto,
+    ProductIdDto,
     PizzaEntity,
     PizzaPartialDto,
-} from "../../domain";
-import { PizzaMapper } from "../index";
+} from "../../../domain";
+import { PizzaMapper } from "../../mappers";
 
 export class PizzaDatasourceImpl implements PizzaDatasource {
     create = async (pizzaDto: PizzaDto): Promise<PizzaEntity> => {
@@ -64,14 +64,14 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
         }
     };
 
-    getById = async (pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> => {
-        const { id } = pizzaIdDto;
+    getById = async (productIdDto: ProductIdDto): Promise<PizzaEntity> => {
+        const { id } = productIdDto;
         try {
             const existsPizza = await pizzaModel.findById(id);
 
             if (!existsPizza) {
                 throw CustomError.notFound(
-                    `Pizza with ID: ${pizzaIdDto.id} not found`
+                    `Pizza with ID: ${productIdDto.id} not found`
                 );
             }
 
@@ -88,14 +88,12 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
         }
     };
 
-    deleteById = async (pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> => {
-        const { id } = pizzaIdDto;
+    deleteById = async (productIdDto: ProductIdDto): Promise<PizzaEntity> => {
+        const { id } = productIdDto;
         try {
             const deleted = await pizzaModel.findByIdAndDelete(id);
             if (!deleted) {
-                throw CustomError.notFound(
-                    `Pizza with ID: ${pizzaIdDto.id} not found`
-                );
+                throw CustomError.notFound(`Pizza with ID: ${id} not found`);
             }
             return PizzaMapper.PizzaEntityFromObject(deleted);
         } catch (error) {
@@ -108,10 +106,10 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
     };
 
     updateById = async (
-        pizzaIdDto: PizzaIdDto,
+        productIdDto: ProductIdDto,
         pizzaDto: PizzaDto
     ): Promise<PizzaEntity> => {
-        const { id } = pizzaIdDto;
+        const { id } = productIdDto;
         try {
             const existsPizza = await pizzaModel.findOneAndUpdate(
                 { _id: id },
@@ -133,10 +131,10 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
     };
 
     partialUpdateById = async (
-        pizzaIdDto: PizzaIdDto,
+        productIdDto: ProductIdDto,
         pizzaPartialDto: PizzaPartialDto
     ): Promise<PizzaEntity> => {
-        const { id } = pizzaIdDto;
+        const { id } = productIdDto;
         try {
             const existsPizza = await pizzaModel.findOneAndUpdate(
                 { _id: id },

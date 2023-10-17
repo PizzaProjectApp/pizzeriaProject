@@ -1,1 +1,1 @@
-export * from "./pizza.mapper";
+export * from "./products/index";

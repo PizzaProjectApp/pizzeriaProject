@@ -1,17 +1,21 @@
-import { PizzaPartialDto } from "../dtos/pizza/pizza-partial.dto";
-import { PizzaDto, PizzaIdDto, PizzaEntity } from "../index";
+import { PizzaDto, ProductIdDto, PizzaPartialDto, PizzaEntity } from "../../";
 
 export abstract class PizzaDatasource {
     abstract create(pizzaDto: PizzaDto): Promise<PizzaEntity>;
+
     abstract getAll(): Promise<PizzaEntity[]>;
-    abstract getById(pizzaIdDto: PizzaIdDto): Promise<PizzaEntity>;
-    abstract deleteById(pizzaIdDto: PizzaIdDto): Promise<PizzaEntity>;
+
+    abstract getById(productIdDto: ProductIdDto): Promise<PizzaEntity>;
+
+    abstract deleteById(productIdDto: ProductIdDto): Promise<PizzaEntity>;
+
     abstract updateById(
-        pizzaIdDto: PizzaIdDto,
+        productIdDto: ProductIdDto,
         pizzaDto: PizzaDto
     ): Promise<PizzaEntity>;
+
     abstract partialUpdateById(
-        pizzaIdDto: PizzaIdDto,
+        productIdDto: ProductIdDto,
         pizzaPartialDto: PizzaPartialDto
     ): Promise<PizzaEntity>;
 }

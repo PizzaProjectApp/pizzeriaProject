@@ -1,11 +1,11 @@
 import {
     PizzaDatasource,
     PizzaDto,
-    PizzaIdDto,
+    ProductIdDto,
     PizzaEntity,
     PizzaRepository,
     PizzaPartialDto,
-} from "../../domain";
+} from "../../../domain";
 
 export class PizzaRepositoryImpl implements PizzaRepository {
     constructor(private readonly pizzaDatasource: PizzaDatasource) {}
@@ -16,24 +16,24 @@ export class PizzaRepositoryImpl implements PizzaRepository {
     getAll = (): Promise<PizzaEntity[]> => {
         return this.pizzaDatasource.getAll();
     };
-    getById = (pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> => {
-        return this.pizzaDatasource.getById(pizzaIdDto);
+    getById = (productIdDto: ProductIdDto): Promise<PizzaEntity> => {
+        return this.pizzaDatasource.getById(productIdDto);
     };
-    deleteById(pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> {
-        return this.pizzaDatasource.deleteById(pizzaIdDto);
+    deleteById(productIdDto: ProductIdDto): Promise<PizzaEntity> {
+        return this.pizzaDatasource.deleteById(productIdDto);
     }
     updateById(
-        pizzaIdDto: PizzaIdDto,
+        productIdDto: ProductIdDto,
         pizzaDto: PizzaDto
     ): Promise<PizzaEntity> {
-        return this.pizzaDatasource.updateById(pizzaIdDto, pizzaDto);
+        return this.pizzaDatasource.updateById(productIdDto, pizzaDto);
     }
     partialUpdateById(
-        pizzaIdDto: PizzaIdDto,
+        productIdDto: ProductIdDto,
         pizzaPartialDto: PizzaPartialDto
     ): Promise<PizzaEntity> {
         return this.pizzaDatasource.partialUpdateById(
-            pizzaIdDto,
+            productIdDto,
             pizzaPartialDto
         );
     }

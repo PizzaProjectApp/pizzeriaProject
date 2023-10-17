@@ -1,1 +1,1 @@
-export * from "./pizza.repository";
+export * from "./products/index";

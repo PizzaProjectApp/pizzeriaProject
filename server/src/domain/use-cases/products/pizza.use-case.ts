@@ -1,18 +1,21 @@
 import {
     PizzaDto,
-    PizzaIdDto,
+    ProductIdDto,
     PizzaRepository,
     PizzaPartialDto,
-} from "../../index";
+} from "../../";
 
 interface IPizzaUseCase {
     create(pizzaDto: PizzaDto): Promise<PizzaDto>;
     getAll(): Promise<PizzaDto[]>;
-    getById(pizzaIdDto: PizzaIdDto): Promise<PizzaDto>;
-    deleteById(pizzaIdDto: PizzaIdDto): Promise<PizzaDto>;
-    updateById(pizzaIdDto: PizzaIdDto, pizzaDto: PizzaDto): Promise<PizzaDto>;
+    getById(productIdDto: ProductIdDto): Promise<PizzaDto>;
+    deleteById(productIdDto: ProductIdDto): Promise<PizzaDto>;
+    updateById(
+        productIdDto: ProductIdDto,
+        pizzaDto: PizzaDto
+    ): Promise<PizzaDto>;
     partialUpdateById(
-        pizzaIdDto: PizzaIdDto,
+        productIdDto: ProductIdDto,
         pizzaPartialDto: PizzaPartialDto
     ): Promise<PizzaDto>;
 }
@@ -27,27 +30,27 @@ export class PizzaUseCase implements IPizzaUseCase {
         return await this.pizzaRepository.getAll();
     };
 
-    getById = async (pizzaIdDto: PizzaIdDto): Promise<PizzaDto> => {
-        return await this.pizzaRepository.getById(pizzaIdDto);
+    getById = async (productIdDto: ProductIdDto): Promise<PizzaDto> => {
+        return await this.pizzaRepository.getById(productIdDto);
     };
 
-    deleteById = async (pizzaIdDto: PizzaIdDto): Promise<PizzaDto> => {
-        return await this.pizzaRepository.deleteById(pizzaIdDto);
+    deleteById = async (productIdDto: ProductIdDto): Promise<PizzaDto> => {
+        return await this.pizzaRepository.deleteById(productIdDto);
     };
 
     updateById = async (
-        pizzaIdDto: PizzaIdDto,
+        productIdDto: ProductIdDto,
         pizzaDto: PizzaDto
     ): Promise<PizzaDto> => {
-        return await this.pizzaRepository.updateById(pizzaIdDto, pizzaDto);
+        return await this.pizzaRepository.updateById(productIdDto, pizzaDto);
     };
 
     partialUpdateById = async (
-        pizzaIdDto: PizzaIdDto,
+        productIdDto: ProductIdDto,
         pizzaPartialDto: PizzaPartialDto
     ): Promise<PizzaDto> => {
         return await this.pizzaRepository.partialUpdateById(
-            pizzaIdDto,
+            productIdDto,
             pizzaPartialDto
         );
     };
