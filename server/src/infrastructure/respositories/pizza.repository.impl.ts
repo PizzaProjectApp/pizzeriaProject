@@ -18,4 +18,7 @@ export class PizzaRepositoryImpl implements PizzaRepository {
     getById = (pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> => {
         return this.pizzaDatasource.getById(pizzaIdDto);
     };
+    deleteById(pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> {
+        return this.pizzaDatasource.deleteById(pizzaIdDto);
+    }
 }
