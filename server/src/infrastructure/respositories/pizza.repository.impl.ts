@@ -21,4 +21,10 @@ export class PizzaRepositoryImpl implements PizzaRepository {
     deleteById(pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> {
         return this.pizzaDatasource.deleteById(pizzaIdDto);
     }
+    updateById(
+        pizzaIdDto: PizzaIdDto,
+        pizzaDto: PizzaDto
+    ): Promise<PizzaEntity> {
+        return this.pizzaDatasource.updateById(pizzaIdDto, pizzaDto);
+    }
 }
