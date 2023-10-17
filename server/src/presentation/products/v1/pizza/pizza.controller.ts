@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CustomError, PizzaDto, PizzaRepository } from "../../../../domain";
 import { PizzaIdDto, PizzaUseCase } from "../../../../domain/index";
+import { PizzaPartialDto } from "../../../../domain/dtos/pizza/pizza-partial.dto";
 
 export class PizzaController {
     constructor(private readonly pizzaRepository: PizzaRepository) {}
@@ -8,8 +9,6 @@ export class PizzaController {
         if (error instanceof CustomError) {
             return res.status(error.statusCode).json({ error: error.message });
         }
-
-        console.log(error);
         return res.status(500).json({ error: "Internal Server Error" });
     };
 
@@ -59,6 +58,19 @@ export class PizzaController {
 
         new PizzaUseCase(this.pizzaRepository)
             .updateById(pizzaIdDto!, pizzaDto!)
+            .then((data) => res.json(data))
+            .catch((error) => this.handleError(error, res));
+    };
+
+    partialUpdatePizzaById = (req: Request, res: Response) => {
+        let [errorId, pizzaIdDto] = PizzaIdDto.create(req.params.pid);
+        let [errorDto, pizzaPartialDto] = PizzaPartialDto.create(req.body);
+
+        if (errorId) return res.status(400).json({ errorId });
+        if (errorDto) return res.status(400).json({ errorDto });
+
+        new PizzaUseCase(this.pizzaRepository)
+            .partialUpdateById(pizzaIdDto!, pizzaPartialDto!)
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };
