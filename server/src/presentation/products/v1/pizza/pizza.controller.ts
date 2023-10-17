@@ -39,4 +39,14 @@ export class PizzaController {
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };
+
+    deletePizzaById = (req: Request, res: Response) => {
+        const [error, pizzaIdDto] = PizzaIdDto.create(req.params.pid);
+        if (error) return res.status(400).json({ error });
+
+        new PizzaUseCase(this.pizzaRepository)
+            .deleteById(pizzaIdDto!)
+            .then((data) => res.json(data))
+            .catch((error) => this.handleError(error, res));
+    };
 }
