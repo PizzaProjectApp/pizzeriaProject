@@ -6,8 +6,8 @@ import {
     PizzaDto,
     PizzaIdDto,
     PizzaEntity,
+    PizzaPartialDto,
 } from "../../domain";
-import { PizzaPartialDto } from "../../domain/dtos/pizza/pizza-partial.dto";
 import { PizzaMapper } from "../index";
 
 export class PizzaDatasourceImpl implements PizzaDatasource {

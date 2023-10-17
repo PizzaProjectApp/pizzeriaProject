@@ -1,5 +1,9 @@
-import { PizzaPartialDto } from "../../dtos/pizza/pizza-partial.dto";
-import { PizzaDto, PizzaIdDto, PizzaRepository } from "../../index";
+import {
+    PizzaDto,
+    PizzaIdDto,
+    PizzaRepository,
+    PizzaPartialDto,
+} from "../../index";
 
 interface IPizzaUseCase {
     create(pizzaDto: PizzaDto): Promise<PizzaDto>;

@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
-import { CustomError, PizzaDto, PizzaRepository } from "../../../../domain";
-import { PizzaIdDto, PizzaUseCase } from "../../../../domain/index";
-import { PizzaPartialDto } from "../../../../domain/dtos/pizza/pizza-partial.dto";
+import {
+    CustomError,
+    PizzaDto,
+    PizzaRepository,
+    PizzaPartialDto,
+    PizzaIdDto,
+    PizzaUseCase,
+} from "../../../../domain";
 
 export class PizzaController {
     constructor(private readonly pizzaRepository: PizzaRepository) {}
