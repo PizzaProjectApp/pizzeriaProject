@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import {
     CustomError,
-    PizzaDto,
-    PizzaRepository,
-    PizzaPartialDto,
+    EmpanadaDto,
+    EmpanadaRepository,
+    EmpanadaPartialDto,
     ProductIdDto,
-    PizzaUseCase,
+    EmpanadaUseCase,
 } from "../../../../domain";
 
-export class PizzaController {
-    constructor(private readonly pizzaRepository: PizzaRepository) {}
+export class EmpanadaController {
+    constructor(private readonly empanadaRepository: EmpanadaRepository) {}
     private handleError = (error: unknown, res: Response) => {
         if (error instanceof CustomError) {
             return res.status(error.statusCode).json({ error: error.message });
@@ -17,65 +17,67 @@ export class PizzaController {
         return res.status(500).json({ error: "Internal Server Error" });
     };
 
-    createPizza = (req: Request, res: Response) => {
-        const [error, pizzaDto] = PizzaDto.create(req.body);
+    createEmpanada = (req: Request, res: Response) => {
+        const [error, empanadaDto] = EmpanadaDto.create(req.body);
         if (error) return res.status(400).json({ error });
 
-        new PizzaUseCase(this.pizzaRepository)
-            .create(pizzaDto!)
+        new EmpanadaUseCase(this.empanadaRepository)
+            .create(empanadaDto!)
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };
 
-    getPizzas = (_req: Request, res: Response) => {
-        new PizzaUseCase(this.pizzaRepository)
+    getEmpanadas = (_req: Request, res: Response) => {
+        new EmpanadaUseCase(this.empanadaRepository)
             .getAll()
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };
 
-    getPizzaById = (req: Request, res: Response) => {
-        const [error, productIdDto] = ProductIdDto.create(req.params.pid);
+    getEmpanadaById = (req: Request, res: Response) => {
+        const [error, productIdDto] = ProductIdDto.create(req.params.empid);
         if (error) return res.status(400).json({ error });
 
-        new PizzaUseCase(this.pizzaRepository)
+        new EmpanadaUseCase(this.empanadaRepository)
             .getById(productIdDto!)
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };
 
-    deletePizzaById = (req: Request, res: Response) => {
-        const [error, productIdDto] = ProductIdDto.create(req.params.pid);
+    deleteEmpanadaById = (req: Request, res: Response) => {
+        const [error, productIdDto] = ProductIdDto.create(req.params.empid);
         if (error) return res.status(400).json({ error });
 
-        new PizzaUseCase(this.pizzaRepository)
+        new EmpanadaUseCase(this.empanadaRepository)
             .deleteById(productIdDto!)
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };
 
-    updatePizzaById = (req: Request, res: Response) => {
-        let [errorId, productIdDto] = ProductIdDto.create(req.params.pid);
-        let [errorDto, pizzaDto] = PizzaDto.create(req.body);
+    updateEmpanadaById = (req: Request, res: Response) => {
+        let [errorId, productIdDto] = ProductIdDto.create(req.params.empid);
+        let [errorDto, empanadaDto] = EmpanadaDto.create(req.body);
 
         if (errorId) return res.status(400).json({ errorId });
         if (errorDto) return res.status(400).json({ errorDto });
 
-        new PizzaUseCase(this.pizzaRepository)
-            .updateById(productIdDto!, pizzaDto!)
+        new EmpanadaUseCase(this.empanadaRepository)
+            .updateById(productIdDto!, empanadaDto!)
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };
 
-    partialUpdatePizzaById = (req: Request, res: Response) => {
-        let [errorId, productIdDto] = ProductIdDto.create(req.params.pid);
-        let [errorDto, pizzaPartialDto] = PizzaPartialDto.create(req.body);
+    partialUpdateEmpanadaById = (req: Request, res: Response) => {
+        let [errorId, productIdDto] = ProductIdDto.create(req.params.empid);
+        let [errorDto, empanadaPartialDto] = EmpanadaPartialDto.create(
+            req.body
+        );
 
         if (errorId) return res.status(400).json({ errorId });
         if (errorDto) return res.status(400).json({ errorDto });
 
-        new PizzaUseCase(this.pizzaRepository)
-            .partialUpdateById(productIdDto!, pizzaPartialDto!)
+        new EmpanadaUseCase(this.empanadaRepository)
+            .partialUpdateById(productIdDto!, empanadaPartialDto!)
             .then((data) => res.json(data))
             .catch((error) => this.handleError(error, res));
     };

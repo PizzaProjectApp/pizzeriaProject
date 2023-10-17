@@ -1,26 +1,36 @@
 import { Router } from "express";
+import {
+    BeverageDatasourceImpl,
+    BeverageRepositoryImpl,
+} from "../../../../infrastructure";
+import { BeverageController } from "./beverage.controller";
 
-export default class BeverageRoutes {
+export class BeverageRoutes {
     static get routes(): Router {
         const router = Router();
 
-        // //~> |Get a list of available beverages
-        // router.get("/", beverageController.getBeverages);
+        const database = new BeverageDatasourceImpl();
+        const beverageRepository = new BeverageRepositoryImpl(database);
 
-        // //~> |Add a new beverage
-        // router.post("/", beverageController.addBeverage);
+        const controller = new BeverageController(beverageRepository);
 
-        // //~> |Get an beverage by ID
-        // router.get("/:bvgid", beverageController.getBeverageById);
+        //~> |Get a list of available beverages
+        router.get("/", controller.getBeverages);
 
-        // //~> |Update an beverage by ID
-        // router.put("/:bvgid", beverageController.updateBeverageById);
+        //~> |Add a new beverage
+        router.post("/", controller.createBeverage);
 
-        // //~> |Partially Update an beverage by ID
-        // router.patch("/:bvgid", beverageController.partialUpdateBeverageById);
+        //~> |Get an beverage by ID
+        router.get("/:bvgid", controller.getBeverageById);
 
-        // //~> |Delete an beverage by ID
-        // router.delete("/:bvgid", beverageController.deleteBeverageById);
+        //~> |Update an beverage by ID
+        router.put("/:bvgid", controller.updateBeverageById);
+
+        //~> |Partially Update an beverage by ID
+        router.patch("/:bvgid", controller.partialUpdateBeverageById);
+
+        //~> |Delete an beverage by ID
+        router.delete("/:bvgid", controller.deleteBeverageById);
 
         return router;
     }

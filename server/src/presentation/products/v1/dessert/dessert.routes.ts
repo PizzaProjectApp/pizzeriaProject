@@ -1,26 +1,36 @@
 import { Router } from "express";
+import {
+    DessertDatasourceImpl,
+    DessertRepositoryImpl,
+} from "../../../../infrastructure";
+import { DessertController } from "./dessert.controller";
 
-export default class DessertRoutes {
+export class DessertRoutes {
     static get routes(): Router {
         const router = Router();
 
-        // //~> |Get a list of available desserts
-        // router.get("/", dessertController.getDesserts);
+        const database = new DessertDatasourceImpl();
+        const dessertRepository = new DessertRepositoryImpl(database);
 
-        // //~> |Add a new dessert
-        // router.post("/", dessertController.addDessert);
+        const controller = new DessertController(dessertRepository);
 
-        // //~> |Get an dessert by ID
-        // router.get("/:dstid", dessertController.getDessertById);
+        //~> |Get a list of available desserts
+        router.get("/", controller.getDesserts);
 
-        // //~> |Update an dessert by ID
-        // router.put("/:dstid", dessertController.updateDessert);
+        //~> |Add a new dessert
+        router.post("/", controller.createDessert);
 
-        // //~> |Partially Update an dessert by ID
-        // router.patch("/:dstid", dessertController.partialUpdateDessertById);
+        //~> |Get an dessert by ID
+        router.get("/:dstid", controller.getDessertById);
 
-        // //~> |Delete an dessert by ID
-        // router.delete("/:dstid", dessertController.deleteDessertById);
+        //~> |Update an dessert by ID
+        router.put("/:dstid", controller.updateDessertById);
+
+        //~> |Partially Update an dessert by ID
+        router.patch("/:dstid", controller.partialUpdateDessertById);
+
+        //~> |Delete an dessert by ID
+        router.delete("/:dstid", controller.deleteDessertById);
 
         return router;
     }
