@@ -66,15 +66,15 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
     getById = async (pizzaIdDto: PizzaIdDto): Promise<PizzaEntity> => {
         const { id } = pizzaIdDto;
         try {
-            const exists = await pizzaModel.findById(id);
+            const existsPizza = await pizzaModel.findById(id);
 
-            if (!exists) {
+            if (!existsPizza) {
                 throw CustomError.notFound(
                     `Pizza with ID: ${pizzaIdDto.id} not found`
                 );
             }
 
-            return PizzaMapper.PizzaEntityFromObject(exists);
+            return PizzaMapper.PizzaEntityFromObject(existsPizza);
         } catch (error) {
             if (error instanceof CustomError) {
                 throw error;
@@ -101,10 +101,32 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while deleting for the pizza by ID. Details:",
-                error
+            logger.error("Error while deleting pizza by ID. Details:", error);
+            throw CustomError.internalServer();
+        }
+    };
+
+    updateById = async (
+        pizzaIdDto: PizzaIdDto,
+        pizzaDto: PizzaDto
+    ): Promise<PizzaEntity> => {
+        const { id } = pizzaIdDto;
+        try {
+            const existsPizza = await pizzaModel.findOneAndUpdate(
+                { _id: id },
+                pizzaDto,
+                { new: true }
             );
+            if (!existsPizza) {
+                throw CustomError.notFound(`Pizza with ID: ${id} not found`);
+            }
+
+            return PizzaMapper.PizzaEntityFromObject(existsPizza);
+        } catch (error) {
+            if (error instanceof CustomError) {
+                throw error;
+            }
+            logger.error("Error while updating pizza by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };
