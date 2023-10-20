@@ -5,7 +5,7 @@ import {
     PizzaRepository,
     PizzaPartialDto,
     ProductIdDto,
-    PizzaUseCase,
+    PizzaUseCase
 } from "../../../../domain";
 
 export class PizzaController {
@@ -23,15 +23,15 @@ export class PizzaController {
 
         new PizzaUseCase(this.pizzaRepository)
             .create(pizzaDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     getPizzas = (_req: Request, res: Response) => {
         new PizzaUseCase(this.pizzaRepository)
             .getAll()
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     getPizzaById = (req: Request, res: Response) => {
@@ -40,8 +40,8 @@ export class PizzaController {
 
         new PizzaUseCase(this.pizzaRepository)
             .getById(productIdDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     deletePizzaById = (req: Request, res: Response) => {
@@ -50,33 +50,33 @@ export class PizzaController {
 
         new PizzaUseCase(this.pizzaRepository)
             .deleteById(productIdDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     updatePizzaById = (req: Request, res: Response) => {
-        let [errorId, productIdDto] = ProductIdDto.create(req.params.pid);
-        let [errorDto, pizzaDto] = PizzaDto.create(req.body);
+        const [errorId, productIdDto] = ProductIdDto.create(req.params.pid);
+        const [errorDto, pizzaDto] = PizzaDto.create(req.body);
 
         if (errorId) return res.status(400).json({ errorId });
         if (errorDto) return res.status(400).json({ errorDto });
 
         new PizzaUseCase(this.pizzaRepository)
             .updateById(productIdDto!, pizzaDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     partialUpdatePizzaById = (req: Request, res: Response) => {
-        let [errorId, productIdDto] = ProductIdDto.create(req.params.pid);
-        let [errorDto, pizzaPartialDto] = PizzaPartialDto.create(req.body);
+        const [errorId, productIdDto] = ProductIdDto.create(req.params.pid);
+        const [errorDto, pizzaPartialDto] = PizzaPartialDto.create(req.body);
 
         if (errorId) return res.status(400).json({ errorId });
         if (errorDto) return res.status(400).json({ errorDto });
 
         new PizzaUseCase(this.pizzaRepository)
             .partialUpdateById(productIdDto!, pizzaPartialDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 }

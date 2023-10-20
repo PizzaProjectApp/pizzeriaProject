@@ -1,13 +1,6 @@
 import { logger } from "../../../config";
 import { pizzaModel } from "../../../data";
-import {
-    PizzaDatasource,
-    CustomError,
-    PizzaDto,
-    ProductIdDto,
-    PizzaEntity,
-    PizzaPartialDto,
-} from "../../../domain";
+import { PizzaDatasource, CustomError, PizzaDto, ProductIdDto, PizzaEntity, PizzaPartialDto } from "../../../domain";
 import { PizzaMapper } from "../../mappers";
 
 export class PizzaDatasourceImpl implements PizzaDatasource {
@@ -17,13 +10,10 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             const exists = await pizzaModel.findOne({
                 name,
                 description,
-                price,
+                price
             });
 
-            if (exists)
-                throw CustomError.badRequest(
-                    "Pizza with the same properties already exists."
-                );
+            if (exists) throw CustomError.badRequest("Pizza with the same properties already exists.");
 
             const pizza = await pizzaModel.create({
                 name,
@@ -31,7 +21,7 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
                 price,
                 type,
                 thumbnail,
-                status,
+                status
             });
 
             await pizza.save();
@@ -41,10 +31,7 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for the pizza. Details:",
-                error
-            );
+            logger.error("Error while searching for the pizza. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -56,10 +43,7 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for all pizzas. Details:",
-                error
-            );
+            logger.error("Error while searching for all pizzas. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -70,9 +54,7 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             const existsPizza = await pizzaModel.findById(id);
 
             if (!existsPizza) {
-                throw CustomError.notFound(
-                    `Pizza with ID: ${productIdDto.id} not found`
-                );
+                throw CustomError.notFound(`Pizza with ID: ${id} not found`);
             }
 
             return PizzaMapper.PizzaEntityFromObject(existsPizza);
@@ -80,10 +62,7 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for the pizza by ID. Details:",
-                error
-            );
+            logger.error("Error while searching for the pizza by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -105,17 +84,10 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
         }
     };
 
-    updateById = async (
-        productIdDto: ProductIdDto,
-        pizzaDto: PizzaDto
-    ): Promise<PizzaEntity> => {
+    updateById = async (productIdDto: ProductIdDto, pizzaDto: PizzaDto): Promise<PizzaEntity> => {
         const { id } = productIdDto;
         try {
-            const existsPizza = await pizzaModel.findOneAndUpdate(
-                { _id: id },
-                pizzaDto,
-                { new: true }
-            );
+            const existsPizza = await pizzaModel.findOneAndUpdate({ _id: id }, pizzaDto, { new: true });
             if (!existsPizza) {
                 throw CustomError.notFound(`Pizza with ID: ${id} not found`);
             }
@@ -130,17 +102,10 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
         }
     };
 
-    partialUpdateById = async (
-        productIdDto: ProductIdDto,
-        pizzaPartialDto: PizzaPartialDto
-    ): Promise<PizzaEntity> => {
+    partialUpdateById = async (productIdDto: ProductIdDto, pizzaPartialDto: PizzaPartialDto): Promise<PizzaEntity> => {
         const { id } = productIdDto;
         try {
-            const existsPizza = await pizzaModel.findOneAndUpdate(
-                { _id: id },
-                pizzaPartialDto,
-                { new: true }
-            );
+            const existsPizza = await pizzaModel.findOneAndUpdate({ _id: id }, pizzaPartialDto, { new: true });
             if (!existsPizza) {
                 throw CustomError.notFound(`Pizza with ID: ${id} not found`);
             }
@@ -150,10 +115,7 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while partial updating pizza by ID. Details:",
-                error
-            );
+            logger.error("Error while partial updating pizza by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };

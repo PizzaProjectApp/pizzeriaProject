@@ -9,13 +9,7 @@ export abstract class PizzaDatasource {
 
     abstract deleteById(productIdDto: ProductIdDto): Promise<PizzaEntity>;
 
-    abstract updateById(
-        productIdDto: ProductIdDto,
-        pizzaDto: PizzaDto
-    ): Promise<PizzaEntity>;
+    abstract updateById(productIdDto: ProductIdDto, pizzaDto: PizzaDto): Promise<PizzaEntity>;
 
-    abstract partialUpdateById(
-        productIdDto: ProductIdDto,
-        pizzaPartialDto: PizzaPartialDto
-    ): Promise<PizzaEntity>;
+    abstract partialUpdateById(productIdDto: ProductIdDto, pizzaPartialDto: PizzaPartialDto): Promise<PizzaEntity>;
 }

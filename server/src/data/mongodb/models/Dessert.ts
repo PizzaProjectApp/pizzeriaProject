@@ -4,32 +4,32 @@ import { Schema, model } from "mongoose";
 const DessertSchema = new Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
     description: {
         type: String,
-        required: true,
+        required: true
     },
     price: {
         type: Number,
-        required: true,
+        required: true
     },
     type: {
         type: String,
         enum: ["cold", "hot"],
         default: "cold",
-        required: false,
+        required: false
     },
     thumbnail: {
         type: [String],
         default: [""],
-        required: false,
+        required: false
     },
     status: {
         type: Boolean,
         default: true,
-        required: false,
-    },
+        required: false
+    }
 });
 
 // Create the dessert model using "model" directly

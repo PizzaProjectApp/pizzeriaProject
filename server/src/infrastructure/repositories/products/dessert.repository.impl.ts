@@ -4,7 +4,7 @@ import {
     ProductIdDto,
     DessertEntity,
     DessertRepository,
-    DessertPartialDto,
+    DessertPartialDto
 } from "../../../domain";
 
 export class DessertRepositoryImpl implements DessertRepository {
@@ -22,19 +22,10 @@ export class DessertRepositoryImpl implements DessertRepository {
     deleteById(productIdDto: ProductIdDto): Promise<DessertEntity> {
         return this.dessertDatasource.deleteById(productIdDto);
     }
-    updateById(
-        productIdDto: ProductIdDto,
-        dessertDto: DessertDto
-    ): Promise<DessertEntity> {
+    updateById(productIdDto: ProductIdDto, dessertDto: DessertDto): Promise<DessertEntity> {
         return this.dessertDatasource.updateById(productIdDto, dessertDto);
     }
-    partialUpdateById(
-        productIdDto: ProductIdDto,
-        dessertPartialDto: DessertPartialDto
-    ): Promise<DessertEntity> {
-        return this.dessertDatasource.partialUpdateById(
-            productIdDto,
-            dessertPartialDto
-        );
+    partialUpdateById(productIdDto: ProductIdDto, dessertPartialDto: DessertPartialDto): Promise<DessertEntity> {
+        return this.dessertDatasource.partialUpdateById(productIdDto, dessertPartialDto);
     }
 }

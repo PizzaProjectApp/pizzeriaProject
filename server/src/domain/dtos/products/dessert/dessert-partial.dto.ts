@@ -8,9 +8,7 @@ export class DessertPartialDto {
     private constructor(partialData: Partial<DessertPartialDto>) {
         Object.assign(this, partialData);
     }
-    static create(
-        partialData: Partial<DessertPartialDto>
-    ): [string?, DessertPartialDto?] {
+    static create(partialData: Partial<DessertPartialDto>): [string?, DessertPartialDto?] {
         return [undefined, new DessertPartialDto(partialData)];
     }
 }

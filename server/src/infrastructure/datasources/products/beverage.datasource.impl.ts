@@ -6,25 +6,21 @@ import {
     BeverageDto,
     ProductIdDto,
     BeverageEntity,
-    BeveragePartialDto,
+    BeveragePartialDto
 } from "../../../domain";
 import { BeverageMapper } from "../../mappers";
 
 export class BeverageDatasourceImpl implements BeverageDatasource {
     create = async (beverageDto: BeverageDto): Promise<BeverageEntity> => {
-        const { name, description, price, category, thumbnail, status } =
-            beverageDto;
+        const { name, description, price, category, thumbnail, status } = beverageDto;
         try {
             const exists = await beverageModel.findOne({
                 name,
                 description,
-                price,
+                price
             });
 
-            if (exists)
-                throw CustomError.badRequest(
-                    "Beverage with the same properties already exists."
-                );
+            if (exists) throw CustomError.badRequest("Beverage with the same properties already exists.");
 
             const beverage = await beverageModel.create({
                 name,
@@ -32,7 +28,7 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
                 price,
                 category,
                 thumbnail,
-                status,
+                status
             });
 
             await beverage.save();
@@ -42,10 +38,7 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for the beverage. Details:",
-                error
-            );
+            logger.error("Error while searching for the beverage. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -57,10 +50,7 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for all beverages. Details:",
-                error
-            );
+            logger.error("Error while searching for all beverages. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -71,9 +61,7 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
             const existsBeverage = await beverageModel.findById(id);
 
             if (!existsBeverage) {
-                throw CustomError.notFound(
-                    `Beverage with ID: ${productIdDto.id} not found`
-                );
+                throw CustomError.notFound(`Beverage with ID: ${id} not found`);
             }
 
             return BeverageMapper.BeverageEntityFromObject(existsBeverage);
@@ -81,17 +69,12 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for the beverage by ID. Details:",
-                error
-            );
+            logger.error("Error while searching for the beverage by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };
 
-    deleteById = async (
-        productIdDto: ProductIdDto
-    ): Promise<BeverageEntity> => {
+    deleteById = async (productIdDto: ProductIdDto): Promise<BeverageEntity> => {
         const { id } = productIdDto;
         try {
             const deleted = await beverageModel.findByIdAndDelete(id);
@@ -103,25 +86,15 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while deleting beverage by ID. Details:",
-                error
-            );
+            logger.error("Error while deleting beverage by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };
 
-    updateById = async (
-        productIdDto: ProductIdDto,
-        beverageDto: BeverageDto
-    ): Promise<BeverageEntity> => {
+    updateById = async (productIdDto: ProductIdDto, beverageDto: BeverageDto): Promise<BeverageEntity> => {
         const { id } = productIdDto;
         try {
-            const existsBeverage = await beverageModel.findOneAndUpdate(
-                { _id: id },
-                beverageDto,
-                { new: true }
-            );
+            const existsBeverage = await beverageModel.findOneAndUpdate({ _id: id }, beverageDto, { new: true });
             if (!existsBeverage) {
                 throw CustomError.notFound(`Beverage with ID: ${id} not found`);
             }
@@ -131,10 +104,7 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while updating beverage by ID. Details:",
-                error
-            );
+            logger.error("Error while updating beverage by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -145,11 +115,7 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
     ): Promise<BeverageEntity> => {
         const { id } = productIdDto;
         try {
-            const existsBeverage = await beverageModel.findOneAndUpdate(
-                { _id: id },
-                beveragePartialDto,
-                { new: true }
-            );
+            const existsBeverage = await beverageModel.findOneAndUpdate({ _id: id }, beveragePartialDto, { new: true });
             if (!existsBeverage) {
                 throw CustomError.notFound(`Beverage with ID: ${id} not found`);
             }
@@ -159,10 +125,7 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while partial updating beverage by ID. Details:",
-                error
-            );
+            logger.error("Error while partial updating beverage by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };

@@ -6,7 +6,7 @@ import {
     EmpanadaDto,
     ProductIdDto,
     EmpanadaEntity,
-    EmpanadaPartialDto,
+    EmpanadaPartialDto
 } from "../../../domain";
 import { EmpanadaMapper } from "../../mappers";
 
@@ -17,13 +17,10 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
             const exists = await empanadaModel.findOne({
                 name,
                 description,
-                price,
+                price
             });
 
-            if (exists)
-                throw CustomError.badRequest(
-                    "Empanada with the same properties already exists."
-                );
+            if (exists) throw CustomError.badRequest("Empanada with the same properties already exists.");
 
             const empanada = await empanadaModel.create({
                 name,
@@ -31,7 +28,7 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
                 price,
 
                 thumbnail,
-                status,
+                status
             });
 
             await empanada.save();
@@ -41,10 +38,7 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for the empanada. Details:",
-                error
-            );
+            logger.error("Error while searching for the empanada. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -56,10 +50,7 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for all empanadas. Details:",
-                error
-            );
+            logger.error("Error while searching for all empanadas. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -70,9 +61,7 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
             const existsEmpanada = await empanadaModel.findById(id);
 
             if (!existsEmpanada) {
-                throw CustomError.notFound(
-                    `Empanada with ID: ${productIdDto.id} not found`
-                );
+                throw CustomError.notFound(`Empanada with ID: ${id} not found`);
             }
 
             return EmpanadaMapper.EmpanadaEntityFromObject(existsEmpanada);
@@ -80,17 +69,12 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for the empanada by ID. Details:",
-                error
-            );
+            logger.error("Error while searching for the empanada by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };
 
-    deleteById = async (
-        productIdDto: ProductIdDto
-    ): Promise<EmpanadaEntity> => {
+    deleteById = async (productIdDto: ProductIdDto): Promise<EmpanadaEntity> => {
         const { id } = productIdDto;
         try {
             const deleted = await empanadaModel.findByIdAndDelete(id);
@@ -102,25 +86,15 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while deleting empanada by ID. Details:",
-                error
-            );
+            logger.error("Error while deleting empanada by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };
 
-    updateById = async (
-        productIdDto: ProductIdDto,
-        empanadaDto: EmpanadaDto
-    ): Promise<EmpanadaEntity> => {
+    updateById = async (productIdDto: ProductIdDto, empanadaDto: EmpanadaDto): Promise<EmpanadaEntity> => {
         const { id } = productIdDto;
         try {
-            const existsEmpanada = await empanadaModel.findOneAndUpdate(
-                { _id: id },
-                empanadaDto,
-                { new: true }
-            );
+            const existsEmpanada = await empanadaModel.findOneAndUpdate({ _id: id }, empanadaDto, { new: true });
             if (!existsEmpanada) {
                 throw CustomError.notFound(`Empanada with ID: ${id} not found`);
             }
@@ -130,10 +104,7 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while updating empanada by ID. Details:",
-                error
-            );
+            logger.error("Error while updating empanada by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -144,11 +115,7 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
     ): Promise<EmpanadaEntity> => {
         const { id } = productIdDto;
         try {
-            const existsEmpanada = await empanadaModel.findOneAndUpdate(
-                { _id: id },
-                empanadaPartialDto,
-                { new: true }
-            );
+            const existsEmpanada = await empanadaModel.findOneAndUpdate({ _id: id }, empanadaPartialDto, { new: true });
             if (!existsEmpanada) {
                 throw CustomError.notFound(`Empanada with ID: ${id} not found`);
             }
@@ -158,10 +125,7 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while partial updating empanada by ID. Details:",
-                error
-            );
+            logger.error("Error while partial updating empanada by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };

@@ -6,25 +6,21 @@ import {
     DessertDto,
     ProductIdDto,
     DessertEntity,
-    DessertPartialDto,
+    DessertPartialDto
 } from "../../../domain";
 import { DessertMapper } from "../../mappers";
 
 export class DessertDatasourceImpl implements DessertDatasource {
     create = async (dessertDto: DessertDto): Promise<DessertEntity> => {
-        const { name, description, price, type, thumbnail, status } =
-            dessertDto;
+        const { name, description, price, type, thumbnail, status } = dessertDto;
         try {
             const exists = await dessertModel.findOne({
                 name,
                 description,
-                price,
+                price
             });
 
-            if (exists)
-                throw CustomError.badRequest(
-                    "Dessert with the same properties already exists."
-                );
+            if (exists) throw CustomError.badRequest("Dessert with the same properties already exists.");
 
             const dessert = await dessertModel.create({
                 name,
@@ -32,7 +28,7 @@ export class DessertDatasourceImpl implements DessertDatasource {
                 price,
                 type,
                 thumbnail,
-                status,
+                status
             });
 
             await dessert.save();
@@ -42,10 +38,7 @@ export class DessertDatasourceImpl implements DessertDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for the dessert. Details:",
-                error
-            );
+            logger.error("Error while searching for the dessert. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -57,10 +50,7 @@ export class DessertDatasourceImpl implements DessertDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for all desserts. Details:",
-                error
-            );
+            logger.error("Error while searching for all desserts. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -71,9 +61,7 @@ export class DessertDatasourceImpl implements DessertDatasource {
             const existsDessert = await dessertModel.findById(id);
 
             if (!existsDessert) {
-                throw CustomError.notFound(
-                    `Dessert with ID: ${productIdDto.id} not found`
-                );
+                throw CustomError.notFound(`Dessert with ID: ${id} not found`);
             }
 
             return DessertMapper.DessertEntityFromObject(existsDessert);
@@ -81,10 +69,7 @@ export class DessertDatasourceImpl implements DessertDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while searching for the dessert by ID. Details:",
-                error
-            );
+            logger.error("Error while searching for the dessert by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };
@@ -106,17 +91,10 @@ export class DessertDatasourceImpl implements DessertDatasource {
         }
     };
 
-    updateById = async (
-        productIdDto: ProductIdDto,
-        dessertDto: DessertDto
-    ): Promise<DessertEntity> => {
+    updateById = async (productIdDto: ProductIdDto, dessertDto: DessertDto): Promise<DessertEntity> => {
         const { id } = productIdDto;
         try {
-            const existsDessert = await dessertModel.findOneAndUpdate(
-                { _id: id },
-                dessertDto,
-                { new: true }
-            );
+            const existsDessert = await dessertModel.findOneAndUpdate({ _id: id }, dessertDto, { new: true });
             if (!existsDessert) {
                 throw CustomError.notFound(`Dessert with ID: ${id} not found`);
             }
@@ -137,11 +115,7 @@ export class DessertDatasourceImpl implements DessertDatasource {
     ): Promise<DessertEntity> => {
         const { id } = productIdDto;
         try {
-            const existsDessert = await dessertModel.findOneAndUpdate(
-                { _id: id },
-                dessertPartialDto,
-                { new: true }
-            );
+            const existsDessert = await dessertModel.findOneAndUpdate({ _id: id }, dessertPartialDto, { new: true });
             if (!existsDessert) {
                 throw CustomError.notFound(`Dessert with ID: ${id} not found`);
             }
@@ -151,10 +125,7 @@ export class DessertDatasourceImpl implements DessertDatasource {
             if (error instanceof CustomError) {
                 throw error;
             }
-            logger.error(
-                "Error while partial updating dessert by ID. Details:",
-                error
-            );
+            logger.error("Error while partial updating dessert by ID. Details:", error);
             throw CustomError.internalServer();
         }
     };

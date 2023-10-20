@@ -2,8 +2,7 @@ import { CustomError, DessertEntity } from "../../../domain";
 
 export class DessertMapper {
     static DessertEntityFromObject = (object: { [key: string]: any }) => {
-        const { id, _id, name, description, price, type, thumbnail, status } =
-            object;
+        const { id, _id, name, description, price, type, thumbnail, status } = object;
 
         if (!_id || !id) {
             throw CustomError.badRequest("Missing id");
@@ -27,14 +26,6 @@ export class DessertMapper {
             throw CustomError.badRequest("Missing status");
         }
 
-        return new DessertEntity(
-            id || _id,
-            name,
-            description,
-            price,
-            type,
-            thumbnail,
-            status
-        );
+        return new DessertEntity(id || _id, name, description, price, type, thumbnail, status);
     };
 }

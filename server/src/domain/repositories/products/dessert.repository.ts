@@ -1,9 +1,4 @@
-import {
-    DessertDto,
-    DessertPartialDto,
-    ProductIdDto,
-    DessertEntity,
-} from "../../";
+import { DessertDto, DessertPartialDto, ProductIdDto, DessertEntity } from "../../";
 
 export abstract class DessertRepository {
     abstract create(dessertDto: DessertDto): Promise<DessertEntity>;
@@ -14,10 +9,7 @@ export abstract class DessertRepository {
 
     abstract deleteById(productIdDto: ProductIdDto): Promise<DessertEntity>;
 
-    abstract updateById(
-        productIdDto: ProductIdDto,
-        dessertDto: DessertDto
-    ): Promise<DessertEntity>;
+    abstract updateById(productIdDto: ProductIdDto, dessertDto: DessertDto): Promise<DessertEntity>;
 
     abstract partialUpdateById(
         productIdDto: ProductIdDto,

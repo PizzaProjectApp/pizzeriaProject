@@ -23,13 +23,6 @@ export class EmpanadaMapper {
             throw CustomError.badRequest("Missing status");
         }
 
-        return new EmpanadaEntity(
-            id || _id,
-            name,
-            description,
-            price,
-            thumbnail,
-            status
-        );
+        return new EmpanadaEntity(id || _id, name, description, price, thumbnail, status);
     };
 }

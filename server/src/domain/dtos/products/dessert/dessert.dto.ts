@@ -7,9 +7,7 @@ export class DessertDto {
         public thumbnail?: string,
         public status?: boolean
     ) {}
-    static create = (object: {
-        [key: string]: any;
-    }): [string?, DessertDto?] => {
+    static create = (object: { [key: string]: any }): [string?, DessertDto?] => {
         const { name, description, price, type, thumbnail, status } = object;
 
         if (!name) return ["Missing name"];
@@ -22,21 +20,14 @@ export class DessertDto {
         if (!price) return ["Missing price"];
         else if (typeof price !== "number") return ["Invalid price"];
 
-        if (type) {
-            if (type !== "whole" && type !== "half") {
-                return ["Invalid type"];
-            }
+        if (type && type !== "whole" && type !== "half") {
+            return ["Invalid type"];
         }
 
-        if (status) {
-            if (typeof status !== "boolean") {
-                return ["Invalid status"];
-            }
+        if (status && typeof status !== "boolean") {
+            return ["Invalid status"];
         }
 
-        return [
-            undefined,
-            new DessertDto(name, description, price, type, thumbnail, status),
-        ];
+        return [undefined, new DessertDto(name, description, price, type, thumbnail, status)];
     };
 }

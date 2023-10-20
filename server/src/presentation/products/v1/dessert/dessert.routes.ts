@@ -1,8 +1,5 @@
 import { Router } from "express";
-import {
-    DessertDatasourceImpl,
-    DessertRepositoryImpl,
-} from "../../../../infrastructure";
+import { DessertDatasourceImpl, DessertRepositoryImpl } from "../../../../infrastructure";
 import { DessertController } from "./dessert.controller";
 
 export class DessertRoutes {

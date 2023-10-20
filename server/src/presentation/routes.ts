@@ -1,10 +1,5 @@
 import { Router } from "express";
-import {
-    PizzaRoutes,
-    BeverageRoutes,
-    DessertRoutes,
-    EmpanadaRoutes,
-} from "./products";
+import { PizzaRoutes, BeverageRoutes, DessertRoutes, EmpanadaRoutes } from "./products";
 
 export class AppRoutes {
     static get routes(): Router {

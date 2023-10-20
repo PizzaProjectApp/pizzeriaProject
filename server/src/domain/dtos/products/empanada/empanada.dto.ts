@@ -6,9 +6,7 @@ export class EmpanadaDto {
         public thumbnail?: string,
         public status?: boolean
     ) {}
-    static create = (object: {
-        [key: string]: any;
-    }): [string?, EmpanadaDto?] => {
+    static create = (object: { [key: string]: any }): [string?, EmpanadaDto?] => {
         const { name, description, price, thumbnail, status } = object;
 
         if (!name) return ["Missing name"];
@@ -21,15 +19,10 @@ export class EmpanadaDto {
         if (!price) return ["Missing price"];
         else if (typeof price !== "number") return ["Invalid price"];
 
-        if (status) {
-            if (typeof status !== "boolean") {
-                return ["Invalid status"];
-            }
+        if (status && typeof status !== "boolean") {
+            return ["Invalid status"];
         }
 
-        return [
-            undefined,
-            new EmpanadaDto(name, description, price, thumbnail, status),
-        ];
+        return [undefined, new EmpanadaDto(name, description, price, thumbnail, status)];
     };
 }
