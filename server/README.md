@@ -1,3 +1,26 @@
+# Pizzeria Project with Clean Architecture, DDD, and Clean Code
+
+## Overview
+
+This project is a Pizzeria application that demonstrates the use of Clean Architecture, Domain-Driven Design (DDD), and Clean Code principles. The application is designed to showcase best practices for building maintainable and scalable software.
+
+## Features
+
+- **Domain-Driven Design (DDD):** The project follows DDD principles by organizing the codebase into clear and well-defined domains, such as "Order," "Customer," and "Menu." Each domain has its own folder structure with distinct responsibilities.
+
+- **Clean Architecture:** Clean Architecture is implemented to ensure separation of concerns and maintainability. The codebase is divided into layers, including "Application," "Domain," and "Infrastructure," each with a specific role.
+
+- **Clean Code:** Clean Code principles are applied throughout the project to enhance code readability, maintainability, and testability. Descriptive variable and function names, SOLID principles, and best practices are followed.
+
+- **Modularity:** The code is organized using barrel files, making it easy to navigate and understand the project structure. This modularity enhances code accessibility and maintainability.
+
+## Project Structure
+
+- `/src`
+  - `/domain`: The heart of the application, housing the domain model, entities, and core business logic.
+  - `/infrastructure`: Manages infrastructure-related tasks like database access and external service interactions.
+  - `/presentation`: Handles user interfaces and API endpoints for interacting with the application.
+
 ## Installation and Configuration
 
 Follow the steps below to set up and run the application in your local environment:
