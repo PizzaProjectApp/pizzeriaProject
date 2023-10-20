@@ -7,9 +7,7 @@ export class EmpanadaPartialDto {
     private constructor(partialData: Partial<EmpanadaPartialDto>) {
         Object.assign(this, partialData);
     }
-    static create(
-        partialData: Partial<EmpanadaPartialDto>
-    ): [string?, EmpanadaPartialDto?] {
+    static create(partialData: Partial<EmpanadaPartialDto>): [string?, EmpanadaPartialDto?] {
         return [undefined, new EmpanadaPartialDto(partialData)];
     }
 }

@@ -2,16 +2,7 @@ import { CustomError, BeverageEntity } from "../../../domain";
 
 export class BeverageMapper {
     static BeverageEntityFromObject = (object: { [key: string]: any }) => {
-        const {
-            id,
-            _id,
-            name,
-            description,
-            price,
-            category,
-            thumbnail,
-            status,
-        } = object;
+        const { id, _id, name, description, price, category, thumbnail, status } = object;
 
         if (!_id || !id) {
             throw CustomError.badRequest("Missing id");
@@ -35,14 +26,6 @@ export class BeverageMapper {
             throw CustomError.badRequest("Missing status");
         }
 
-        return new BeverageEntity(
-            id || _id,
-            name,
-            description,
-            price,
-            category,
-            thumbnail,
-            status
-        );
+        return new BeverageEntity(id || _id, name, description, price, category, thumbnail, status);
     };
 }

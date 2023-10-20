@@ -1,10 +1,11 @@
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 // Get the current file's path
-const currentFilePath = __filename;
+const __filename = fileURLToPath(import.meta.url);
 
 // Get the current directory (src/utils)
-const currentDir = dirname(currentFilePath);
+const currentDir = dirname(__filename);
 
 // Go up one level to reach the src folder
 const rootDir = join(currentDir, "..");

@@ -11,7 +11,7 @@ async function main() {
     try {
         await MongoDatabase.connect({
             mongoUrl: envs.MONGODB_URI,
-            dbName: envs.DB_NAME,
+            dbName: envs.DB_NAME
         });
         new Server({ port: envs.PORT, routes: AppRoutes.routes }).start();
     } catch (error) {

@@ -7,11 +7,8 @@ export class BeverageDto {
         public thumbnail?: string,
         public status?: boolean
     ) {}
-    static create = (object: {
-        [key: string]: any;
-    }): [string?, BeverageDto?] => {
-        const { name, description, price, category, thumbnail, status } =
-            object;
+    static create = (object: { [key: string]: any }): [string?, BeverageDto?] => {
+        const { name, description, price, category, thumbnail, status } = object;
 
         if (!name) return ["Missing name"];
         if (name.length < 3) return ["Name too short"];
@@ -26,22 +23,10 @@ export class BeverageDto {
         if (!category) return ["Missing category"];
         else if (typeof category !== "string") return ["Invalid category"];
 
-        if (status) {
-            if (typeof status !== "boolean") {
-                return ["Invalid status"];
-            }
+        if (status && typeof status !== "boolean") {
+            return ["Invalid status"];
         }
 
-        return [
-            undefined,
-            new BeverageDto(
-                name,
-                description,
-                price,
-                category,
-                thumbnail,
-                status
-            ),
-        ];
+        return [undefined, new BeverageDto(name, description, price, category, thumbnail, status)];
     };
 }

@@ -1,23 +1,12 @@
-import {
-    DessertDto,
-    ProductIdDto,
-    DessertRepository,
-    DessertPartialDto,
-} from "../../";
+import { DessertDto, ProductIdDto, DessertRepository, DessertPartialDto } from "../../";
 
 interface IDessertUseCase {
     create(dessertDto: DessertDto): Promise<DessertDto>;
     getAll(): Promise<DessertDto[]>;
     getById(productIdDto: ProductIdDto): Promise<DessertDto>;
     deleteById(productIdDto: ProductIdDto): Promise<DessertDto>;
-    updateById(
-        productIdDto: ProductIdDto,
-        dessertDto: DessertDto
-    ): Promise<DessertDto>;
-    partialUpdateById(
-        productIdDto: ProductIdDto,
-        dessertPartialDto: DessertPartialDto
-    ): Promise<DessertDto>;
+    updateById(productIdDto: ProductIdDto, dessertDto: DessertDto): Promise<DessertDto>;
+    partialUpdateById(productIdDto: ProductIdDto, dessertPartialDto: DessertPartialDto): Promise<DessertDto>;
 }
 
 export class DessertUseCase implements IDessertUseCase {
@@ -38,23 +27,14 @@ export class DessertUseCase implements IDessertUseCase {
         return await this.dessertRepository.deleteById(productIdDto);
     };
 
-    updateById = async (
-        productIdDto: ProductIdDto,
-        dessertDto: DessertDto
-    ): Promise<DessertDto> => {
-        return await this.dessertRepository.updateById(
-            productIdDto,
-            dessertDto
-        );
+    updateById = async (productIdDto: ProductIdDto, dessertDto: DessertDto): Promise<DessertDto> => {
+        return await this.dessertRepository.updateById(productIdDto, dessertDto);
     };
 
     partialUpdateById = async (
         productIdDto: ProductIdDto,
         dessertPartialDto: DessertPartialDto
     ): Promise<DessertDto> => {
-        return await this.dessertRepository.partialUpdateById(
-            productIdDto,
-            dessertPartialDto
-        );
+        return await this.dessertRepository.partialUpdateById(productIdDto, dessertPartialDto);
     };
 }

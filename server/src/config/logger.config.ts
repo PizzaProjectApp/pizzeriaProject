@@ -6,10 +6,10 @@ export const logger = winston.createLogger({
     transports: [
         new winston.transports.File({
             filename: `${rootDirOverSrc}/logs/error.log`,
-            level: "error",
+            level: "error"
         }),
-        new winston.transports.File({ filename: "./logs/combined.log" }),
-    ],
+        new winston.transports.File({ filename: "./logs/combined.log" })
+    ]
 });
 
 if (envs.MODE === "dev") {
@@ -21,7 +21,7 @@ if (envs.MODE === "dev") {
                 winston.format.printf(({ timestamp, level, message }) => {
                     return `${timestamp} [${level}]: ${message}`;
                 })
-            ),
+            )
         })
     );
 }

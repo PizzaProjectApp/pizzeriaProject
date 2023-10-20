@@ -4,7 +4,7 @@ import {
     ProductIdDto,
     PizzaEntity,
     PizzaRepository,
-    PizzaPartialDto,
+    PizzaPartialDto
 } from "../../../domain";
 
 export class PizzaRepositoryImpl implements PizzaRepository {
@@ -22,19 +22,10 @@ export class PizzaRepositoryImpl implements PizzaRepository {
     deleteById(productIdDto: ProductIdDto): Promise<PizzaEntity> {
         return this.pizzaDatasource.deleteById(productIdDto);
     }
-    updateById(
-        productIdDto: ProductIdDto,
-        pizzaDto: PizzaDto
-    ): Promise<PizzaEntity> {
+    updateById(productIdDto: ProductIdDto, pizzaDto: PizzaDto): Promise<PizzaEntity> {
         return this.pizzaDatasource.updateById(productIdDto, pizzaDto);
     }
-    partialUpdateById(
-        productIdDto: ProductIdDto,
-        pizzaPartialDto: PizzaPartialDto
-    ): Promise<PizzaEntity> {
-        return this.pizzaDatasource.partialUpdateById(
-            productIdDto,
-            pizzaPartialDto
-        );
+    partialUpdateById(productIdDto: ProductIdDto, pizzaPartialDto: PizzaPartialDto): Promise<PizzaEntity> {
+        return this.pizzaDatasource.partialUpdateById(productIdDto, pizzaPartialDto);
     }
 }

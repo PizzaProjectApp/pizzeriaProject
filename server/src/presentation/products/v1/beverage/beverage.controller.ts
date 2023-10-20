@@ -5,7 +5,7 @@ import {
     BeverageRepository,
     BeveragePartialDto,
     ProductIdDto,
-    BeverageUseCase,
+    BeverageUseCase
 } from "../../../../domain";
 
 export class BeverageController {
@@ -23,15 +23,15 @@ export class BeverageController {
 
         new BeverageUseCase(this.beverageRepository)
             .create(beverageDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     getBeverages = (_req: Request, res: Response) => {
         new BeverageUseCase(this.beverageRepository)
             .getAll()
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     getBeverageById = (req: Request, res: Response) => {
@@ -40,8 +40,8 @@ export class BeverageController {
 
         new BeverageUseCase(this.beverageRepository)
             .getById(productIdDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     deleteBeverageById = (req: Request, res: Response) => {
@@ -50,35 +50,33 @@ export class BeverageController {
 
         new BeverageUseCase(this.beverageRepository)
             .deleteById(productIdDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     updateBeverageById = (req: Request, res: Response) => {
-        let [errorId, productIdDto] = ProductIdDto.create(req.params.bvgid);
-        let [errorDto, beverageDto] = BeverageDto.create(req.body);
+        const [errorId, productIdDto] = ProductIdDto.create(req.params.bvgid);
+        const [errorDto, beverageDto] = BeverageDto.create(req.body);
 
         if (errorId) return res.status(400).json({ errorId });
         if (errorDto) return res.status(400).json({ errorDto });
 
         new BeverageUseCase(this.beverageRepository)
             .updateById(productIdDto!, beverageDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     partialUpdateBeverageById = (req: Request, res: Response) => {
-        let [errorId, productIdDto] = ProductIdDto.create(req.params.bvgid);
-        let [errorDto, beveragePartialDto] = BeveragePartialDto.create(
-            req.body
-        );
+        const [errorId, productIdDto] = ProductIdDto.create(req.params.bvgid);
+        const [errorDto, beveragePartialDto] = BeveragePartialDto.create(req.body);
 
         if (errorId) return res.status(400).json({ errorId });
         if (errorDto) return res.status(400).json({ errorDto });
 
         new BeverageUseCase(this.beverageRepository)
             .partialUpdateById(productIdDto!, beveragePartialDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 }

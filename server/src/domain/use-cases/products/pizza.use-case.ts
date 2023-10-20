@@ -1,23 +1,12 @@
-import {
-    PizzaDto,
-    ProductIdDto,
-    PizzaRepository,
-    PizzaPartialDto,
-} from "../../";
+import { PizzaDto, ProductIdDto, PizzaRepository, PizzaPartialDto } from "../../";
 
 interface IPizzaUseCase {
     create(pizzaDto: PizzaDto): Promise<PizzaDto>;
     getAll(): Promise<PizzaDto[]>;
     getById(productIdDto: ProductIdDto): Promise<PizzaDto>;
     deleteById(productIdDto: ProductIdDto): Promise<PizzaDto>;
-    updateById(
-        productIdDto: ProductIdDto,
-        pizzaDto: PizzaDto
-    ): Promise<PizzaDto>;
-    partialUpdateById(
-        productIdDto: ProductIdDto,
-        pizzaPartialDto: PizzaPartialDto
-    ): Promise<PizzaDto>;
+    updateById(productIdDto: ProductIdDto, pizzaDto: PizzaDto): Promise<PizzaDto>;
+    partialUpdateById(productIdDto: ProductIdDto, pizzaPartialDto: PizzaPartialDto): Promise<PizzaDto>;
 }
 
 export class PizzaUseCase implements IPizzaUseCase {
@@ -38,20 +27,11 @@ export class PizzaUseCase implements IPizzaUseCase {
         return await this.pizzaRepository.deleteById(productIdDto);
     };
 
-    updateById = async (
-        productIdDto: ProductIdDto,
-        pizzaDto: PizzaDto
-    ): Promise<PizzaDto> => {
+    updateById = async (productIdDto: ProductIdDto, pizzaDto: PizzaDto): Promise<PizzaDto> => {
         return await this.pizzaRepository.updateById(productIdDto, pizzaDto);
     };
 
-    partialUpdateById = async (
-        productIdDto: ProductIdDto,
-        pizzaPartialDto: PizzaPartialDto
-    ): Promise<PizzaDto> => {
-        return await this.pizzaRepository.partialUpdateById(
-            productIdDto,
-            pizzaPartialDto
-        );
+    partialUpdateById = async (productIdDto: ProductIdDto, pizzaPartialDto: PizzaPartialDto): Promise<PizzaDto> => {
+        return await this.pizzaRepository.partialUpdateById(productIdDto, pizzaPartialDto);
     };
 }
