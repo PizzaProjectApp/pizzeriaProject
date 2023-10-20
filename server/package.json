@@ -5,7 +5,7 @@
     "main": "src/app.js",
     "scripts": {
         "dev": "ts-node-dev --respawn src/app.ts",
-        "build": "tsc",
+        "build": "eslint src && tsc",
         "lint": "eslint src",
         "test": "jest --verbose"
     },
@@ -88,14 +88,12 @@
             "unicorn/consistent-function-scoping": "error",
             "unicorn/prefer-module": "error",
             "unicorn/no-await-expression-member": "error",
-            "unicorn/filename-case": [
-                "error",
-                {
-                    "case": "camelCase"
-                }
-            ],
+            "unicorn/no-static-only-class": "off",
+            "unicorn/prevent-abbreviations": "off",
             "security/detect-object-injection": "warn",
-            "optimize-regex/optimize-regex": "warn"
+            "optimize-regex/optimize-regex": "warn",
+            "@typescript-eslint/no-explicit-any": "off",
+            "unicorn/filename-case": "off"
         }
     },
     "prettier": {
