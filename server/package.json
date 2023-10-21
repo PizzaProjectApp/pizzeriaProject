@@ -4,10 +4,11 @@
     "description": "Server for ID-IDEAS E-commerce",
     "main": "src/app.js",
     "scripts": {
-        "dev": "ts-node-dev --respawn src/app.ts",
-        "build": "eslint src && tsc",
         "lint": "eslint src",
-        "test": "jest --verbose"
+        "test": "jest --verbose",
+        "dev": "ts-node-dev --respawn src/app.ts",
+        "build": "eslint src && rimraf ../build && tsc",
+        "start": "npm run build && node build/app"
     },
     "keywords": [
         "pizzeria",
@@ -43,6 +44,7 @@
         "eslint-plugin-unicorn": "^48.0.1",
         "jest": "^29.7.0",
         "prettier": "3.0.3",
+        "rimraf": "^5.0.5",
         "ts-node-dev": "2.0.0",
         "typescript": "5.2.2"
     },
