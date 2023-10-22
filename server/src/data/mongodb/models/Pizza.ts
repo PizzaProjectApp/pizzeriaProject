@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
-// import mongoosePaginate from "mongoose-paginate-v2";
+import mongoosePaginate from "mongoose-paginate-v2";
 
-// Define the Pizza schema
 const PizzaSchema = new Schema({
     name: {
         type: String,
@@ -33,7 +32,6 @@ const PizzaSchema = new Schema({
     }
 });
 
-// PizzaSchema.plugin(mongoosePaginate);
+PizzaSchema.plugin(mongoosePaginate);
 
-// Create the pizza model using "model" directly
 export const pizzaModel = model("pizzas", PizzaSchema);
