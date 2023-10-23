@@ -1,0 +1,39 @@
+:root {
+    --marron: #412512;
+    --quesito: #df9a39;
+    --chanchito: #ecd0b8;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --light: #f1efdd;  
+    --tomate: #e54424;
+}
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header {
+    display: grid;
+    background-color:var(--tomate);
+    height: 250px;
+}
+header nav {
+    display: grid;
+    place-items: center;
+    padding: 50px;
+    margin-bottom: 22px;
+    color: var(--white);
+    font-weight: bolder;
+    font-size: 24px;
+}
+.logo {
+    position: relative;
+    bottom: 18px;
+    height: 100px;
+    width: 100px;
+    
+
+}
+
