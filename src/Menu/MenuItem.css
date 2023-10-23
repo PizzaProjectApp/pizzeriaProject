@@ -1,0 +1,52 @@
+:root {
+    --marron: #412512;
+    --quesito: #df9a39;
+    --chanchito: #ecd0b8;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --ligth: #f1efdd;  
+    --tomate: #e54424;
+}
+.item-name {
+    font-weight: bold;
+}
+figure {
+    display: flex;
+    justify-content: center;
+}
+.product {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.container-button{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-seeOrder, .add-to-cart-button, .remove-from-cart-button {
+    width: 30px;
+    height: 30px;
+    background-color: var(--tomate);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 1s;
+    margin: 12px;
+}
+
+.btn-seeOrder:hover, .add-to-cart-button:hover, .remove-from-cart-button:hover {
+    background-color: var(--teal);
+}
+
+/* Añadí estilos para los botones + y - */
+.button-label {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
