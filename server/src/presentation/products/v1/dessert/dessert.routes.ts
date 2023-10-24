@@ -11,22 +11,16 @@ export class DessertRoutes {
 
         const controller = new DessertController(dessertRepository);
 
-        //~> |Get a list of available desserts
         router.get("/", controller.getDesserts);
 
-        //~> |Add a new dessert
         router.post("/", controller.createDessert);
 
-        //~> |Get an dessert by ID
         router.get("/:dstid", controller.getDessertById);
 
-        //~> |Update an dessert by ID
         router.put("/:dstid", controller.updateDessertById);
 
-        //~> |Partially Update an dessert by ID
         router.patch("/:dstid", controller.partialUpdateDessertById);
 
-        //~> |Delete an dessert by ID
         router.delete("/:dstid", controller.deleteDessertById);
 
         return router;

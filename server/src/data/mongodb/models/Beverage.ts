@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 
-// Define the Pizza schema
 const BeverageSchema = new Schema({
     name: {
         type: String,
@@ -30,5 +29,4 @@ const BeverageSchema = new Schema({
     }
 });
 
-// Create the beverage model using "model" directly
 export const beverageModel = model("beverages", BeverageSchema);

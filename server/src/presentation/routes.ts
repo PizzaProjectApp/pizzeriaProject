@@ -5,7 +5,6 @@ export class AppRoutes {
     static get routes(): Router {
         const router = Router();
 
-        //~> | V1 ROUTES
         router.use("/api/v1/pizzas", PizzaRoutes.routes);
         router.use("/api/v1/beverages", BeverageRoutes.routes);
         router.use("/api/v1/desserts", DessertRoutes.routes);
