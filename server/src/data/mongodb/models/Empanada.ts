@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 
-// Define the Empanada schema
 const EmpanadaSchema = new Schema({
     name: {
         type: String,
@@ -26,5 +25,4 @@ const EmpanadaSchema = new Schema({
     }
 });
 
-// Create the empanada model using "model" directly
 export const empanadaModel = model("empanadas", EmpanadaSchema);

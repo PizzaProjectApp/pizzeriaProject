@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
 
 const PizzaSchema = new Schema({
     name: {
@@ -31,7 +30,5 @@ const PizzaSchema = new Schema({
         required: false
     }
 });
-
-PizzaSchema.plugin(mongoosePaginate);
 
 export const pizzaModel = model("pizzas", PizzaSchema);
