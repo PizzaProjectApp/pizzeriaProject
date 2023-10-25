@@ -4,7 +4,7 @@ import "./index.css";
 
 function Header({ isCart }) {
   return (
-    <header className="bg-main-tomate h-56 flex items-start justify-center px-8">
+    <header className="bg-main-tomate flex items-start justify-center px-8">
       <nav className="text-white text-3xl font-bold">
         {isCart ? (
           <p className="header-cart">My Order</p>

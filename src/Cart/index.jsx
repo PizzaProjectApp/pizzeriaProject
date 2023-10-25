@@ -56,26 +56,32 @@ function Cart({ showOrderConfirmation, onConfirmOrder, handleBackToMenu }) {
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">
-      <section className="my-order container mx-auto mt-6 p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="my-order container mx-auto ">
+        <div className="flex justify-between items-center mb-4">
+          <BackToMenuButton className="back-btn" handleBackToMenu={handleBackToMenuClick} />
+          <h2 className="text-2xl font-bold">Your Cart</h2>
+        </div>
+        <div className="max-h-96 overflow-y-auto">
           {groupedCartItems.map(item => (
-            <div key={item._id} className="card bg-white rounded-lg shadow-md p-4">
-              <img
-                src={item.thumbnail}
-                alt={item.name}
-                className="h-20 w-20 rounded-lg object-contain cursor-pointer"
-                onClick={() => handleRemoveFromCart(item)}
-              />
+            <div key={item._id} className="pizza-card bg-white rounded-md shadow-md p-4 flex">
+              <div className="pizza-image">
+                <img
+                  src={item.thumbnail}
+                  alt={item.name}
+                  className="h-32 w-32 rounded-md object-cover cursor-pointer"
+                  onClick={() => handleRemoveFromCart(item)}
+                />
+              </div>
 
-              <div className="info flex flex-col text-brown">
-                <span className="product font-bold text-lg text-brown">
-                  {item.name} x {item.count}
+              <div className="pizza-details flex flex-col flex-1 text-brown">
+                <span className="pizza-name font-bold text-lg text-brown mb-1">
+                  {item.name} x{item.count}
                 </span>
-                <span className="text-brown">${item.price}</span>
+                <span className="pizza-price text-brown text-sm">${item.price}</span>
               </div>
 
               <button
-                className="delete-product ml-2 bg-transparent border-none cursor-pointer focus:outline-none"
+                className="delete-product ml-auto bg-transparent border-none cursor-pointer focus:outline-none"
                 onClick={() => handleRemoveFromCart(item)}>
                 <MdOutlineDeleteForever className="text-red-600 w-6 h-6" />
               </button>
