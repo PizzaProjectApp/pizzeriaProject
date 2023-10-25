@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
 import { BackToMenuButton } from "../BackToMenuBtn";
-import { MdOutlineDeleteForever } from "react-icons/md";
-
+import CartItem from "./CartItem";
+import CartTotal from "./CartTotal";
 function Cart({ showOrderConfirmation, onConfirmOrder, handleBackToMenu }) {
   const { cartItems, removeFromCart } = useContext(AppContext);
   const [groupedCartItems, setGroupedCartItems] = useState([]);
@@ -63,45 +63,11 @@ function Cart({ showOrderConfirmation, onConfirmOrder, handleBackToMenu }) {
         </div>
         <div className="max-h-96 overflow-y-auto">
           {groupedCartItems.map(item => (
-            <div key={item._id} className="pizza-card bg-white rounded-md shadow-md p-4 flex">
-              <div className="pizza-image">
-                <img
-                  src={item.thumbnail}
-                  alt={item.name}
-                  className="h-32 w-32 rounded-md object-cover cursor-pointer"
-                  onClick={() => handleRemoveFromCart(item)}
-                />
-              </div>
-
-              <div className="pizza-details flex flex-col flex-1 text-brown">
-                <span className="pizza-name font-bold text-lg text-brown mb-1">
-                  {item.name} x{item.count}
-                </span>
-                <span className="pizza-price text-brown text-sm">${item.price}</span>
-              </div>
-
-              <button
-                className="delete-product ml-auto bg-transparent border-none cursor-pointer focus:outline-none"
-                onClick={() => handleRemoveFromCart(item)}>
-                <MdOutlineDeleteForever className="text-red-600 w-6 h-6" />
-              </button>
-            </div>
+            <CartItem key={item._id} item={item} handleRemoveFromCart={handleRemoveFromCart} />
           ))}
         </div>
       </section>
-      <div className="container-total fixed bottom-0 left-0 right-0 bg-white p-4 rounded-t-lg">
-        <div className="total-price grid grid-cols-2 w-70 font-bold">
-          <span className="self-center text-right">Total:</span>
-          <span className="self-center text-left">${totalPrice}</span>
-        </div>
-        <div className="container-button flex justify-center">
-          <button
-            className="confirm bg-main-tomato text-main-tomate font-bold p-4 rounded-lg shadow-md"
-            onClick={onConfirmOrder}>
-            Confirm my order
-          </button>
-        </div>
-      </div>
+      <CartTotal totalPrice={totalPrice} onConfirmOrder={onConfirmOrder} />
     </div>
   );
 }
