@@ -1,4 +1,4 @@
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
 
 // Get the current file's path
 const currentFilePath = __filename;

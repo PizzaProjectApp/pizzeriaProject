@@ -1,9 +1,4 @@
-import {
-    BeverageDto,
-    BeverageEntity,
-    ProductIdDto,
-    BeveragePartialDto,
-} from "../../";
+import { BeverageDto, BeverageEntity, ProductIdDto, BeveragePartialDto } from "../../";
 
 export abstract class BeverageDatasource {
     abstract create(beverageDto: BeverageDto): Promise<BeverageEntity>;
@@ -14,10 +9,7 @@ export abstract class BeverageDatasource {
 
     abstract deleteById(productIdDto: ProductIdDto): Promise<BeverageEntity>;
 
-    abstract updateById(
-        productIdDto: ProductIdDto,
-        beverageDto: BeverageDto
-    ): Promise<BeverageEntity>;
+    abstract updateById(productIdDto: ProductIdDto, beverageDto: BeverageDto): Promise<BeverageEntity>;
 
     abstract partialUpdateById(
         productIdDto: ProductIdDto,

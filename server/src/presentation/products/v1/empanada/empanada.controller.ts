@@ -5,7 +5,7 @@ import {
     EmpanadaRepository,
     EmpanadaPartialDto,
     ProductIdDto,
-    EmpanadaUseCase,
+    EmpanadaUseCase
 } from "../../../../domain";
 
 export class EmpanadaController {
@@ -23,15 +23,15 @@ export class EmpanadaController {
 
         new EmpanadaUseCase(this.empanadaRepository)
             .create(empanadaDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     getEmpanadas = (_req: Request, res: Response) => {
         new EmpanadaUseCase(this.empanadaRepository)
             .getAll()
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     getEmpanadaById = (req: Request, res: Response) => {
@@ -40,8 +40,8 @@ export class EmpanadaController {
 
         new EmpanadaUseCase(this.empanadaRepository)
             .getById(productIdDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     deleteEmpanadaById = (req: Request, res: Response) => {
@@ -50,35 +50,33 @@ export class EmpanadaController {
 
         new EmpanadaUseCase(this.empanadaRepository)
             .deleteById(productIdDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     updateEmpanadaById = (req: Request, res: Response) => {
-        let [errorId, productIdDto] = ProductIdDto.create(req.params.empid);
-        let [errorDto, empanadaDto] = EmpanadaDto.create(req.body);
+        const [errorId, productIdDto] = ProductIdDto.create(req.params.empid);
+        const [errorDto, empanadaDto] = EmpanadaDto.create(req.body);
 
         if (errorId) return res.status(400).json({ errorId });
         if (errorDto) return res.status(400).json({ errorDto });
 
         new EmpanadaUseCase(this.empanadaRepository)
             .updateById(productIdDto!, empanadaDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 
     partialUpdateEmpanadaById = (req: Request, res: Response) => {
-        let [errorId, productIdDto] = ProductIdDto.create(req.params.empid);
-        let [errorDto, empanadaPartialDto] = EmpanadaPartialDto.create(
-            req.body
-        );
+        const [errorId, productIdDto] = ProductIdDto.create(req.params.empid);
+        const [errorDto, empanadaPartialDto] = EmpanadaPartialDto.create(req.body);
 
         if (errorId) return res.status(400).json({ errorId });
         if (errorDto) return res.status(400).json({ errorDto });
 
         new EmpanadaUseCase(this.empanadaRepository)
             .partialUpdateById(productIdDto!, empanadaPartialDto!)
-            .then((data) => res.json(data))
-            .catch((error) => this.handleError(error, res));
+            .then(data => res.json(data))
+            .catch(error => this.handleError(error, res));
     };
 }

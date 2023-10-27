@@ -8,9 +8,7 @@ export class BeveragePartialDto {
     private constructor(partialData: Partial<BeveragePartialDto>) {
         Object.assign(this, partialData);
     }
-    static create(
-        partialData: Partial<BeveragePartialDto>
-    ): [string?, BeveragePartialDto?] {
+    static create(partialData: Partial<BeveragePartialDto>): [string?, BeveragePartialDto?] {
         return [undefined, new BeveragePartialDto(partialData)];
     }
 }

@@ -4,7 +4,7 @@ import {
     ProductIdDto,
     EmpanadaEntity,
     EmpanadaRepository,
-    EmpanadaPartialDto,
+    EmpanadaPartialDto
 } from "../../../domain";
 
 export class EmpanadaRepositoryImpl implements EmpanadaRepository {
@@ -22,19 +22,10 @@ export class EmpanadaRepositoryImpl implements EmpanadaRepository {
     deleteById(productIdDto: ProductIdDto): Promise<EmpanadaEntity> {
         return this.empanadaDatasource.deleteById(productIdDto);
     }
-    updateById(
-        productIdDto: ProductIdDto,
-        empanadaDto: EmpanadaDto
-    ): Promise<EmpanadaEntity> {
+    updateById(productIdDto: ProductIdDto, empanadaDto: EmpanadaDto): Promise<EmpanadaEntity> {
         return this.empanadaDatasource.updateById(productIdDto, empanadaDto);
     }
-    partialUpdateById(
-        productIdDto: ProductIdDto,
-        empanadaPartialDto: EmpanadaPartialDto
-    ): Promise<EmpanadaEntity> {
-        return this.empanadaDatasource.partialUpdateById(
-            productIdDto,
-            empanadaPartialDto
-        );
+    partialUpdateById(productIdDto: ProductIdDto, empanadaPartialDto: EmpanadaPartialDto): Promise<EmpanadaEntity> {
+        return this.empanadaDatasource.partialUpdateById(productIdDto, empanadaPartialDto);
     }
 }

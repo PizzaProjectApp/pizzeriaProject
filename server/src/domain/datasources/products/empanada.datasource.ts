@@ -1,9 +1,4 @@
-import {
-    EmpanadaDto,
-    ProductIdDto,
-    EmpanadaPartialDto,
-    EmpanadaEntity,
-} from "../../";
+import { EmpanadaDto, ProductIdDto, EmpanadaPartialDto, EmpanadaEntity } from "../../";
 
 export abstract class EmpanadaDatasource {
     abstract create(empanadaDto: EmpanadaDto): Promise<EmpanadaEntity>;
@@ -14,10 +9,7 @@ export abstract class EmpanadaDatasource {
 
     abstract deleteById(productIdDto: ProductIdDto): Promise<EmpanadaEntity>;
 
-    abstract updateById(
-        productIdDto: ProductIdDto,
-        empanadaDto: EmpanadaDto
-    ): Promise<EmpanadaEntity>;
+    abstract updateById(productIdDto: ProductIdDto, empanadaDto: EmpanadaDto): Promise<EmpanadaEntity>;
 
     abstract partialUpdateById(
         productIdDto: ProductIdDto,

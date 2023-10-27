@@ -1,23 +1,12 @@
-import {
-    BeverageDto,
-    ProductIdDto,
-    BeverageRepository,
-    BeveragePartialDto,
-} from "../../";
+import { BeverageDto, ProductIdDto, BeverageRepository, BeveragePartialDto } from "../../";
 
 interface IBeverageUseCase {
     create(beverageDto: BeverageDto): Promise<BeverageDto>;
     getAll(): Promise<BeverageDto[]>;
     getById(productIdDto: ProductIdDto): Promise<BeverageDto>;
     deleteById(productIdDto: ProductIdDto): Promise<BeverageDto>;
-    updateById(
-        productIdDto: ProductIdDto,
-        beverageDto: BeverageDto
-    ): Promise<BeverageDto>;
-    partialUpdateById(
-        productIdDto: ProductIdDto,
-        beveragePartialDto: BeveragePartialDto
-    ): Promise<BeverageDto>;
+    updateById(productIdDto: ProductIdDto, beverageDto: BeverageDto): Promise<BeverageDto>;
+    partialUpdateById(productIdDto: ProductIdDto, beveragePartialDto: BeveragePartialDto): Promise<BeverageDto>;
 }
 
 export class BeverageUseCase implements IBeverageUseCase {
@@ -38,23 +27,14 @@ export class BeverageUseCase implements IBeverageUseCase {
         return await this.beverageRepository.deleteById(productIdDto);
     };
 
-    updateById = async (
-        productIdDto: ProductIdDto,
-        beverageDto: BeverageDto
-    ): Promise<BeverageDto> => {
-        return await this.beverageRepository.updateById(
-            productIdDto,
-            beverageDto
-        );
+    updateById = async (productIdDto: ProductIdDto, beverageDto: BeverageDto): Promise<BeverageDto> => {
+        return await this.beverageRepository.updateById(productIdDto, beverageDto);
     };
 
     partialUpdateById = async (
         productIdDto: ProductIdDto,
         beveragePartialDto: BeveragePartialDto
     ): Promise<BeverageDto> => {
-        return await this.beverageRepository.partialUpdateById(
-            productIdDto,
-            beveragePartialDto
-        );
+        return await this.beverageRepository.partialUpdateById(productIdDto, beveragePartialDto);
     };
 }
