@@ -1,0 +1,38 @@
+.Btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: transparent;
+  border-radius: 50px;
+  width: 50px; /* Ancho inicial del botón */
+  transition: width 0.4s; /* Transición de ancho */
+  margin-top: 20px;
+}
+
+.Btn:hover {
+  width: 160px; /* Ancho del botón al pasar el mouse por encima */
+  box-shadow: 4px 5px 6px 2px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+.back {
+  display: flex;
+  justify-content: center;
+  padding: 4px;
+  margin: 12px;
+}
+.icon-arrow {
+  font-size: 20px;
+  margin-right: 4px;
+}
+
+.btn-text {
+  opacity: 0;
+  font-size: 14px;
+  transition: opacity 0.5s; /* Transición de opacidad */
+}
+.Btn:hover .btn-text {
+  opacity: 1;
+  font-weight: bold;
+  /* Mostrar el texto al pasar el mouse por encima */
+}
