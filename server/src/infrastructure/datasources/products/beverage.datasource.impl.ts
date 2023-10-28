@@ -6,7 +6,9 @@ import {
     BeverageDto,
     ProductIdDto,
     BeverageEntity,
-    BeveragePartialDto
+    BeveragePartialDto,
+    executePagination,
+    PaginationDto
 } from "../../../domain";
 import { BeverageMapper } from "../../mappers";
 
@@ -43,9 +45,35 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
         }
     };
 
-    getAll = async (): Promise<BeverageEntity[]> => {
+    getAll = async (paginationDto: PaginationDto): Promise<BeverageEntity[]> => {
+        const { page, limit, sort } = paginationDto;
         try {
-            return await beverageModel.find().lean();
+            let sortOptions: { [key: string]: any } = {};
+
+            if (sort === "asc") {
+                sortOptions = { price: 1 };
+            } else if (sort === "desc") {
+                sortOptions = { price: -1 };
+            }
+
+            const products = await beverageModel
+                .find()
+                .skip((page - 1) * limit)
+                .limit(limit)
+                .sort(sortOptions);
+
+            const totalPages: number = await beverageModel.countDocuments();
+
+            const paginationResults = executePagination({
+                page,
+                limit,
+                sort,
+                productUrl: "beverages",
+                totalPages,
+                products
+            });
+
+            return paginationResults as unknown as BeverageEntity[];
         } catch (error) {
             if (error instanceof CustomError) {
                 throw error;

@@ -1,6 +1,15 @@
 import { logger } from "../../../config";
 import { pizzaModel } from "../../../data";
-import { PizzaDatasource, CustomError, PizzaDto, ProductIdDto, PizzaEntity, PizzaPartialDto } from "../../../domain";
+import {
+    PizzaDatasource,
+    CustomError,
+    PizzaDto,
+    ProductIdDto,
+    PizzaEntity,
+    PizzaPartialDto,
+    PaginationDto
+} from "../../../domain";
+import { executePagination } from "../../../domain";
 import { PizzaMapper } from "../../mappers";
 
 export class PizzaDatasourceImpl implements PizzaDatasource {
@@ -36,9 +45,35 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
         }
     };
 
-    getAll = async (): Promise<PizzaEntity[]> => {
+    getAll = async (paginationDto: PaginationDto): Promise<PizzaEntity[]> => {
+        const { page, limit, sort } = paginationDto;
         try {
-            return await pizzaModel.find().lean();
+            let sortOptions: { [key: string]: any } = {};
+
+            if (sort === "asc") {
+                sortOptions = { price: 1 };
+            } else if (sort === "desc") {
+                sortOptions = { price: -1 };
+            }
+
+            const products = await pizzaModel
+                .find()
+                .skip((page - 1) * limit)
+                .limit(limit)
+                .sort(sortOptions);
+
+            const totalPages: number = await pizzaModel.countDocuments();
+
+            const paginationResults = executePagination({
+                page,
+                limit,
+                sort,
+                productUrl: "pizzas",
+                totalPages,
+                products
+            });
+
+            return paginationResults as unknown as PizzaEntity[];
         } catch (error) {
             if (error instanceof CustomError) {
                 throw error;

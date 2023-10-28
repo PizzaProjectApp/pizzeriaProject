@@ -5,7 +5,9 @@ import {
     BeverageRepository,
     BeveragePartialDto,
     ProductIdDto,
-    BeverageUseCase
+    BeverageUseCase,
+    PaginationProps,
+    PaginationDto
 } from "../../../../domain";
 
 export class BeverageController {
@@ -27,9 +29,13 @@ export class BeverageController {
             .catch(error => this.handleError(error, res));
     };
 
-    getBeverages = (_req: Request, res: Response) => {
+    getBeverages = (req: Request, res: Response) => {
+        const { page, limit, sort } = req.query;
+        const [error, paginationDto] = PaginationDto.create({ page, limit, sort } as unknown as PaginationProps);
+        if (error) return res.status(400).json({ error });
+
         new BeverageUseCase(this.beverageRepository)
-            .getAll()
+            .getAll(paginationDto!)
             .then(data => res.json(data))
             .catch(error => this.handleError(error, res));
     };

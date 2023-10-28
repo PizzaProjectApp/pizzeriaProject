@@ -5,7 +5,9 @@ import {
     EmpanadaRepository,
     EmpanadaPartialDto,
     ProductIdDto,
-    EmpanadaUseCase
+    EmpanadaUseCase,
+    PaginationDto,
+    PaginationProps
 } from "../../../../domain";
 
 export class EmpanadaController {
@@ -27,9 +29,13 @@ export class EmpanadaController {
             .catch(error => this.handleError(error, res));
     };
 
-    getEmpanadas = (_req: Request, res: Response) => {
+    getEmpanadas = (req: Request, res: Response) => {
+        const { page, limit, sort } = req.query;
+        const [error, paginationDto] = PaginationDto.create({ page, limit, sort } as unknown as PaginationProps);
+        if (error) return res.status(400).json({ error });
+
         new EmpanadaUseCase(this.empanadaRepository)
-            .getAll()
+            .getAll(paginationDto!)
             .then(data => res.json(data))
             .catch(error => this.handleError(error, res));
     };

@@ -6,7 +6,9 @@ import {
     DessertDto,
     ProductIdDto,
     DessertEntity,
-    DessertPartialDto
+    DessertPartialDto,
+    PaginationDto,
+    executePagination
 } from "../../../domain";
 import { DessertMapper } from "../../mappers";
 
@@ -43,9 +45,35 @@ export class DessertDatasourceImpl implements DessertDatasource {
         }
     };
 
-    getAll = async (): Promise<DessertEntity[]> => {
+    getAll = async (paginationDto: PaginationDto): Promise<DessertEntity[]> => {
+        const { page, limit, sort } = paginationDto;
         try {
-            return await dessertModel.find().lean();
+            let sortOptions: { [key: string]: any } = {};
+
+            if (sort === "asc") {
+                sortOptions = { price: 1 };
+            } else if (sort === "desc") {
+                sortOptions = { price: -1 };
+            }
+
+            const products = await dessertModel
+                .find()
+                .skip((page - 1) * limit)
+                .limit(limit)
+                .sort(sortOptions);
+
+            const totalPages: number = await dessertModel.countDocuments();
+
+            const paginationResults = executePagination({
+                page,
+                limit,
+                sort,
+                productUrl: "desserts",
+                totalPages,
+                products
+            });
+
+            return paginationResults as unknown as DessertEntity[];
         } catch (error) {
             if (error instanceof CustomError) {
                 throw error;

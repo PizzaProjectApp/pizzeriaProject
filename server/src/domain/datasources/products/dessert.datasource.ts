@@ -1,9 +1,9 @@
-import { DessertDto, ProductIdDto, DessertPartialDto, DessertEntity } from "../../";
+import { DessertDto, ProductIdDto, DessertPartialDto, DessertEntity, PaginationDto } from "../../";
 
 export abstract class DessertDatasource {
     abstract create(dessertDto: DessertDto): Promise<DessertEntity>;
 
-    abstract getAll(): Promise<DessertEntity[]>;
+    abstract getAll(paginationDto: PaginationDto): Promise<DessertEntity[]>;
 
     abstract getById(productIdDto: ProductIdDto): Promise<DessertEntity>;
 

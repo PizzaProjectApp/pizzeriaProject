@@ -5,7 +5,9 @@ import {
     PizzaRepository,
     PizzaPartialDto,
     ProductIdDto,
-    PizzaUseCase
+    PizzaUseCase,
+    PaginationDto,
+    PaginationProps
 } from "../../../../domain";
 
 export class PizzaController {
@@ -27,9 +29,13 @@ export class PizzaController {
             .catch(error => this.handleError(error, res));
     };
 
-    getPizzas = (_req: Request, res: Response) => {
+    getPizzas = (req: Request, res: Response) => {
+        const { page, limit, sort } = req.query;
+        const [error, paginationDto] = PaginationDto.create({ page, limit, sort } as unknown as PaginationProps);
+        if (error) return res.status(400).json({ error });
+
         new PizzaUseCase(this.pizzaRepository)
-            .getAll()
+            .getAll(paginationDto!)
             .then(data => res.json(data))
             .catch(error => this.handleError(error, res));
     };
