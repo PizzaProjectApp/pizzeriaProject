@@ -62,14 +62,14 @@ export class DessertDatasourceImpl implements DessertDatasource {
                 .limit(limit)
                 .sort(sortOptions);
 
-            const totalPages: number = await dessertModel.countDocuments();
+            const docs: number = await dessertModel.countDocuments();
 
             const paginationResults = executePagination({
                 page,
                 limit,
                 sort,
                 productUrl: "desserts",
-                totalPages,
+                docs,
                 products
             });
 

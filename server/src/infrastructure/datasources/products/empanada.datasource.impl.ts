@@ -62,14 +62,14 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
                 .limit(limit)
                 .sort(sortOptions);
 
-            const totalPages: number = await empanadaModel.countDocuments();
+            const docs: number = await empanadaModel.countDocuments();
 
             const paginationResults = executePagination({
                 page,
                 limit,
                 sort,
                 productUrl: "empanadas",
-                totalPages,
+                docs,
                 products
             });
 
