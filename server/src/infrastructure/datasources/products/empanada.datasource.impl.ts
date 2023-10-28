@@ -6,7 +6,9 @@ import {
     EmpanadaDto,
     ProductIdDto,
     EmpanadaEntity,
-    EmpanadaPartialDto
+    EmpanadaPartialDto,
+    executePagination,
+    PaginationDto
 } from "../../../domain";
 import { EmpanadaMapper } from "../../mappers";
 
@@ -43,9 +45,35 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
         }
     };
 
-    getAll = async (): Promise<EmpanadaEntity[]> => {
+    getAll = async (paginationDto: PaginationDto): Promise<EmpanadaEntity[]> => {
+        const { page, limit, sort } = paginationDto;
         try {
-            return await empanadaModel.find().lean();
+            let sortOptions: { [key: string]: any } = {};
+
+            if (sort === "asc") {
+                sortOptions = { price: 1 };
+            } else if (sort === "desc") {
+                sortOptions = { price: -1 };
+            }
+
+            const products = await empanadaModel
+                .find()
+                .skip((page - 1) * limit)
+                .limit(limit)
+                .sort(sortOptions);
+
+            const totalPages: number = await empanadaModel.countDocuments();
+
+            const paginationResults = executePagination({
+                page,
+                limit,
+                sort,
+                productUrl: "empanadas",
+                totalPages,
+                products
+            });
+
+            return paginationResults as unknown as EmpanadaEntity[];
         } catch (error) {
             if (error instanceof CustomError) {
                 throw error;

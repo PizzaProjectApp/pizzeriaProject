@@ -4,7 +4,8 @@ import {
     ProductIdDto,
     DessertEntity,
     DessertRepository,
-    DessertPartialDto
+    DessertPartialDto,
+    PaginationDto
 } from "../../../domain";
 
 export class DessertRepositoryImpl implements DessertRepository {
@@ -13,8 +14,8 @@ export class DessertRepositoryImpl implements DessertRepository {
     create = (dessertDto: DessertDto): Promise<DessertEntity> => {
         return this.dessertDatasource.create(dessertDto);
     };
-    getAll = (): Promise<DessertEntity[]> => {
-        return this.dessertDatasource.getAll();
+    getAll = (paginationDto: PaginationDto): Promise<DessertEntity[]> => {
+        return this.dessertDatasource.getAll(paginationDto);
     };
     getById = (productIdDto: ProductIdDto): Promise<DessertEntity> => {
         return this.dessertDatasource.getById(productIdDto);

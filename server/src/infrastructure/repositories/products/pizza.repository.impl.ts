@@ -4,7 +4,8 @@ import {
     ProductIdDto,
     PizzaEntity,
     PizzaRepository,
-    PizzaPartialDto
+    PizzaPartialDto,
+    PaginationDto
 } from "../../../domain";
 
 export class PizzaRepositoryImpl implements PizzaRepository {
@@ -13,8 +14,8 @@ export class PizzaRepositoryImpl implements PizzaRepository {
     create = (pizzaDto: PizzaDto): Promise<PizzaEntity> => {
         return this.pizzaDatasource.create(pizzaDto);
     };
-    getAll = (): Promise<PizzaEntity[]> => {
-        return this.pizzaDatasource.getAll();
+    getAll = (paginationDto: PaginationDto): Promise<PizzaEntity[]> => {
+        return this.pizzaDatasource.getAll(paginationDto);
     };
     getById = (productIdDto: ProductIdDto): Promise<PizzaEntity> => {
         return this.pizzaDatasource.getById(productIdDto);

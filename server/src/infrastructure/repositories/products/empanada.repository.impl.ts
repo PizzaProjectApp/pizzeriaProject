@@ -4,7 +4,8 @@ import {
     ProductIdDto,
     EmpanadaEntity,
     EmpanadaRepository,
-    EmpanadaPartialDto
+    EmpanadaPartialDto,
+    PaginationDto
 } from "../../../domain";
 
 export class EmpanadaRepositoryImpl implements EmpanadaRepository {
@@ -13,8 +14,8 @@ export class EmpanadaRepositoryImpl implements EmpanadaRepository {
     create = (empanadaDto: EmpanadaDto): Promise<EmpanadaEntity> => {
         return this.empanadaDatasource.create(empanadaDto);
     };
-    getAll = (): Promise<EmpanadaEntity[]> => {
-        return this.empanadaDatasource.getAll();
+    getAll = (paginationDto: PaginationDto): Promise<EmpanadaEntity[]> => {
+        return this.empanadaDatasource.getAll(paginationDto);
     };
     getById = (productIdDto: ProductIdDto): Promise<EmpanadaEntity> => {
         return this.empanadaDatasource.getById(productIdDto);

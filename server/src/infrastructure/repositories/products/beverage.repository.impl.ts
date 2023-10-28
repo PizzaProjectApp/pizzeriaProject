@@ -4,7 +4,8 @@ import {
     ProductIdDto,
     BeverageEntity,
     BeverageRepository,
-    BeveragePartialDto
+    BeveragePartialDto,
+    PaginationDto
 } from "../../../domain";
 
 export class BeverageRepositoryImpl implements BeverageRepository {
@@ -14,8 +15,8 @@ export class BeverageRepositoryImpl implements BeverageRepository {
         return this.beverageDatasource.create(beverageDto);
     };
 
-    getAll = (): Promise<BeverageEntity[]> => {
-        return this.beverageDatasource.getAll();
+    getAll = (paginationDto: PaginationDto): Promise<BeverageEntity[]> => {
+        return this.beverageDatasource.getAll(paginationDto);
     };
 
     getById = (productIdDto: ProductIdDto): Promise<BeverageEntity> => {
