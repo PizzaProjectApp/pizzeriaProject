@@ -38,6 +38,22 @@
  *   get:
  *     summary: Get a list of available beverages
  *     tags: [Beverages]
+ *     parameters:
+ *       - name: limit
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: The number of beverages to return per page
+ *       - name: page
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: The page number
+ *       - name: sort
+ *         in: query
+ *         schema:
+ *           type: string
+ *         description: Sort order for the beverages
  *     responses:
  *       200:
  *         description: List of beverages retrieved successfully

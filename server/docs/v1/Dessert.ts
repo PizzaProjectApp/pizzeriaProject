@@ -40,6 +40,22 @@
  *   get:
  *     summary: Get a list of available desserts
  *     tags: [Desserts]
+ *     parameters:
+ *       - name: limit
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: The number of desserts to return per page
+ *       - name: page
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: The page number
+ *       - name: sort
+ *         in: query
+ *         schema:
+ *           type: string
+ *         description: Sort order for the desserts
  *     responses:
  *       200:
  *         description: List of desserts retrieved successfully

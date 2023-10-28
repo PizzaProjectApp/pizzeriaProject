@@ -38,6 +38,22 @@
  *   get:
  *     summary: Get a list of available pizzas
  *     tags: [Pizzas]
+ *     parameters:
+ *       - name: limit
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: The number of pizzas to return per page
+ *       - name: page
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: The page number
+ *       - name: sort
+ *         in: query
+ *         schema:
+ *           type: string
+ *         description: Sort order for the pizzas
  *     responses:
  *       200:
  *         description: List of pizzas retrieved successfully

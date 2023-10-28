@@ -32,6 +32,22 @@
  *   get:
  *     summary: Get a list of available empanadas
  *     tags: [Empanadas]
+ *     parameters:
+ *       - name: limit
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: The number of empanadas to return per page
+ *       - name: page
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: The page number
+ *       - name: sort
+ *         in: query
+ *         schema:
+ *           type: string
+ *         description: Sort order for the empanadas
  *     responses:
  *       200:
  *         description: List of empanadas retrieved successfully
