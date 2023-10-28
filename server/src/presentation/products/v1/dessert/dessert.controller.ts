@@ -5,7 +5,9 @@ import {
     DessertRepository,
     DessertPartialDto,
     ProductIdDto,
-    DessertUseCase
+    DessertUseCase,
+    PaginationProps,
+    PaginationDto
 } from "../../../../domain";
 
 export class DessertController {
@@ -27,9 +29,13 @@ export class DessertController {
             .catch(error => this.handleError(error, res));
     };
 
-    getDesserts = (_req: Request, res: Response) => {
+    getDesserts = (req: Request, res: Response) => {
+        const { page, limit, sort } = req.query;
+        const [error, paginationDto] = PaginationDto.create({ page, limit, sort } as unknown as PaginationProps);
+        if (error) return res.status(400).json({ error });
+
         new DessertUseCase(this.dessertRepository)
-            .getAll()
+            .getAll(paginationDto!)
             .then(data => res.json(data))
             .catch(error => this.handleError(error, res));
     };
