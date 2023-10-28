@@ -1,9 +1,9 @@
-import { PizzaDto, ProductIdDto, PizzaPartialDto, PizzaEntity } from "../../";
+import { PizzaDto, ProductIdDto, PizzaPartialDto, PizzaEntity, PaginationDto } from "../../index";
 
 export abstract class PizzaDatasource {
     abstract create(pizzaDto: PizzaDto): Promise<PizzaEntity>;
 
-    abstract getAll(): Promise<PizzaEntity[]>;
+    abstract getAll(paginationDto: PaginationDto): Promise<PizzaEntity[]>;
 
     abstract getById(productIdDto: ProductIdDto): Promise<PizzaEntity>;
 

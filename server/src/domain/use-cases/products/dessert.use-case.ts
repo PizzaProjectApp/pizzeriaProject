@@ -1,8 +1,8 @@
-import { DessertDto, ProductIdDto, DessertRepository, DessertPartialDto } from "../../";
+import { DessertDto, ProductIdDto, DessertRepository, DessertPartialDto, PaginationDto } from "../../";
 
 interface IDessertUseCase {
     create(dessertDto: DessertDto): Promise<DessertDto>;
-    getAll(): Promise<DessertDto[]>;
+    getAll(paginationDto: PaginationDto): Promise<DessertDto[]>;
     getById(productIdDto: ProductIdDto): Promise<DessertDto>;
     deleteById(productIdDto: ProductIdDto): Promise<DessertDto>;
     updateById(productIdDto: ProductIdDto, dessertDto: DessertDto): Promise<DessertDto>;
@@ -15,8 +15,8 @@ export class DessertUseCase implements IDessertUseCase {
     create = async (dessertDto: DessertDto): Promise<DessertDto> => {
         return await this.dessertRepository.create(dessertDto);
     };
-    getAll = async (): Promise<DessertDto[]> => {
-        return await this.dessertRepository.getAll();
+    getAll = async (paginationDto: PaginationDto): Promise<DessertDto[]> => {
+        return await this.dessertRepository.getAll(paginationDto);
     };
 
     getById = async (productIdDto: ProductIdDto): Promise<DessertDto> => {

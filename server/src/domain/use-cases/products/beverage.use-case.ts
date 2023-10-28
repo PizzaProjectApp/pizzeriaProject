@@ -1,8 +1,8 @@
-import { BeverageDto, ProductIdDto, BeverageRepository, BeveragePartialDto } from "../../";
+import { BeverageDto, ProductIdDto, BeverageRepository, BeveragePartialDto, PaginationDto } from "../../";
 
 interface IBeverageUseCase {
     create(beverageDto: BeverageDto): Promise<BeverageDto>;
-    getAll(): Promise<BeverageDto[]>;
+    getAll(paginationDto: PaginationDto): Promise<BeverageDto[]>;
     getById(productIdDto: ProductIdDto): Promise<BeverageDto>;
     deleteById(productIdDto: ProductIdDto): Promise<BeverageDto>;
     updateById(productIdDto: ProductIdDto, beverageDto: BeverageDto): Promise<BeverageDto>;
@@ -15,8 +15,8 @@ export class BeverageUseCase implements IBeverageUseCase {
     create = async (beverageDto: BeverageDto): Promise<BeverageDto> => {
         return await this.beverageRepository.create(beverageDto);
     };
-    getAll = async (): Promise<BeverageDto[]> => {
-        return await this.beverageRepository.getAll();
+    getAll = async (paginationDto: PaginationDto): Promise<BeverageDto[]> => {
+        return await this.beverageRepository.getAll(paginationDto);
     };
 
     getById = async (productIdDto: ProductIdDto): Promise<BeverageDto> => {

@@ -1,8 +1,8 @@
-import { PizzaDto, ProductIdDto, PizzaRepository, PizzaPartialDto } from "../../";
+import { PizzaDto, ProductIdDto, PizzaRepository, PizzaPartialDto, PaginationDto } from "../../index";
 
 interface IPizzaUseCase {
     create(pizzaDto: PizzaDto): Promise<PizzaDto>;
-    getAll(): Promise<PizzaDto[]>;
+    getAll(paginationDto: PaginationDto): Promise<PizzaDto[]>;
     getById(productIdDto: ProductIdDto): Promise<PizzaDto>;
     deleteById(productIdDto: ProductIdDto): Promise<PizzaDto>;
     updateById(productIdDto: ProductIdDto, pizzaDto: PizzaDto): Promise<PizzaDto>;
@@ -15,8 +15,8 @@ export class PizzaUseCase implements IPizzaUseCase {
     create = async (pizzaDto: PizzaDto): Promise<PizzaDto> => {
         return await this.pizzaRepository.create(pizzaDto);
     };
-    getAll = async (): Promise<PizzaDto[]> => {
-        return await this.pizzaRepository.getAll();
+    getAll = async (paginationDto: PaginationDto): Promise<PizzaDto[]> => {
+        return await this.pizzaRepository.getAll(paginationDto);
     };
 
     getById = async (productIdDto: ProductIdDto): Promise<PizzaDto> => {

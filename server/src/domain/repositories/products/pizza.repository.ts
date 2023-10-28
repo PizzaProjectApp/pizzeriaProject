@@ -1,9 +1,9 @@
-import { ProductIdDto, PizzaPartialDto, PizzaDto, PizzaEntity } from "../../";
+import { ProductIdDto, PizzaPartialDto, PizzaDto, PizzaEntity, PaginationDto } from "../../";
 
 export abstract class PizzaRepository {
     abstract create(PizzaDto: PizzaDto): Promise<PizzaEntity>;
 
-    abstract getAll(): Promise<PizzaEntity[]>;
+    abstract getAll(paginationDto: PaginationDto): Promise<PizzaEntity[]>;
 
     abstract getById(productIdDto: ProductIdDto): Promise<PizzaEntity>;
 

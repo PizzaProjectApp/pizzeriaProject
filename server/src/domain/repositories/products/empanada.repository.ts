@@ -1,9 +1,9 @@
-import { EmpanadaDto, EmpanadaPartialDto, ProductIdDto, EmpanadaEntity } from "../../";
+import { EmpanadaDto, EmpanadaPartialDto, ProductIdDto, EmpanadaEntity, PaginationDto } from "../../";
 
 export abstract class EmpanadaRepository {
     abstract create(empanadaDto: EmpanadaDto): Promise<EmpanadaEntity>;
 
-    abstract getAll(): Promise<EmpanadaEntity[]>;
+    abstract getAll(paginationDto: PaginationDto): Promise<EmpanadaEntity[]>;
 
     abstract getById(productIdDto: ProductIdDto): Promise<EmpanadaEntity>;
 

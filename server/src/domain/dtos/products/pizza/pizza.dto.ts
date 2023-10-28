@@ -20,13 +20,9 @@ export class PizzaDto {
         if (!price) return ["Missing price"];
         else if (typeof price !== "number") return ["Invalid price"];
 
-        if (type && type !== "whole" && type !== "half") {
-            return ["Invalid type"];
-        }
+        if (type && type !== "whole" && type !== "half") return ["Invalid type"];
 
-        if (status && typeof status !== "boolean") {
-            return ["Invalid status"];
-        }
+        if (status && typeof status !== "boolean") return ["Invalid status"];
 
         return [undefined, new PizzaDto(name, description, price, type, thumbnail, status)];
     };

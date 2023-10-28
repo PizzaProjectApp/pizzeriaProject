@@ -1,9 +1,9 @@
-import { BeverageDto, BeverageEntity, ProductIdDto, BeveragePartialDto } from "../../";
+import { BeverageDto, BeverageEntity, ProductIdDto, BeveragePartialDto, PaginationDto } from "../../";
 
 export abstract class BeverageDatasource {
     abstract create(beverageDto: BeverageDto): Promise<BeverageEntity>;
 
-    abstract getAll(): Promise<BeverageEntity[]>;
+    abstract getAll(paginationDto: PaginationDto): Promise<BeverageEntity[]>;
 
     abstract getById(productIdDto: ProductIdDto): Promise<BeverageEntity>;
 
