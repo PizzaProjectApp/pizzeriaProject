@@ -7,7 +7,8 @@ import {
     ProductIdDto,
     PizzaEntity,
     PizzaPartialDto,
-    PaginationDto
+    PaginationDto,
+    validateSort
 } from "../../../domain";
 import { executePagination } from "../../../domain";
 import { PizzaMapper } from "../../mappers";
@@ -48,19 +49,13 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
     getAll = async (paginationDto: PaginationDto): Promise<PizzaEntity[]> => {
         const { page, limit, sort } = paginationDto;
         try {
-            let sortOptions: { [key: string]: any } = {};
-
-            if (sort === "asc") {
-                sortOptions = { price: 1 };
-            } else if (sort === "desc") {
-                sortOptions = { price: -1 };
-            }
+            const sortOptionsResults = validateSort(sort);
 
             const products = await pizzaModel
                 .find()
                 .skip((page - 1) * limit)
                 .limit(limit)
-                .sort(sortOptions);
+                .sort(sortOptionsResults);
 
             const docs: number = await pizzaModel.countDocuments();
 

@@ -8,7 +8,8 @@ import {
     EmpanadaEntity,
     EmpanadaPartialDto,
     executePagination,
-    PaginationDto
+    PaginationDto,
+    validateSort
 } from "../../../domain";
 import { EmpanadaMapper } from "../../mappers";
 
@@ -48,19 +49,13 @@ export class EmpanadaDatasourceImpl implements EmpanadaDatasource {
     getAll = async (paginationDto: PaginationDto): Promise<EmpanadaEntity[]> => {
         const { page, limit, sort } = paginationDto;
         try {
-            let sortOptions: { [key: string]: any } = {};
-
-            if (sort === "asc") {
-                sortOptions = { price: 1 };
-            } else if (sort === "desc") {
-                sortOptions = { price: -1 };
-            }
+            const sortOptionsResults = validateSort(sort);
 
             const products = await empanadaModel
                 .find()
                 .skip((page - 1) * limit)
                 .limit(limit)
-                .sort(sortOptions);
+                .sort(sortOptionsResults);
 
             const docs: number = await empanadaModel.countDocuments();
 
