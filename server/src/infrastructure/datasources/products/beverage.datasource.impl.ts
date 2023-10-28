@@ -62,14 +62,14 @@ export class BeverageDatasourceImpl implements BeverageDatasource {
                 .limit(limit)
                 .sort(sortOptions);
 
-            const totalPages: number = await beverageModel.countDocuments();
+            const docs: number = await beverageModel.countDocuments();
 
             const paginationResults = executePagination({
                 page,
                 limit,
                 sort,
                 productUrl: "beverages",
-                totalPages,
+                docs,
                 products
             });
 

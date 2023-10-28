@@ -62,14 +62,14 @@ export class PizzaDatasourceImpl implements PizzaDatasource {
                 .limit(limit)
                 .sort(sortOptions);
 
-            const totalPages: number = await pizzaModel.countDocuments();
+            const docs: number = await pizzaModel.countDocuments();
 
             const paginationResults = executePagination({
                 page,
                 limit,
                 sort,
                 productUrl: "pizzas",
-                totalPages,
+                docs,
                 products
             });
 
